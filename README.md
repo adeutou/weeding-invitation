@@ -19,7 +19,7 @@ Une application web moderne, élégante et interactive conçue pour célébrer e
 *L'interface d'administration sécurisée permettant de gérer la playlist, de modérer le livre d'or et de suivre les RSVP.*
 
 ### Générateur de Code QR & Cartes PDF
-![Code QR Invitation](/screenshots/qrcode.png)
+![Code QR Invitation](/public/screenshots/qrcode.png)
 *Génération et export PDF haute fidélité de cartes d'invitation avec code QR et monogramme.*
 
 ---
