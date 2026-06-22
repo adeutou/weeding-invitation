@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
+import { useState, useEffect } from 'react'
 import { FiSettings } from 'react-icons/fi'
 import { EnvelopeOpener } from './EnvelopeOpener'
+import { AdminModal } from './AdminModal'
 import { HeroSection } from './HeroSection'
 import { StorySection } from './StorySection'
 import { TimelineSection } from './TimelineSection'
@@ -22,14 +22,27 @@ export function HomePageClient({
   galleryPhotos,
   initialGuestbookEntries,
   initialMusicTracks,
+  initialTimelineEvents,
 }: HomePageClientProps) {
   const [isOpened, setIsOpened] = useState(false)
   const [guestName, setGuestName] = useState('')
+  const [isAdminOpen, setIsAdminOpen] = useState(false)
+  const [hasMounted, setHasMounted] = useState(false)
 
   const groomShort = config.groomName.replace('Monsieur ', '')
   const brideShort = config.brideName.replace('Madame ', '')
   const groomInitial = groomShort.charAt(0)
   const brideInitial = brideShort.charAt(0)
+
+  useEffect(() => {
+    const opened = localStorage.getItem('wedding_envelope_opened_v1') === 'true'
+    if (opened) {
+      setIsOpened(true)
+      const storedName = localStorage.getItem('wedding_guest_name') || ''
+      setGuestName(storedName)
+    }
+    setHasMounted(true)
+  }, [])
 
   function scrollTo(id: string) {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -38,6 +51,8 @@ export function HomePageClient({
   function handleOpen(name: string) {
     setGuestName(name)
     setIsOpened(true)
+    localStorage.setItem('wedding_envelope_opened_v1', 'true')
+    localStorage.setItem('wedding_guest_name', name)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -50,6 +65,14 @@ export function HomePageClient({
     createdAt: e.createdAt,
   }))
 
+  if (!hasMounted) {
+    return (
+      <div className="min-h-screen bg-cream text-charcoal font-serif selection:bg-gold/30 selection:text-charcoal paper-texture flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full border border-gold/40 border-t-transparent animate-spin" />
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-cream text-charcoal font-serif selection:bg-gold/30 selection:text-charcoal paper-texture">
       {!isOpened && (
@@ -57,6 +80,9 @@ export function HomePageClient({
           <EnvelopeOpener
             groomName={config.groomName}
             brideName={config.brideName}
+            weddingDateReadable={config.weddingDateReadable}
+            venueName={config.venueName}
+            venueLocation={config.venueLocation}
             onOpen={handleOpen}
           />
         </div>
@@ -87,14 +113,13 @@ export function HomePageClient({
             </nav>
 
             <div className="flex items-center gap-2.5">
-              <Link
-                href="/atelier"
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-parchment border border-taupe/60 hover:border-gold/60 text-charcoal font-medium text-xs rounded-lg transition-all cursor-pointer"
-                title="Open Couples Atelier Studio Dashboard"
+              <button
+                onClick={() => setIsAdminOpen(true)}
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-parchment border border-taupe/60 hover:border-gold/60 text-charcoal text-xs rounded-lg transition-all cursor-pointer"
               >
                 <FiSettings className="w-3.5 h-3.5 text-gold-dark" />
                 <span className="font-sans uppercase text-[9px] tracking-widest">Atelier Admin</span>
-              </Link>
+              </button>
               <AudioToggle />
             </div>
           </header>
@@ -107,7 +132,7 @@ export function HomePageClient({
 
           <StorySection chapters={config.storyChapters} />
 
-          <TimelineSection />
+          <TimelineSection events={initialTimelineEvents} />
 
           <SwatchBoard
             title={config.dressCodeTitle}
@@ -151,6 +176,11 @@ export function HomePageClient({
               &copy; {new Date().getFullYear()} {groomShort} &amp; {brideShort}. All Rights Reserved.
             </p>
           </footer>
+          <AdminModal
+            isOpen={isAdminOpen}
+            onClose={() => setIsAdminOpen(false)}
+            config={config}
+          />
         </div>
       )}
     </div>

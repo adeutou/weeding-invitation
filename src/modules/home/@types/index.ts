@@ -1,4 +1,4 @@
-import type { StoryChapterRecord, DressCodeSwatchRecord } from '@/server/db/schema'
+import type { StoryChapterRecord, DressCodeSwatchRecord, TimelineEventSelect } from '@/server/db/schema'
 
 export interface TWeddingConfig {
   brideName: string
@@ -46,4 +46,5 @@ export interface HomePageClientProps {
     createdAt: Date
   }>
   initialMusicTracks: TMusicTrack[]
+  initialTimelineEvents: TimelineEventSelect[]
 }

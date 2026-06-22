@@ -1,9 +1,19 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { insertMusicTrack, incrementTrackVote, decrementTrackVote } from '@/server/db/queries/music'
+import { insertMusicTrack, incrementTrackVote, decrementTrackVote, deleteMusicTrackById } from '@/server/db/queries/music'
+import { cookies } from 'next/headers'
 import type { TActionState, TVoidActionState } from '@/lib/action-types'
 import type { MusicTrackSelect } from '@/server/db/schema'
+
+const SESSION_COOKIE = 'atelier_auth'
+
+async function requireAuth(): Promise<boolean> {
+  const passphrase = process.env.ATELIER_PASSPHRASE
+  if (!passphrase) return false
+  const cookieStore = await cookies()
+  return cookieStore.get(SESSION_COOKIE)?.value === passphrase
+}
 
 export async function addMusicTrackAction(
   title: string,
@@ -42,5 +52,16 @@ export async function voteTrackAction(
     return { success: true }
   } catch {
     return { success: false, error: 'Failed to register vote.' }
+  }
+}
+
+export async function deleteMusicTrackAction(id: string): Promise<TVoidActionState> {
+  if (!(await requireAuth())) return { success: false, error: 'Unauthorized.' }
+  try {
+    await deleteMusicTrackById(id)
+    revalidatePath('/')
+    return { success: true }
+  } catch {
+    return { success: false, error: 'Failed to delete music track.' }
   }
 }

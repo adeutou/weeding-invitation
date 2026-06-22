@@ -6,6 +6,8 @@ import { getWeddingConfig, updateWeddingConfig } from '@/server/db/queries/confi
 import { getAllRsvps } from '@/server/db/queries/rsvp'
 import { getAllGuestbookEntries } from '@/server/db/queries/guestbook'
 import { getAllMusicTracks } from '@/server/db/queries/music'
+import { getAllGalleryPhotos } from '@/server/db/queries/gallery'
+import { getAllTimelineEvents } from '@/server/db/queries/timeline'
 import type { TActionState, TVoidActionState } from '@/lib/action-types'
 import type { WeddingConfigSelect, StoryChapterRecord, DressCodeSwatchRecord } from '@/server/db/schema'
 
@@ -22,17 +24,21 @@ export interface AdminData {
   rsvps: Awaited<ReturnType<typeof getAllRsvps>>
   entries: Awaited<ReturnType<typeof getAllGuestbookEntries>>
   tracks: Awaited<ReturnType<typeof getAllMusicTracks>>
+  photos: Awaited<ReturnType<typeof getAllGalleryPhotos>>
+  events: Awaited<ReturnType<typeof getAllTimelineEvents>>
 }
 
 export async function getAdminDataAction(): Promise<TActionState<AdminData>> {
   if (!(await requireAuth())) return { success: false, error: 'Unauthorized.' }
   try {
-    const [rsvps, entries, tracks] = await Promise.all([
+    const [rsvps, entries, tracks, photos, events] = await Promise.all([
       getAllRsvps(),
       getAllGuestbookEntries(),
       getAllMusicTracks(),
+      getAllGalleryPhotos(),
+      getAllTimelineEvents(),
     ])
-    return { success: true, data: { rsvps, entries, tracks } }
+    return { success: true, data: { rsvps, entries, tracks, photos, events } }
   } catch {
     return { success: false, error: 'Failed to load admin data.' }
   }

@@ -183,14 +183,6 @@ export function GallerySection({ photos = [] }: TGallerySectionProps) {
                     />
 
                     {isActive && (
-                      <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center z-40 pointer-events-none">
-                        <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-lg">
-                          <div className="w-0 h-0 border-y-10 border-y-transparent border-l-16 border-l-white ml-1.5 opacity-90" />
-                        </div>
-                      </div>
-                    )}
-
-                    {isActive && (
                       <div className="absolute top-6 right-6 z-30 bg-black/35 backdrop-blur-md border border-white/10 px-2.5 py-1 rounded-md text-[8px] font-sans uppercase tracking-[0.2em] font-medium text-gold">
                         #Château-Provence
                       </div>

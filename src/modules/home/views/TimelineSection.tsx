@@ -11,111 +11,13 @@ import {
   FiHeart,
 } from 'react-icons/fi'
 import { RiGlassesFill, RiBuildingLine } from 'react-icons/ri'
+import type { TimelineEventSelect } from '@/server/db/schema'
 
 type WeddingPhase = 'preWedding' | 'bigDay' | 'afterglow'
 
-interface TimelineEvent {
-  id: string
-  phase: WeddingPhase
-  time: string
-  title: string
-  location: string
-  description: string
-  iconName: string
+interface TimelineSectionProps {
+  events: TimelineEventSelect[]
 }
-
-const SCHEDULE: TimelineEvent[] = [
-  {
-    id: 'pre-1',
-    phase: 'preWedding',
-    time: '18:00 - 21:00',
-    title: 'Bienvenue • Welcome Sunset Apéro',
-    location: 'Château Courtyard Lawn',
-    description:
-      'Join us for local organic French wines, cold artisan cheeses, and warm reunion laughter as the sun sinks beneath the lavender hills.',
-    iconName: 'glass',
-  },
-  {
-    id: 'pre-2',
-    phase: 'preWedding',
-    time: '21:30',
-    title: 'Candlelit Garden Chords',
-    location: 'The Old Oak Fountain',
-    description:
-      'An acoustic classical guitar set under fairy lights to ease everyone into the calm country breeze before the grand day.',
-    iconName: 'music',
-  },
-  {
-    id: 'day-1',
-    phase: 'bigDay',
-    time: '14:30',
-    title: 'The Assembly & Welcoming',
-    location: 'Sainte-Marie Glass Orangery Entrance',
-    description:
-      'Please arrive and pick up your hand-bound botanical program booklets. Infused floral waters will be served.',
-    iconName: 'landmark',
-  },
-  {
-    id: 'day-2',
-    phase: 'bigDay',
-    time: '15:00',
-    title: 'The Holy Exchange of Vows',
-    location: 'The Botanical Cathedral Ruins',
-    description:
-      'Pledging our lifetimes and exchanging antique gold rings under the shadow of the stone arches.',
-    iconName: 'heart',
-  },
-  {
-    id: 'day-3',
-    phase: 'bigDay',
-    time: '16:30',
-    title: 'Le Cocktail de Royal Reception',
-    location: 'The Rose Trellis Maze Gardens',
-    description:
-      "Sip custom botanical gins and champagne with local lavender-infused hors d'oeuvres while live jazz strings serenade the terrace.",
-    iconName: 'glass',
-  },
-  {
-    id: 'day-4',
-    phase: 'bigDay',
-    time: '19:00',
-    title: 'Candlelit Banquet of Provence',
-    location: 'The Grand Mirror Ballroom',
-    description:
-      'A seated 3-course French culinary experience curated by Chef Luc Besson. Organic pairing wines included.',
-    iconName: 'coffee',
-  },
-  {
-    id: 'day-5',
-    phase: 'bigDay',
-    time: '22:00',
-    title: 'The First Waltz & Live Ball',
-    location: 'Grand Ballroom & Terrace',
-    description:
-      'Dancing under the twilight canopy, featuring the Midnight Chords live orchestra and cutting of the tiered macaron frame cake.',
-    iconName: 'music',
-  },
-  {
-    id: 'after-1',
-    phase: 'afterglow',
-    time: '11:30 - 14:30',
-    title: 'The Sunday Pastry & Espresso Recovery',
-    location: 'The Greenhouse Conservatory',
-    description:
-      'Wrap up the incredible weekend with fresh butter croissants, pain au chocolat, local honey, and warm rich espresso.',
-    iconName: 'coffee',
-  },
-  {
-    id: 'after-2',
-    phase: 'afterglow',
-    time: '15:00',
-    title: 'Warm Departures & Keep Box Signatures',
-    location: 'The Foyer Courtyard',
-    description:
-      'Write your Polaroid blessings, place them on our rustic wood frame, and pick up your miniature olive-oil keepsake bottles before voyage.',
-    iconName: 'landmark',
-  },
-]
 
 function renderIcon(name: string) {
   switch (name) {
@@ -140,10 +42,10 @@ const PHASE_LABELS: Record<WeddingPhase, string> = {
   afterglow: 'III. The Afterglow (Brunch)',
 }
 
-export function TimelineSection() {
+export function TimelineSection({ events }: TimelineSectionProps) {
   const [activePhase, setActivePhase] = useState<WeddingPhase>('bigDay')
 
-  const currentEvents = SCHEDULE.filter(e => e.phase === activePhase)
+  const currentEvents = events.filter(e => e.phase === activePhase)
 
   return (
     <section
@@ -201,7 +103,7 @@ export function TimelineSection() {
                   </div>
                   <div className="flex flex-col">
                     <span className="font-serif text-charcoal font-semibold text-lg md:text-xl tracking-tight">
-                      {event.time}
+                      {event.eventTime}
                     </span>
                     <span className="text-[10px] text-stone-400 font-sans tracking-widest uppercase md:hidden block mt-0.5">
                       {event.location}
@@ -223,6 +125,12 @@ export function TimelineSection() {
                 </div>
               </div>
             ))}
+
+            {currentEvents.length === 0 && (
+              <div className="bg-[#fdfbf8]/85 p-12 rounded-xl border border-dashed border-taupe/80 text-center text-xs text-stone-400 font-serif">
+                No events scheduled for this phase.
+              </div>
+            )}
           </div>
         </div>
 

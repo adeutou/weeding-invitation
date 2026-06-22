@@ -2,15 +2,17 @@ import { getWeddingConfig } from '@/server/db/queries/config'
 import { getAllGalleryPhotos } from '@/server/db/queries/gallery'
 import { getApprovedGuestbookEntries } from '@/server/db/queries/guestbook'
 import { getAllMusicTracks } from '@/server/db/queries/music'
+import { getAllTimelineEvents } from '@/server/db/queries/timeline'
 import { HomePageClient } from '@/modules/home'
 import type { TWeddingConfig, TMusicTrack } from '@/modules/home'
 
 export default async function HomePage() {
-  const [weddingConfig, galleryPhotos, guestbookEntries, musicTracks] = await Promise.all([
+  const [weddingConfig, galleryPhotos, guestbookEntries, musicTracks, timelineEvents] = await Promise.all([
     getWeddingConfig(),
     getAllGalleryPhotos(),
     getApprovedGuestbookEntries(),
     getAllMusicTracks(),
+    getAllTimelineEvents(),
   ])
 
   const config: TWeddingConfig = {
@@ -46,6 +48,7 @@ export default async function HomePage() {
       galleryPhotos={galleryPhotos.map(p => ({ id: p.id, url: p.url, caption: p.caption }))}
       initialGuestbookEntries={guestbookEntries}
       initialMusicTracks={tracks}
+      initialTimelineEvents={timelineEvents}
     />
   )
 }

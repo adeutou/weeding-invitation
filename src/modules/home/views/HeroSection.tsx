@@ -19,6 +19,23 @@ export function HeroSection({ config, guestName, onScrollToStory }: HeroSectionP
   const groomInitial = groomShort.charAt(0)
   const brideInitial = brideShort.charAt(0)
 
+  const weddingDate = new Date(config.weddingDateStr)
+  const weddingYear = isNaN(weddingDate.getTime()) ? 2026 : weddingDate.getFullYear()
+  const weddingMonthIndex = isNaN(weddingDate.getTime()) ? 8 : weddingDate.getMonth()
+  const weddingMonthName = isNaN(weddingDate.getTime())
+    ? 'September'
+    : weddingDate.toLocaleString('en-US', { month: 'long' })
+  const weddingDay = isNaN(weddingDate.getTime()) ? 19 : weddingDate.getDate()
+
+  const firstDay = new Date(weddingYear, weddingMonthIndex, 1)
+  const startDayOfWeek = isNaN(firstDay.getTime()) ? 2 : firstDay.getDay()
+  const totalDays = isNaN(weddingDate.getTime())
+    ? 30
+    : new Date(weddingYear, weddingMonthIndex + 1, 0).getDate()
+
+  const daysArray = Array.from({ length: totalDays }, (_, i) => i + 1)
+  const padArray = Array.from({ length: startDayOfWeek })
+
   useEffect(() => {
     function calculate() {
       const diff = new Date(config.weddingDateStr).getTime() - Date.now()
@@ -189,25 +206,30 @@ export function HeroSection({ config, guestName, onScrollToStory }: HeroSectionP
               </div>
 
               <div className="mt-6 border-t border-taupe/50 pt-5 text-center">
-                <h4 className="font-serif text-sm text-charcoal uppercase tracking-widest font-semibold mb-3">September 2026</h4>
+                <h4 className="font-serif text-sm text-charcoal uppercase tracking-widest font-semibold mb-3">
+                  {weddingMonthName} {weddingYear}
+                </h4>
                 <div className="grid grid-cols-7 gap-2 text-[9px] font-sans font-bold tracking-wider text-stone-400 mb-2">
                   {['SU','MO','TU','WE','TH','FR','SA'].map(d => <span key={d}>{d}</span>)}
                 </div>
                 <div className="grid grid-cols-7 gap-y-1.5 gap-x-2 text-xs font-serif text-stone-600">
-                  <span className="text-stone-300" />
-                  <span className="text-stone-300" />
-                  <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-                  <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
-                  <span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span>
-                  <span className="relative flex items-center justify-center font-bold text-gold-dark z-10 w-6 h-6 mx-auto">
-                    19
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="1.75" className="absolute w-8 h-8 pointer-events-none scale-125 animate-pulse">
-                      <path d="M12,21.35 L10.55,20.03 C5.4,15.36 2,12.28 2,8.5 C2,5.42 4.42,3 7.5,3 C9.24,3 10.91,3.81 12,5.09 C13.09,3.81 14.76,3 16.5,3 C19.58,3 22,5.42 22,8.5 C22,12.28 18.6,15.36 13.45,20.04 L12,21.35 Z" />
-                    </svg>
-                  </span>
-                  <span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span>
-                  <span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>
-                  <span className="text-stone-300" /><span className="text-stone-300" />
+                  {padArray.map((_, idx) => (
+                    <span key={`pad-${idx}`} className="text-stone-300" />
+                  ))}
+                  {daysArray.map(day => {
+                    const isWeddingDay = day === weddingDay
+                    if (isWeddingDay) {
+                      return (
+                        <span key={day} className="relative flex items-center justify-center font-bold text-gold-dark z-10 w-6 h-6 mx-auto">
+                          {day}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="1.75" className="absolute w-8 h-8 pointer-events-none scale-125 animate-pulse">
+                            <path d="M12,21.35 L10.55,20.03 C5.4,15.36 2,12.28 2,8.5 C2,5.42 4.42,3 7.5,3 C9.24,3 10.91,3.81 12,5.09 C13.09,3.81 14.76,3 16.5,3 C19.58,3 22,5.42 22,8.5 C22,12.28 18.6,15.36 13.45,20.04 L12,21.35 Z" />
+                          </svg>
+                        </span>
+                      )
+                    }
+                    return <span key={day}>{day}</span>
+                  })}
                 </div>
                 <p className="handwriting text-gold text-lg mt-4 flex items-center justify-center gap-1.5">
                   <RiHeartFill className="w-3.5 h-3.5 text-rose" />

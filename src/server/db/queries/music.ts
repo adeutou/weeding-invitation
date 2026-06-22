@@ -4,19 +4,8 @@ import { db } from '../index'
 import { musicTracksTable } from '../schema'
 import type { MusicTrackInsert, MusicTrackSelect } from '../schema'
 
-const SEED_TRACKS: MusicTrackInsert[] = [
-  { title: 'September', artist: 'Earth, Wind & Fire', votes: 18, requestedBy: 'Cousin Amélie', isCurated: true },
-  { title: 'La Vie En Rose', artist: 'Édith Piaf', votes: 14, requestedBy: 'Grandmother Eleanor', isCurated: true },
-  { title: 'Fly Me To The Moon', artist: 'Frank Sinatra', votes: 11, requestedBy: 'Arthur (Groom)', isCurated: true },
-  { title: 'L-O-V-E', artist: 'Nat King Cole', votes: 9, requestedBy: 'Beatrice (Bride)', isCurated: true },
-]
-
 export async function getAllMusicTracks(): Promise<MusicTrackSelect[]> {
-  const rows = await db.select().from(musicTracksTable).orderBy(desc(musicTracksTable.votes), desc(musicTracksTable.createdAt))
-  if (rows.length > 0) return rows
-
-  const inserted = await db.insert(musicTracksTable).values(SEED_TRACKS).returning()
-  return inserted.sort((a, b) => b.votes - a.votes)
+  return db.select().from(musicTracksTable).orderBy(desc(musicTracksTable.votes), desc(musicTracksTable.createdAt))
 }
 
 export async function insertMusicTrack(data: MusicTrackInsert): Promise<MusicTrackSelect> {
@@ -46,4 +35,8 @@ export async function decrementTrackVote(id: string): Promise<MusicTrackSelect> 
   const row = rows[0]
   if (!row) throw new Error('Vote decrement returned no row')
   return row
+}
+
+export async function deleteMusicTrackById(id: string): Promise<void> {
+  await db.delete(musicTracksTable).where(eq(musicTracksTable.id, id))
 }

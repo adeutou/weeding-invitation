@@ -6,10 +6,20 @@ import { motion, AnimatePresence } from 'motion/react'
 interface EnvelopeOpenerProps {
   groomName: string
   brideName: string
+  weddingDateReadable: string
+  venueName: string
+  venueLocation: string
   onOpen: (guestName: string) => void
 }
 
-export function EnvelopeOpener({ groomName, brideName, onOpen }: EnvelopeOpenerProps) {
+export function EnvelopeOpener({
+  groomName,
+  brideName,
+  weddingDateReadable,
+  venueName,
+  venueLocation,
+  onOpen,
+}: EnvelopeOpenerProps) {
   const [guestName, setGuestName] = useState('')
   const [isOpening, setIsOpening] = useState(false)
   const [isSealed, setIsSealed] = useState(true)
@@ -41,11 +51,9 @@ export function EnvelopeOpener({ groomName, brideName, onOpen }: EnvelopeOpenerP
   return (
     <div id="envelope-screen" className="fixed inset-0 z-50 flex flex-col items-center justify-center px-4 overflow-hidden" style={{ background: 'radial-gradient(ellipse at center, #2a2c2a 0%, #121312 100%)' }}>
       
-      {/* Background organic light wash */}
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, rgba(207,168,86,0.05) 0%, transparent 70%)' }} />
 
       <div className="relative w-full max-w-lg flex flex-col items-center">
-        {/* Floating botanicals */}
         <div className="absolute -top-32 -left-20 w-48 h-48 opacity-10 pointer-events-none animate-sway text-cream">
           <svg viewBox="0 0 100 100" fill="currentColor">
             <path d="M10,90 Q30,60 40,20 Q42,50 60,60 Q70,40 90,10 Q80,45 60,70 Q45,75 10,90 Z" />
@@ -57,7 +65,6 @@ export function EnvelopeOpener({ groomName, brideName, onOpen }: EnvelopeOpenerP
           </svg>
         </div>
 
-        {/* Vintage Top Branding Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: isOpening ? 0 : 1, y: 0 }}
@@ -68,7 +75,7 @@ export function EnvelopeOpener({ groomName, brideName, onOpen }: EnvelopeOpenerP
           <h1 className="text-cream font-serif text-3xl md:text-4xl tracking-wide font-light">
             {groomShort} <span className="handwriting text-gold text-4xl italic lowercase">&amp;</span> {brideShort}
           </h1>
-          <div className="text-gray-400 font-serif text-sm italic mt-2">September 19th, 2026 • Château de la Rose, France</div>
+          <div className="text-gray-400 font-serif text-sm italic mt-2">{weddingDateReadable} • {venueName}, {venueLocation}</div>
         </motion.div>
 
         {/* Custom Interactive Envelope Frame */}

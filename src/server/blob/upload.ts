@@ -26,7 +26,7 @@ export async function uploadGalleryPhoto(file: File): Promise<string> {
   }
 
   const slug = `gallery/${Date.now()}-${sanitizeFilename(file.name)}`
-  const { url } = await put(slug, file, { access: 'public' })
+  const { url } = await put(slug, file, { access: 'private' })
 
   return url
 }
