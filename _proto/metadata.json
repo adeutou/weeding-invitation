@@ -1,0 +1,6 @@
+{
+  "name": "Arthur & Beatrice • The Wedding Invitation",
+  "description": "An interactive, elegant, and evolutionary fine-art wedding invitation and guest experience for Arthur and Beatrice.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

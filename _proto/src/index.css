@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Alex+Brush&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-cursive: 'Alex Brush', cursive;
+  --font-sans: 'Inter', sans-serif;
+  
+  --color-gold: #C5A059;
+  --color-gold-dark: #A48039;
+  --color-rose: #C8968E;
+  --color-sage: #81917F;
+  --color-sage-light: #EAECE2;
+  --color-cream: #F8F5F2;
+  --color-charcoal: #1A1A1A;
+  --color-taupe: #E6E2DE;
+  --color-parchment: #EFECE8;
+}
+
+/* Custom Letterpress and Fine Art paper effect style */
+.paper-texture {
+  background-color: #F8F5F2;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 0),
+                    radial-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 0);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
+}
+
+/* Fine line gold details */
+.gold-border-corner {
+  border-image: linear-gradient(to bottom right, #C5A059, #E6E2DE, #C5A059, #A48039) 1;
+}
+
+/* Webkit Scrollbars for editorial vibe */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F5F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #C8968E;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #81917F;
+}
+
+/* Elegant handwriting signature font styling */
+.handwriting {
+  font-family: 'Alex Brush', cursive;
+}
+
+@keyframes slow-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-slow-spin {
+  animation: slow-spin 25s linear infinite;
+}
+
+@keyframes wave-sway {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  50% {
+    transform: rotate(3deg) translateY(-4px);
+  }
+}
+
+.animate-sway {
+  animation: wave-sway 6s ease-in-out infinite;
+}
+
+/* Styling for elegant select outlines */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #C5A059 !important;
+  box-shadow: 0 0 0 1px rgba(197, 160, 89, 0.2);
+}
