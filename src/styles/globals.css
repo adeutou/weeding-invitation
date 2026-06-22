@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: var(--font-playfair-display), Georgia, serif;
+  --font-cursive: var(--font-alex-brush), cursive;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  --color-gold: #C5A059;
+  --color-gold-dark: #A48039;
+  --color-rose: #C8968E;
+  --color-sage: #81917F;
+  --color-sage-light: #EAECE2;
+  --color-cream: #F8F5F2;
+  --color-charcoal: #1A1A1A;
+  --color-taupe: #E6E2DE;
+  --color-parchment: #EFECE8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #F8F5F2;
+  color: #1A1A1A;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.paper-texture {
+  background-color: #F8F5F2;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 0),
+                    radial-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 0);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
+}
+
+.gold-border-corner {
+  border-image: linear-gradient(to bottom right, #C5A059, #E6E2DE, #C5A059, #A48039) 1;
+}
+
+.handwriting {
+  font-family: var(--font-alex-brush), cursive;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8F5F2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C8968E;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #81917F;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #C5A059 !important;
+  box-shadow: 0 0 0 1px rgba(197, 160, 89, 0.2);
+}
+
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes wave-sway {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(3deg) translateY(-4px); }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slow-spin {
+  animation: slow-spin 25s linear infinite;
+}
+
+.animate-sway {
+  animation: wave-sway 6s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+@keyframes blur-fade-out {
+  from { opacity: 1; filter: blur(0px); transform: translateY(0); }
+  to   { opacity: 0; filter: blur(10px); transform: translateY(-20px); }
+}
+
+.animate-blur-fade-out {
+  animation: blur-fade-out 0.8s ease-in-out forwards;
+}
+
+@keyframes screen-reveal {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-screen-reveal {
+  animation: screen-reveal 1.2s ease-out 0.2s forwards;
+  opacity: 0;
+}
