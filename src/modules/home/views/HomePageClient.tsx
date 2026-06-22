@@ -103,12 +103,12 @@ export function HomePageClient({
             </button>
 
             <nav className="hidden lg:flex items-center gap-8 text-[11px] font-sans tracking-[0.2em] uppercase font-medium">
-              <button onClick={() => scrollTo('our-story-section')} className="hover:text-gold cursor-pointer transition-colors">Our Story</button>
-              <button onClick={() => scrollTo('schedule-timeline-section')} className="hover:text-gold cursor-pointer transition-colors">The Schedule</button>
-              <button onClick={() => scrollTo('dresscode-section')} className="hover:text-gold cursor-pointer transition-colors">Attire Theme</button>
-              <button onClick={() => scrollTo('travel-guide-section')} className="hover:text-gold cursor-pointer transition-colors">Provence Guide</button>
-              <button onClick={() => scrollTo('rsvp-section')} className="hover:text-gold cursor-pointer transition-colors font-semibold text-rose">RSVP</button>
-              <button onClick={() => scrollTo('guestbook-section')} className="hover:text-gold cursor-pointer transition-colors">Blessings</button>
+              <button onClick={() => scrollTo('our-story-section')} className="hover:text-gold cursor-pointer transition-colors">Notre Histoire</button>
+              <button onClick={() => scrollTo('schedule-timeline-section')} className="hover:text-gold cursor-pointer transition-colors">Le Programme</button>
+              <button onClick={() => scrollTo('dresscode-section')} className="hover:text-gold cursor-pointer transition-colors">Code Couleur</button>
+              <button onClick={() => scrollTo('travel-guide-section')} className="hover:text-gold cursor-pointer transition-colors">Guide Provence</button>
+              <button onClick={() => scrollTo('rsvp-section')} className="hover:text-gold cursor-pointer transition-colors font-semibold text-rose">Répondre (RSVP)</button>
+              <button onClick={() => scrollTo('guestbook-section')} className="hover:text-gold cursor-pointer transition-colors">Livre d'Or</button>
               <button onClick={() => scrollTo('ballplay-section')} className="hover:text-gold cursor-pointer transition-colors">Playlist</button>
             </nav>
 
@@ -170,10 +170,10 @@ export function HomePageClient({
             <div className="w-16 h-px bg-gold/25 mx-auto my-6" />
 
             <p className="text-[11px] text-stone-400 font-serif italic">
-              Crafted with love for Clara &amp; Charles. All RSVPs secure and private.
+              Créé avec amour pour {groomShort} &amp; {brideShort}. Tous les RSVP sont sécurisés et privés.
             </p>
             <p className="text-[10px] text-stone-400/60 font-sans tracking-wide mt-2">
-              &copy; {new Date().getFullYear()} {groomShort} &amp; {brideShort}. All Rights Reserved.
+              &copy; {new Date().getFullYear()} {groomShort} &amp; {brideShort}. Tous droits réservés.
             </p>
           </footer>
           <AdminModal

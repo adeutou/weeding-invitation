@@ -20,34 +20,64 @@ export function AdminRsvpsTab({
   onApproveEntry,
   onDeleteEntry,
 }: AdminRsvpsTabProps) {
+  const getAttendanceLabel = (att: string) => {
+    switch (att) {
+      case 'attending': return 'Présent'
+      case 'uncertain': return 'Incertain'
+      case 'declined': return 'Absent'
+      default: return att
+    }
+  }
+
+  const getDietaryLabel = (diet: string) => {
+    switch (diet) {
+      case 'none': return 'Aucun'
+      case 'vegetarian': return 'Végétarien'
+      case 'vegan': return 'Végétalien'
+      case 'gluten-free': return 'Sans gluten'
+      case 'other': return 'Autre'
+      default: return diet
+    }
+  }
+
+  const getStampLabel = (stamp: string) => {
+    switch (stamp) {
+      case 'botanical': return 'Botanique'
+      case 'gold_ring': return 'Alliance'
+      case 'wax_seal': return 'Sceau Cire'
+      case 'vintage_dove': return 'Colombe'
+      default: return stamp
+    }
+  }
+
   return (
     <div className="space-y-8">
       <div>
         <div className="flex items-center justify-between mb-3 border-b border-taupe/40 pb-2">
           <h4 className="font-serif text-lg font-medium text-charcoal">
-            Registered RSVPs ({rsvps.length})
+            RSVPs Enregistrés ({rsvps.length})
           </h4>
           {rsvps.length > 0 && (
             <span className="font-sans text-[10px] uppercase tracking-wider text-sage font-bold bg-[#EAFEEA] border border-green-200 px-2 py-1 rounded">
-              Total Expected Guests: {totalGuests}
+              Nombre total d'invités attendus : {totalGuests}
             </span>
           )}
         </div>
         {rsvps.length === 0 ? (
           <div className="bg-white p-6 rounded-2xl border border-dashed border-taupe/80 text-center text-xs text-stone-400 font-serif">
-            No guests have filled out the digital RSVP form yet.
+            Aucun invité n'a encore rempli le formulaire RSVP numérique.
           </div>
         ) : (
           <div className="overflow-x-auto max-h-[30vh] border border-taupe/50 rounded-xl">
             <table className="w-full text-left border-collapse font-sans text-[11px]">
               <thead>
                 <tr className="bg-parchment border-b border-taupe text-stone-400 uppercase tracking-widest text-[9px] font-bold">
-                  <th className="p-3">Guest Name</th>
-                  <th className="p-3">Status</th>
-                  <th className="p-3">Party</th>
-                  <th className="p-3">Dietary</th>
-                  <th className="p-3 text-center">Shuttle</th>
-                  <th className="p-3">Action</th>
+                  <th className="p-3">Nom de l'Invité</th>
+                  <th className="p-3">Statut</th>
+                  <th className="p-3">Accompagnants</th>
+                  <th className="p-3">Régime</th>
+                  <th className="p-3 text-center">Navette</th>
+                  <th className="p-3">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-taupe/30">
@@ -72,30 +102,30 @@ export function AdminRsvpsTab({
                               : 'bg-rose/15 text-rose'
                         }`}
                       >
-                        {guest.attendance}
+                        {getAttendanceLabel(guest.attendance)}
                       </span>
                     </td>
                     <td className="p-3 font-semibold">
-                      {guest.guestsCount} guests
+                      {guest.guestsCount} invité(s)
                     </td>
                     <td
                       className="p-3 max-w-[150px] truncate"
                       title={guest.dietaryDetails || guest.dietary}
                     >
                       {guest.dietary === 'none'
-                        ? 'None'
-                        : `${guest.dietary} (${
-                            guest.dietaryDetails || 'No notes'
+                        ? 'Aucun'
+                        : `${getDietaryLabel(guest.dietary)} (${
+                            guest.dietaryDetails || 'Aucune note'
                           })`}
                     </td>
                     <td className="p-3 text-center font-bold">
-                      {guest.needsShuttle ? 'YES' : 'NO'}
+                      {guest.needsShuttle ? 'OUI' : 'NON'}
                     </td>
                     <td className="p-3">
                       <button
                         onClick={() => onDeleteRsvp(guest.id)}
-                        className="p-1 text-stone-450 hover:text-rose transition-colors cursor-pointer"
-                        title="Delete RSVP record"
+                        className="p-1 text-stone-455 hover:text-rose transition-colors cursor-pointer"
+                        title="Supprimer ce RSVP"
                       >
                         <FiTrash2 className="w-3.5 h-3.5" />
                       </button>
@@ -111,12 +141,12 @@ export function AdminRsvpsTab({
       <div>
         <div className="flex items-center gap-2 mb-3 border-b border-taupe/40 pb-2">
           <h4 className="font-serif text-lg font-medium text-charcoal">
-            Guestbook Blessings ({entries.length})
+            Messages du Livre d'Or ({entries.length})
           </h4>
         </div>
         {entries.length === 0 ? (
           <div className="bg-white p-6 rounded-2xl border border-dashed border-taupe/80 text-center text-xs text-stone-400 font-serif">
-            No messages have been posted to the guestbook board yet.
+            Aucun message n'a encore été publié dans le livre d'or.
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[35vh] overflow-y-auto pr-2">
@@ -127,7 +157,7 @@ export function AdminRsvpsTab({
               >
                 <div className="space-y-1">
                   <span className="inline-block text-[8px] uppercase tracking-widest font-bold px-1.5 py-0.2 rounded border bg-stone-100 text-stone-500">
-                    {b.stampType} stamp
+                    Sceau {getStampLabel(b.stampType)}
                   </span>
                   <h5 className="font-serif font-bold text-xs text-charcoal">
                     {b.name}
@@ -141,7 +171,7 @@ export function AdminRsvpsTab({
                     <button
                       onClick={() => onApproveEntry(b.id)}
                       className="p-1 text-stone-400 hover:text-emerald-600 transition-colors hover:bg-emerald-50 rounded cursor-pointer"
-                      title="Approve Blessing"
+                      title="Approuver le message"
                     >
                       <FiCheck className="w-3.5 h-3.5" />
                     </button>
@@ -149,7 +179,7 @@ export function AdminRsvpsTab({
                   <button
                     onClick={() => onDeleteEntry(b.id)}
                     className="p-1 text-stone-400 hover:text-rose transition-colors hover:bg-rose/5 rounded cursor-pointer"
-                    title="Delete Blessing message"
+                    title="Supprimer le message"
                   >
                     <FiTrash2 className="w-3.5 h-3.5" />
                   </button>

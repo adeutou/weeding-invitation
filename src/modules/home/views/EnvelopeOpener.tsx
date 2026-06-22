@@ -116,30 +116,27 @@ export function EnvelopeOpener({
               <div className="w-12 h-12 rounded-full border border-gold/40 flex items-center justify-center mb-3">
                 <span className="text-gold font-serif text-sm tracking-wide font-semibold">{groomInitial} &amp; {brideInitial}</span>
               </div>
-              <p className="text-gold text-xs tracking-[0.25em] uppercase font-sans mb-2">Personal Invitation</p>
-              <p className="font-serif text-xs italic text-sage mb-2">Prepared with endless love for</p>
+              <p className="text-gold text-xs tracking-[0.25em] uppercase font-sans mb-2">Invitation Personnelle</p>
+              <p className="font-serif text-xs italic text-sage mb-2">Préparé avec tout notre amour pour</p>
               <h3 className="font-serif text-xl font-medium tracking-wide text-charcoal max-w-[280px] truncate border-b border-gold/20 pb-2 mb-2">
-                {guestName || "Our Honored Guest"}
+                {guestName || "Notre Cher(e) Invité(e)"}
               </h3>
               <p className="font-serif text-xs text-stone-500 leading-relaxed max-w-[240px]">
-                We request the honor of your presence as we pledge our lives together under the skies of Provence.
+                Nous sollicitons l'honneur de votre présence alors que nous unissons nos vies sous le ciel de la Provence.
               </p>
               <div className="mt-4 flex items-center gap-1.5 text-xs text-gold font-medium uppercase tracking-widest animate-pulse">
-                <span>Entering Celebration</span>
+                <span>Entrée dans la Célébration</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-gold"></span>
               </div>
             </motion.div>
 
-            {/* Front flap angled cuts */}
             <div className="absolute bottom-0 left-0 w-1/2 h-[60%] bg-[#282a28] shadow-[4px_-4px_10px_rgba(0,0,0,0.15)] rounded-bl-xl origin-bottom-left border-t border-r border-[#303330] z-20" style={{ transform: 'skewY(24deg)' }} />
             <div className="absolute bottom-0 right-0 w-1/2 h-[60%] bg-[#282a28] shadow-[-4px_-4px_10px_rgba(0,0,0,0.15)] rounded-br-xl origin-bottom-right border-t border-l border-[#303330] z-20" style={{ transform: 'skewY(-24deg)' }} />
 
-            {/* Low bottom triangle overlay */}
             <div className="absolute bottom-0 inset-x-0 h-[40%] bg-[#1f211f] border-t border-[#2d2f2d] shadow-[-5px_-5px_15px_rgba(0,0,0,0.2)] z-20 flex items-center justify-center">
-              <div className="text-neutral-500 font-serif text-[10px] tracking-[0.3em] uppercase pt-4">RSVP INCLUDED</div>
+              <div className="text-neutral-500 font-serif text-[10px] tracking-[0.3em] uppercase pt-4">RSVP INCLUS</div>
             </div>
 
-            {/* Folding Top Triangle Flap */}
             <motion.div
               style={{ originY: 0 }}
               initial={{ rotateX: 0 }}
@@ -154,7 +151,6 @@ export function EnvelopeOpener({
               </div>
             </motion.div>
 
-            {/* Wax Seal */}
             <AnimatePresence>
               {isSealed && (
                 <motion.div
@@ -168,7 +164,7 @@ export function EnvelopeOpener({
                     <div className="absolute inset-px rounded-full border border-[#805e13]/20" />
                     <div className="w-16 h-16 rounded-full border border-dashed border-[#ffeecc]/40 flex flex-col items-center justify-center text-center">
                       <span className="text-[#fdfbf7] font-serif text-lg font-bold tracking-tighter drop-shadow-md">{groomInitial} &amp; {brideInitial}</span>
-                      <span className="text-[#ffeecc]/80 text-[7px] font-sans tracking-widest uppercase mt-0.5">SEALED</span>
+                      <span className="text-[#ffeecc]/80 text-[7px] font-sans tracking-widest uppercase mt-0.5">SCELLÉ</span>
                     </div>
                     <div className="absolute -top-1 left-4 w-4 h-8 bg-white/10 rounded-full blur-sm transform -rotate-45" />
                   </div>
@@ -179,7 +175,6 @@ export function EnvelopeOpener({
           </div>
         </div>
 
-        {/* Guest Interactive Form */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: isOpening ? 0 : 1, y: 0 }}
@@ -193,12 +188,12 @@ export function EnvelopeOpener({
                 type="text"
                 value={guestName}
                 onChange={(e) => setGuestName(e.target.value)}
-                placeholder="Ex. Emma & Michael..."
+                placeholder="Ex. Emma & Michel..."
                 className="w-full bg-[#181918] text-cream border border-neutral-800 rounded-lg px-4 py-3 text-center tracking-wide capitalize text-sm focus:border-gold/50 transition-colors"
                 disabled={isOpening}
                 maxLength={40}
               />
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-600 text-[10px] tracking-[0.2em] font-sans uppercase pointer-events-none">To:</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-600 text-[10px] tracking-[0.2em] font-sans uppercase pointer-events-none">Pour :</span>
             </div>
 
             <button
@@ -212,12 +207,12 @@ export function EnvelopeOpener({
               }`}
               style={!isOpening ? { background: 'linear-gradient(to right, #C5A059, #A48039)' } : {}}
             >
-              {isOpening ? "BREAKING SEAL..." : "BREAK WAX SEAL & CHRONICLE"}
+              {isOpening ? "SCEAU EN COURS..." : "BRISER LE SCEAU DE CIRE & CHRONIQUE"}
             </button>
           </form>
 
           <p className="text-[11px] text-gray-500 font-serif italic mt-3">
-            Enter your name to open your digital bespoke invitation &amp; schedule details.
+            Entrez votre nom pour ouvrir votre invitation personnalisée et le programme.
           </p>
         </motion.div>
       </div>

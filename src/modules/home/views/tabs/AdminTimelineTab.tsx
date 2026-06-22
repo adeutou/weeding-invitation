@@ -29,18 +29,18 @@ const DEFAULT_FORM: TEventForm = {
 }
 
 const PHASES = [
-  { value: 'preWedding', label: 'I. The Gathering (Eve)' },
-  { value: 'bigDay', label: 'II. The Wedding Day' },
-  { value: 'afterglow', label: 'III. The Afterglow (Brunch)' },
+  { value: 'preWedding', label: 'I. L\'Accueil (Veille)' },
+  { value: 'bigDay', label: 'II. Le Jour J' },
+  { value: 'afterglow', label: 'III. Le Lendemain (Brunch)' },
 ] as const
 
 const ICONS = [
-  { value: 'clock', label: 'Clock' },
-  { value: 'glass', label: 'Glasses' },
-  { value: 'music', label: 'Music' },
-  { value: 'landmark', label: 'Building' },
-  { value: 'heart', label: 'Heart' },
-  { value: 'coffee', label: 'Coffee' },
+  { value: 'clock', label: 'Horloge' },
+  { value: 'glass', label: 'Verres' },
+  { value: 'music', label: 'Musique' },
+  { value: 'landmark', label: 'Lieu' },
+  { value: 'heart', label: 'Cœur' },
+  { value: 'coffee', label: 'Café' },
 ] as const
 
 export function AdminTimelineTab({
@@ -80,7 +80,7 @@ export function AdminTimelineTab({
   }
 
   const handleDelete = async (id: string) => {
-    if (window.confirm('Are you sure you want to delete this timeline event?')) {
+    if (window.confirm('Êtes-vous sûr de vouloir supprimer cet événement ?')) {
       setIsLoading(true)
       const res = await deleteTimelineEventAction(id)
       setIsLoading(false)
@@ -107,7 +107,7 @@ export function AdminTimelineTab({
     <div className="space-y-6 max-w-3xl">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-taupe/30 pb-4">
         <p className="text-[11px] font-sans text-stone-500">
-          Manage the evolution stages of the wedding timeline. Add, update, and order events to organize the guests' schedule.
+          Gerez le planning et le programme de la célébration. Ajoutez, modifiez et organisez l'ordre des étapes du mariage.
         </p>
         <button
           onClick={() => {
@@ -118,7 +118,7 @@ export function AdminTimelineTab({
           className="px-3.5 py-2 bg-charcoal hover:bg-black text-[10px] tracking-wider uppercase font-bold text-white rounded-lg flex items-center gap-1.5 transition-all cursor-pointer shrink-0 disabled:opacity-50"
         >
           <FiPlus className="w-3.5 h-3.5 text-gold" />
-          <span>Add Stage Event</span>
+          <span>Ajouter un Événement</span>
         </button>
       </div>
 
@@ -127,7 +127,7 @@ export function AdminTimelineTab({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
               <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-0.5">
-                Timeline Phase
+                Étape du Mariage
               </label>
               <select
                 value={newEvent.phase}
@@ -141,20 +141,20 @@ export function AdminTimelineTab({
             </div>
             <div>
               <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-0.5">
-                Event Time / Hours
+                Horaire / Heures
               </label>
               <input
                 type="text"
                 value={newEvent.eventTime}
                 onChange={e => setNewEvent(prev => ({ ...prev, eventTime: e.target.value }))}
-                placeholder="Ex. 14:30 or 18:00 - 21:00"
+                placeholder="Ex. 14:30 ou 18:00 - 21:00"
                 className="w-full bg-cream border border-taupe/80 rounded-lg px-3 py-1.5 font-sans text-xs focus:ring-1 focus:ring-gold outline-none"
                 required
               />
             </div>
             <div>
               <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-0.5">
-                Sorting Order
+                Ordre d'affichage
               </label>
               <input
                 type="number"
@@ -169,26 +169,26 @@ export function AdminTimelineTab({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
               <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-0.5">
-                Event Title
+                Titre de l'Événement
               </label>
               <input
                 type="text"
                 value={newEvent.title}
                 onChange={e => setNewEvent(prev => ({ ...prev, title: e.target.value }))}
-                placeholder="Ex. Assembly & Reception"
+                placeholder="Ex. Accueil &amp; Remise des Livrets"
                 className="w-full bg-cream border border-taupe/80 rounded-lg px-3 py-1.5 font-serif text-xs focus:ring-1 focus:ring-gold outline-none"
                 required
               />
             </div>
             <div>
               <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-0.5">
-                Venue Location
+                Lieu de l'Événement
               </label>
               <input
                 type="text"
                 value={newEvent.location}
                 onChange={e => setNewEvent(prev => ({ ...prev, location: e.target.value }))}
-                placeholder="Ex. Château Greenhouse Gardens"
+                placeholder="Ex. Pelouse du Jardin"
                 className="w-full bg-cream border border-taupe/80 rounded-lg px-3 py-1.5 font-sans text-xs focus:ring-1 focus:ring-gold outline-none"
                 required
               />
@@ -198,7 +198,7 @@ export function AdminTimelineTab({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
               <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-0.5">
-                Aesthetic Icon Accent
+                Icône Illustrative
               </label>
               <select
                 value={newEvent.iconName}
@@ -216,20 +216,20 @@ export function AdminTimelineTab({
                 disabled={isLoading}
                 className="w-full md:w-auto px-5 py-2 bg-charcoal hover:bg-black text-white font-sans text-xs tracking-widest font-semibold uppercase rounded-lg transition-colors cursor-pointer disabled:opacity-50"
               >
-                Save Event
+                Enregistrer l'Événement
               </button>
             </div>
           </div>
 
           <div>
             <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-0.5">
-              Chronicle Event Details
+              Détails &amp; Description
             </label>
             <textarea
               value={newEvent.description}
               onChange={e => setNewEvent(prev => ({ ...prev, description: e.target.value }))}
               rows={3}
-              placeholder="Provide a short atmospheric description for the guests..."
+              placeholder="Fournissez une brève description de cette étape pour vos invités..."
               className="w-full bg-cream border border-taupe/80 rounded-lg p-3 font-serif text-xs leading-relaxed focus:ring-1 focus:ring-gold outline-none resize-none"
               required
             />
@@ -250,7 +250,7 @@ export function AdminTimelineTab({
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                     <div>
                       <label className="block text-[8px] text-stone-400 font-sans uppercase font-bold tracking-wider mb-0.5">
-                        Timeline Phase
+                        Étape du Mariage
                       </label>
                       <select
                         value={editForm.phase}
@@ -264,7 +264,7 @@ export function AdminTimelineTab({
                     </div>
                     <div>
                       <label className="block text-[8px] text-stone-400 font-sans uppercase font-bold tracking-wider mb-0.5">
-                        Event Time / Hours
+                        Horaire / Heures
                       </label>
                       <input
                         type="text"
@@ -276,7 +276,7 @@ export function AdminTimelineTab({
                     </div>
                     <div>
                       <label className="block text-[8px] text-stone-400 font-sans uppercase font-bold tracking-wider mb-0.5">
-                        Sorting Order
+                        Ordre d'affichage
                       </label>
                       <input
                         type="number"
@@ -291,7 +291,7 @@ export function AdminTimelineTab({
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <div>
                       <label className="block text-[8px] text-stone-400 font-sans uppercase font-bold tracking-wider mb-0.5">
-                        Event Title
+                        Titre de l'Événement
                       </label>
                       <input
                         type="text"
@@ -303,7 +303,7 @@ export function AdminTimelineTab({
                     </div>
                     <div>
                       <label className="block text-[8px] text-stone-400 font-sans uppercase font-bold tracking-wider mb-0.5">
-                        Venue Location
+                        Lieu de l'Événement
                       </label>
                       <input
                         type="text"
@@ -318,7 +318,7 @@ export function AdminTimelineTab({
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <div>
                       <label className="block text-[8px] text-stone-400 font-sans uppercase font-bold tracking-wider mb-0.5">
-                        Aesthetic Icon Accent
+                        Icône Illustrative
                       </label>
                       <select
                         value={editForm.iconName}
@@ -332,7 +332,7 @@ export function AdminTimelineTab({
                     </div>
                     <div>
                       <label className="block text-[8px] text-stone-400 font-sans uppercase font-bold tracking-wider mb-0.5">
-                        Chronicle Event Details
+                        Détails &amp; Description
                       </label>
                       <textarea
                         value={editForm.description}
@@ -351,7 +351,7 @@ export function AdminTimelineTab({
                       className="px-3 py-1 border border-taupe hover:bg-parchment text-[10px] tracking-wider uppercase font-bold text-stone-500 rounded-lg flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-50"
                     >
                       <FiX className="w-3.5 h-3.5" />
-                      <span>Cancel</span>
+                      <span>Annuler</span>
                     </button>
                     <button
                       onClick={() => handleSaveEdit(event.id)}
@@ -359,7 +359,7 @@ export function AdminTimelineTab({
                       className="px-3 py-1 bg-charcoal hover:bg-black text-[10px] tracking-wider uppercase font-bold text-white rounded-lg flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-50"
                     >
                       <FiSave className="w-3.5 h-3.5 text-gold" />
-                      <span>Save</span>
+                      <span>Enregistrer</span>
                     </button>
                   </div>
                 </div>
@@ -371,25 +371,25 @@ export function AdminTimelineTab({
                         {PHASES.find(p => p.value === event.phase)?.label}
                       </span>
                       <span className="text-[8px] bg-taupe/20 text-stone-600 px-1.5 py-0.5 rounded font-mono font-bold">
-                        ORDER {event.sortOrder}
+                        ORDRE {event.sortOrder}
                       </span>
                     </div>
                     <div className="flex gap-2">
                       <button
                         onClick={() => startEdit(event)}
                         disabled={isLoading}
-                        className="p-1 px-1.5 text-stone-450 hover:text-charcoal hover:bg-parchment rounded font-sans text-[10px] flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-50"
+                        className="p-1 px-1.5 text-stone-455 hover:text-charcoal hover:bg-parchment rounded font-sans text-[10px] flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-50"
                       >
                         <FiEdit2 className="w-3 h-3 text-gold-dark" />
-                        <span>Edit</span>
+                        <span>Modifier</span>
                       </button>
                       <button
                         onClick={() => handleDelete(event.id)}
                         disabled={isLoading}
-                        className="p-1 px-1.5 text-stone-450 hover:text-rose hover:bg-rose/5 rounded font-sans text-[10px] flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-50"
+                        className="p-1 px-1.5 text-stone-455 hover:text-rose hover:bg-rose/5 rounded font-sans text-[10px] flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-50"
                       >
                         <FiTrash2 className="w-3 h-3 text-rose/85" />
-                        <span>Remove</span>
+                        <span>Supprimer</span>
                       </button>
                     </div>
                   </div>
@@ -410,7 +410,7 @@ export function AdminTimelineTab({
 
         {events.length === 0 && (
           <div className="bg-white/75 p-12 rounded-2xl border border-dashed border-taupe/80 text-center text-xs text-stone-400 font-serif">
-            No schedule events currently registered. Seed default events or add some using the helper above.
+            Aucun événement n'est programmé pour le moment. Ajoutez des étapes en utilisant le bouton ci-dessus.
           </div>
         )}
       </div>

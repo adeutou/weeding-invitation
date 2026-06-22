@@ -9,10 +9,10 @@ interface RsvpConfirmationProps {
 export function RsvpConfirmation({ entry, onAmend }: RsvpConfirmationProps) {
   const attendanceLabel =
     entry.attendance === 'attending'
-      ? 'Attending with Joy'
+      ? 'Présence confirmée'
       : entry.attendance === 'declined'
-        ? 'Declined with Regret'
-        : 'Uncertain'
+        ? 'Regret, absent'
+        : 'Incertain'
 
   const attendanceBadgeClass =
     entry.attendance === 'attending'
@@ -21,7 +21,7 @@ export function RsvpConfirmation({ entry, onAmend }: RsvpConfirmationProps) {
         ? 'bg-rose/10 text-rose'
         : 'bg-amber-100 text-amber-700'
 
-  const confirmedDate = entry.createdAt.toLocaleDateString('en-US', {
+  const confirmedDate = entry.createdAt.toLocaleDateString('fr-FR', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -29,8 +29,8 @@ export function RsvpConfirmation({ entry, onAmend }: RsvpConfirmationProps) {
 
   const thankYouMessage =
     entry.attendance === 'attending'
-      ? "Merci Beaucoup! We can't wait."
-      : 'Thank you for letting us know.'
+      ? "Merci beaucoup ! Nous avons hâte de vous retrouver."
+      : 'Merci de nous avoir prévenus.'
 
   return (
     <div className="flex flex-col items-center py-6 text-center">
@@ -59,10 +59,10 @@ export function RsvpConfirmation({ entry, onAmend }: RsvpConfirmationProps) {
         <div className="flex flex-col items-center mb-6">
           <FiCheckCircle className="w-12 h-12 text-sage mb-2" />
           <span className="text-[10px] text-gold uppercase tracking-[0.3em] font-semibold">
-            Admission Pass
+            Billet d'entrée
           </span>
           <h3 className="font-serif text-xl font-bold tracking-wider text-charcoal mt-1">
-            Confirmed Registry
+            Inscription Confirmée
           </h3>
           <div className="w-12 h-px bg-gold/30 mt-2" />
         </div>
@@ -70,7 +70,7 @@ export function RsvpConfirmation({ entry, onAmend }: RsvpConfirmationProps) {
         <div className="flex flex-col gap-3 font-serif border-y border-dashed border-gold/20 py-4 my-4 text-left">
           <div className="flex justify-between items-baseline">
             <span className="text-[10px] text-stone-400 uppercase tracking-widest font-sans">
-              INVITEE(S):
+              INVITÉ(S) :
             </span>
             <span className="text-sm font-semibold max-w-[200px] truncate text-right">
               {entry.name}
@@ -78,7 +78,7 @@ export function RsvpConfirmation({ entry, onAmend }: RsvpConfirmationProps) {
           </div>
           <div className="flex justify-between items-baseline">
             <span className="text-[10px] text-stone-400 uppercase tracking-widest font-sans">
-              STATUS:
+              STATUT :
             </span>
             <span
               className={`text-[11px] uppercase tracking-wider px-2 py-0.5 rounded font-sans font-bold ${attendanceBadgeClass}`}
@@ -88,26 +88,34 @@ export function RsvpConfirmation({ entry, onAmend }: RsvpConfirmationProps) {
           </div>
           <div className="flex justify-between items-baseline">
             <span className="text-[10px] text-stone-400 uppercase tracking-widest font-sans">
-              PARTY COUNT:
+              NOMBRE :
             </span>
             <span className="text-sm text-stone-700 font-semibold">
-              {entry.guestsCount} Guests approved
+              {entry.guestsCount} invité(s)
             </span>
           </div>
           <div className="flex justify-between items-baseline">
             <span className="text-[10px] text-stone-400 uppercase tracking-widest font-sans">
-              SHUTTLE COACH:
+              NAVETTE :
             </span>
             <span className="text-xs font-semibold">
-              {entry.needsShuttle ? 'Yes (Reserved Seat)' : 'No (Private Auto)'}
+              {entry.needsShuttle ? 'Oui (Place réservée)' : 'Non (Voiture privée)'}
             </span>
           </div>
           <div className="flex justify-between items-baseline">
             <span className="text-[10px] text-stone-400 uppercase tracking-widest font-sans">
-              CUISINE PREF:
+              RÉGIME :
             </span>
             <span className="text-xs capitalize max-w-[200px] truncate">
-              {entry.dietary === 'none' ? 'Standard French Chef curated' : entry.dietary}
+              {entry.dietary === 'none'
+                ? 'Standard (Menu du Chef)'
+                : entry.dietary === 'vegetarian'
+                  ? 'Végétarien'
+                  : entry.dietary === 'vegan'
+                    ? 'Végétalien'
+                    : entry.dietary === 'gluten-free'
+                      ? 'Sans gluten'
+                      : 'Autre'}
             </span>
           </div>
         </div>
@@ -117,7 +125,7 @@ export function RsvpConfirmation({ entry, onAmend }: RsvpConfirmationProps) {
             || |||| ||| | ||||| | ||||| | | |||| ||| | ||| |||| |
           </div>
           <span className="text-[9px] text-stone-400 font-sans uppercase tracking-[0.2em] mt-1">
-            Confirmed • {confirmedDate}
+            Confirmé le {confirmedDate}
           </span>
         </div>
       </div>
@@ -125,14 +133,13 @@ export function RsvpConfirmation({ entry, onAmend }: RsvpConfirmationProps) {
       <div className="mt-8 max-w-sm">
         <h4 className="font-serif text-lg font-light text-stone-800">{thankYouMessage}</h4>
         <p className="font-serif text-xs text-stone-500 leading-relaxed mt-2.5">
-          Your response has been secured. Our invitations coordinator has logged your details. You
-          may amend your response at any time by clicking below.
+          Votre réponse a été enregistrée. Les détails ont été enregistrés avec succès dans notre base de données. Vous pouvez modifier votre choix à tout moment en cliquant ci-dessous.
         </p>
         <button
           onClick={onAmend}
           className="mt-6 px-5 py-2 font-sans text-[10px] tracking-widest uppercase text-gold hover:text-gold-dark border border-gold/30 hover:border-gold/60 rounded-lg bg-cream/50 transition-colors cursor-pointer"
         >
-          AMEND RSVP REGISTRY
+          MODIFIER MA RÉPONSE
         </button>
       </div>
     </div>

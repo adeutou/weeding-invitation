@@ -36,7 +36,7 @@ function EmptyGallery() {
         </h2>
         <div className="w-12 h-px bg-gold/40 mx-auto mt-3 mb-6" />
         <p className="font-serif italic text-sm text-stone-400 max-w-md mx-auto">
-          Your custom memory room is clear of frames. Visit the Atelier dashboard to upload your first wedding snapshots.
+          Votre galerie de souvenirs est vide. Visitez l'Atelier d'administration pour ajouter vos premières photos.
         </p>
       </div>
     </section>
@@ -58,7 +58,7 @@ function CaptionPanel({ photo, visible }: { photo: TGalleryPhoto; visible: boole
 
       <div className="flex items-center gap-3 justify-center text-gold text-[9px] font-sans tracking-[0.25em] uppercase font-semibold">
         <RiSparklingFill className="w-3.5 h-3.5" />
-        <span>Château de la Rose Memory</span>
+        <span>Souvenir du Château de la Rose</span>
         <RiSparklingFill className="w-3.5 h-3.5" />
       </div>
 
@@ -108,14 +108,14 @@ export function GallerySection({ photos = [] }: TGallerySectionProps) {
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-sans font-bold block mb-2">
-            Moments in Provence
+            Moments en Provence
           </span>
           <h2 className="font-serif text-4xl md:text-5xl font-light tracking-wide text-white">
             Galerie de la Rose
           </h2>
           <div className="w-16 h-px bg-gold/30 mx-auto mt-4 mb-3" />
           <p className="font-serif italic text-xs sm:text-sm text-stone-400 max-w-md mx-auto leading-relaxed">
-            A dynamic memory landscape of sweet interactions, local summer light, and cherished chapters.
+            Un panorama de nos souvenirs, capturant la douceur de nos instants partagés sous la lumière provençale.
           </p>
         </div>
 
@@ -126,7 +126,7 @@ export function GallerySection({ photos = [] }: TGallerySectionProps) {
           <div className="absolute left-2 md:left-6 z-50">
             <button
               onClick={prev}
-              aria-label="Previous Frame"
+              aria-label="Cadre précédent"
               className="w-12 h-12 rounded-full border border-white/10 hover:border-gold/40 bg-black/40 hover:bg-black/80 backdrop-blur-md text-stone-300 hover:text-white flex items-center justify-center transition-all cursor-pointer group shadow-2xl"
             >
               <FiChevronLeft className="w-6 h-6 transition-transform group-hover:-translate-x-0.5" />
@@ -136,7 +136,7 @@ export function GallerySection({ photos = [] }: TGallerySectionProps) {
           <div className="absolute right-2 md:right-6 z-50">
             <button
               onClick={next}
-              aria-label="Next Frame"
+              aria-label="Cadre suivant"
               className="w-12 h-12 rounded-full border border-white/10 hover:border-gold/40 bg-black/40 hover:bg-black/80 backdrop-blur-md text-stone-300 hover:text-white flex items-center justify-center transition-all cursor-pointer group shadow-2xl"
             >
               <FiChevronRight className="w-6 h-6 transition-transform group-hover:translate-x-0.5" />

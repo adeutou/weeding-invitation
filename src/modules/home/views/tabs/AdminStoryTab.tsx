@@ -24,12 +24,12 @@ export function AdminStoryTab({
           className="bg-white rounded-2xl border border-taupe p-5 flex flex-col gap-3"
         >
           <span className="text-[10px] font-sans tracking-widest text-gold uppercase font-bold">
-            Chapter {idx + 1}
+            Chapitre {idx + 1}
           </span>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
               <label className="block text-[10px] uppercase tracking-widest text-stone-400 font-sans font-bold mb-0.5">
-                Chapter Title
+                Titre du Chapitre
               </label>
               <input
                 type="text"
@@ -41,7 +41,7 @@ export function AdminStoryTab({
             </div>
             <div>
               <label className="block text-[10px] uppercase tracking-widest text-stone-400 font-sans font-bold mb-0.5">
-                Period Label
+                Période / Date
               </label>
               <input
                 type="text"
@@ -54,7 +54,7 @@ export function AdminStoryTab({
           </div>
           <div>
             <label className="block text-[10px] uppercase tracking-widest text-stone-400 font-sans font-bold mb-0.5">
-              Lyrical Subtitle
+              Sous-titre poétique
             </label>
             <input
               type="text"
@@ -66,7 +66,7 @@ export function AdminStoryTab({
           </div>
           <div>
             <label className="block text-[10px] uppercase tracking-widest text-stone-400 font-sans font-bold mb-0.5">
-              The Chronicle Text
+              Récit du Chapitre
             </label>
             <textarea
               value={chap.content}

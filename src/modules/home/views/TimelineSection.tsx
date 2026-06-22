@@ -37,9 +37,9 @@ function renderIcon(name: string) {
 }
 
 const PHASE_LABELS: Record<WeddingPhase, string> = {
-  preWedding: 'I. The Gathering (Eve)',
-  bigDay: 'II. The Wedding Day',
-  afterglow: 'III. The Afterglow (Brunch)',
+  preWedding: 'I. L\'Accueil (Veille)',
+  bigDay: 'II. Le Jour J',
+  afterglow: 'III. Le Lendemain (Brunch)',
 }
 
 export function TimelineSection({ events }: TimelineSectionProps) {
@@ -59,14 +59,14 @@ export function TimelineSection({ events }: TimelineSectionProps) {
       <div className="max-w-4xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <span className="text-gold uppercase tracking-[0.3em] text-xs font-sans font-medium block mb-2">
-            The Event Stages
+            Les Étapes du Week-end
           </span>
           <h2 className="font-serif text-4xl md:text-5xl font-light tracking-wide text-charcoal">
-            The Evolutionary Chronicle
+            La Chronique de notre Union
           </h2>
           <div className="w-16 h-px bg-gold/40 mx-auto mt-4 mb-2" />
           <p className="font-serif italic text-sm text-stone-500 max-w-md mx-auto">
-            Toggle between the evolutionary chapters of our celebrative weekend.
+            Parcourez les différents moments clés de notre week-end de célébration.
           </p>
         </div>
 
@@ -128,7 +128,7 @@ export function TimelineSection({ events }: TimelineSectionProps) {
 
             {currentEvents.length === 0 && (
               <div className="bg-[#fdfbf8]/85 p-12 rounded-xl border border-dashed border-taupe/80 text-center text-xs text-stone-400 font-serif">
-                No events scheduled for this phase.
+                Aucun événement prévu pour cette étape.
               </div>
             )}
           </div>
@@ -138,15 +138,15 @@ export function TimelineSection({ events }: TimelineSectionProps) {
           <div className="absolute top-0 inset-x-0 h-1 bg-linear-to-r from-rose/20 via-gold/40 to-sage/20" />
           <FiMap className="w-6 h-6 text-gold/80 mb-3" />
           <h4 className="font-serif text-lg font-light text-charcoal tracking-wide mb-1">
-            Complimentary Guest Shuttle Assistance
+            Service de Navette pour les Invités
           </h4>
           <p className="font-serif text-stone-500 text-xs leading-relaxed max-w-lg mb-3">
-            An elegant coach service will run between Saint-Sulpice Train Station, the local hotels (Le Clos &amp; Grand
-            Saint-Jean), and the Château venue before the Eve and after Sunday departures. Please specify if you need
-            shuttle transport in your RSVP below.
+            Un service de navette élégant circulera entre la gare de Saint-Sulpice, les hôtels partenaires (Le Clos &amp; Grand
+            Saint-Jean) et le Château avant la veille et après les départs du dimanche. Veuillez préciser si vous avez besoin
+            d'une navette lors de votre RSVP ci-dessous.
           </p>
           <div className="inline-flex items-center gap-1 text-[10px] text-gold uppercase tracking-[0.2em] font-sans font-semibold">
-            <span>Schedule details available in guest-guide folder</span>
+            <span>Détails des horaires disponibles dans les informations pratiques</span>
             <FiChevronRight className="w-3 h-3" />
           </div>
         </div>

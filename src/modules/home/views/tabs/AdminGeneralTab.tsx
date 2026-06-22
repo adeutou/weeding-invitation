@@ -25,7 +25,7 @@ export function AdminGeneralTab({ localConfig, onChange }: AdminGeneralTabProps)
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-1">
-            Bride Name
+            Nom de la Mariée
           </label>
           <input
             type="text"
@@ -37,7 +37,7 @@ export function AdminGeneralTab({ localConfig, onChange }: AdminGeneralTabProps)
         </div>
         <div>
           <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-1">
-            Groom Name
+            Nom du Marié
           </label>
           <input
             type="text"
@@ -52,7 +52,7 @@ export function AdminGeneralTab({ localConfig, onChange }: AdminGeneralTabProps)
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-1">
-            Countdown Wedding Date
+            Date du Mariage (Compte à rebours)
           </label>
           <input
             type="datetime-local"
@@ -64,7 +64,7 @@ export function AdminGeneralTab({ localConfig, onChange }: AdminGeneralTabProps)
         </div>
         <div>
           <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-1">
-            Date Readable
+            Date Lisible
           </label>
           <input
             type="text"
@@ -79,7 +79,7 @@ export function AdminGeneralTab({ localConfig, onChange }: AdminGeneralTabProps)
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-1">
-            Venue Name
+            Nom du Lieu
           </label>
           <input
             type="text"
@@ -91,7 +91,7 @@ export function AdminGeneralTab({ localConfig, onChange }: AdminGeneralTabProps)
         </div>
         <div>
           <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-1">
-            Venue Location
+            Adresse/Localisation
           </label>
           <input
             type="text"
@@ -105,7 +105,7 @@ export function AdminGeneralTab({ localConfig, onChange }: AdminGeneralTabProps)
 
       <div>
         <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-1">
-          Editorial Quote
+          Citation Éditoriale
         </label>
         <input
           type="text"

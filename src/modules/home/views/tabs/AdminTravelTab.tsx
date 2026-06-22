@@ -12,7 +12,7 @@ export function AdminTravelTab({ localConfig, onChange }: AdminTravelTabProps) {
     <div className="space-y-5 max-w-3xl">
       <div>
         <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-1">
-          Transit &amp; Flight Connections
+          Vols &amp; Liaisons Aériennes
         </label>
         <textarea
           value={localConfig.travelFlights}
@@ -24,7 +24,7 @@ export function AdminTravelTab({ localConfig, onChange }: AdminTravelTabProps) {
       </div>
       <div>
         <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-1">
-          TGV Train Transfers
+          Transferts en Train / TGV
         </label>
         <textarea
           value={localConfig.travelTrains}
@@ -36,7 +36,7 @@ export function AdminTravelTab({ localConfig, onChange }: AdminTravelTabProps) {
       </div>
       <div>
         <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-1">
-          Reserved Boutique Stays &amp; Codes
+          Hébergements &amp; Hôtels Partenaires
         </label>
         <textarea
           value={localConfig.travelStays}
@@ -48,7 +48,7 @@ export function AdminTravelTab({ localConfig, onChange }: AdminTravelTabProps) {
       </div>
       <div>
         <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-1">
-          Provençal Treasures
+          Trésors de Provence
         </label>
         <textarea
           value={localConfig.travelTreasures}

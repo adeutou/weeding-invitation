@@ -23,8 +23,8 @@ export function HeroSection({ config, guestName, onScrollToStory }: HeroSectionP
   const weddingYear = isNaN(weddingDate.getTime()) ? 2026 : weddingDate.getFullYear()
   const weddingMonthIndex = isNaN(weddingDate.getTime()) ? 8 : weddingDate.getMonth()
   const weddingMonthName = isNaN(weddingDate.getTime())
-    ? 'September'
-    : weddingDate.toLocaleString('en-US', { month: 'long' })
+    ? 'Septembre'
+    : weddingDate.toLocaleString('fr-FR', { month: 'long' })
   const weddingDay = isNaN(weddingDate.getTime()) ? 19 : weddingDate.getDate()
 
   const firstDay = new Date(weddingYear, weddingMonthIndex, 1)
@@ -74,7 +74,7 @@ export function HeroSection({ config, guestName, onScrollToStory }: HeroSectionP
           <div className="inline-flex items-center gap-3 bg-parchment py-1.5 px-4 rounded-full border border-taupe/65 mb-8 animate-fade-in shadow-sm">
             <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
             <p className="font-serif italic text-xs text-stone-600">
-              With supreme joy, to our guest{' '}
+              Avec une immense joie, pour notre invité(e){' '}
               <span className="font-sans font-bold uppercase text-[10px] tracking-widest text-charcoal">
                 {guestName}
               </span>
@@ -83,7 +83,7 @@ export function HeroSection({ config, guestName, onScrollToStory }: HeroSectionP
 
           <div className="space-y-2 max-w-2xl">
             <span className="text-gold uppercase tracking-[0.45em] text-[10px] font-sans font-semibold block">
-              The Sacred Union &amp; Gathering
+              La Sainte Union &amp; Célébration
             </span>
             <h1 className="font-serif text-5xl sm:text-7xl md:text-[80px] font-extralight tracking-tight text-charcoal leading-[1.05]">
               {config.groomName}
@@ -109,7 +109,7 @@ export function HeroSection({ config, guestName, onScrollToStory }: HeroSectionP
                 <FiCalendar className="w-4 h-4 text-gold" />
               </div>
               <div>
-                <p className="text-[10px] uppercase tracking-widest text-stone-400 font-sans">The Wedding Day</p>
+                <p className="text-[10px] uppercase tracking-widest text-stone-400 font-sans">Le Jour J</p>
                 <p className="font-serif text-sm font-semibold text-charcoal">{config.weddingDateReadable}</p>
               </div>
             </div>
@@ -118,7 +118,7 @@ export function HeroSection({ config, guestName, onScrollToStory }: HeroSectionP
                 <FiMapPin className="w-4 h-4 text-sage" />
               </div>
               <div>
-                <p className="text-[10px] uppercase tracking-widest text-stone-400 font-sans">The Location</p>
+                <p className="text-[10px] uppercase tracking-widest text-stone-400 font-sans">Le Lieu</p>
                 <p className="font-serif text-sm font-semibold text-charcoal">{config.venueLocation}</p>
               </div>
             </div>
@@ -126,14 +126,14 @@ export function HeroSection({ config, guestName, onScrollToStory }: HeroSectionP
 
           <div className="w-full max-w-lg">
             <p className="text-[10px] uppercase tracking-[0.3em] font-sans text-stone-400 mb-3 font-medium">
-              Chronograph until vows
+              Compte à rebours avant les vœux
             </p>
             <div className="grid grid-cols-4 gap-3 bg-white/45 p-4 rounded-2xl border border-taupe shadow-sm backdrop-blur-sm">
               {([
-                { label: 'Days', value: countdown.days },
-                { label: 'Hours', value: countdown.hours },
-                { label: 'Mins', value: countdown.minutes },
-                { label: 'Secs', value: countdown.seconds, accent: true },
+                { label: 'Jours', value: countdown.days },
+                { label: 'Heures', value: countdown.hours },
+                { label: 'Min', value: countdown.minutes },
+                { label: 'Sec', value: countdown.seconds, accent: true },
               ] as Array<{ label: string; value: number; accent?: boolean }>).map(({ label, value, accent }, i) => (
                 <div key={label} className={`flex flex-col items-center py-2 ${i > 0 ? 'border-l border-gold/15' : ''}`}>
                   <span className={`font-serif text-3xl md:text-4xl font-light tracking-tight ${accent ? 'text-rose' : 'text-charcoal'}`}>
@@ -210,7 +210,7 @@ export function HeroSection({ config, guestName, onScrollToStory }: HeroSectionP
                   {weddingMonthName} {weddingYear}
                 </h4>
                 <div className="grid grid-cols-7 gap-2 text-[9px] font-sans font-bold tracking-wider text-stone-400 mb-2">
-                  {['SU','MO','TU','WE','TH','FR','SA'].map(d => <span key={d}>{d}</span>)}
+                  {['DI','LU','MA','ME','JE','VE','SA'].map(d => <span key={d}>{d}</span>)}
                 </div>
                 <div className="grid grid-cols-7 gap-y-1.5 gap-x-2 text-xs font-serif text-stone-600">
                   {padArray.map((_, idx) => (
@@ -233,7 +233,7 @@ export function HeroSection({ config, guestName, onScrollToStory }: HeroSectionP
                 </div>
                 <p className="handwriting text-gold text-lg mt-4 flex items-center justify-center gap-1.5">
                   <RiHeartFill className="w-3.5 h-3.5 text-rose" />
-                  The Wedding Day
+                  Le Jour J
                 </p>
               </div>
             </div>
@@ -245,7 +245,7 @@ export function HeroSection({ config, guestName, onScrollToStory }: HeroSectionP
         onClick={onScrollToStory}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center text-stone-400 animate-bounce cursor-pointer z-10"
       >
-        <span className="text-[8px] font-sans tracking-[0.3em] uppercase block mb-1">Scroll to begin chronicle</span>
+        <span className="text-[8px] font-sans tracking-[0.3em] uppercase block mb-1">Défiler pour commencer</span>
         <FiChevronDown className="w-4 h-4 text-gold-dark" />
       </button>
 

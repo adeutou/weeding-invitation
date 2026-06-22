@@ -24,7 +24,7 @@ export function AdminDressCodeTab({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-0.5">
-            Theme Title
+            Titre du Thème
           </label>
           <input
             type="text"
@@ -36,7 +36,7 @@ export function AdminDressCodeTab({
         </div>
         <div>
           <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-0.5">
-            Theme Instructions Transcript
+            Instructions &amp; Description
           </label>
           <input
             type="text"
@@ -49,7 +49,7 @@ export function AdminDressCodeTab({
       </div>
       <div>
         <span className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-3">
-          Organic Swatches
+          Échantillons de Couleur
         </span>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {localConfig.dressCodeSwatches.map((sw, index) => {
@@ -63,7 +63,7 @@ export function AdminDressCodeTab({
               >
                 <div className="flex items-center justify-between">
                   <span className="text-[9px] font-sans text-stone-400 font-bold uppercase">
-                    Swatch #{index + 1}
+                    Échantillon #{index + 1}
                   </span>
                   <div
                     className="w-5 h-5 rounded-full border border-taupe/60"
@@ -72,7 +72,7 @@ export function AdminDressCodeTab({
                 </div>
                 <div>
                   <label className="block text-[9px] text-stone-400 font-sans uppercase mb-1">
-                    Color HEX &amp; Picker
+                    Code HEX &amp; Pipette
                   </label>
                   <div className="flex items-center gap-2">
                     <div
@@ -101,7 +101,7 @@ export function AdminDressCodeTab({
                 </div>
                 <div>
                   <label className="block text-[9px] text-stone-400 font-sans uppercase mb-0.5">
-                    Swatch Label
+                    Nom de la Couleur
                   </label>
                   <input
                     type="text"
@@ -115,7 +115,7 @@ export function AdminDressCodeTab({
                 </div>
                 <div>
                   <label className="block text-[9px] text-stone-400 font-sans uppercase mb-1">
-                    Vibe Description
+                    Description &amp; Conseils
                   </label>
                   <textarea
                     value={sw.description}

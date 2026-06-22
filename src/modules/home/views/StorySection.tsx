@@ -37,14 +37,14 @@ export function StorySection({ chapters }: StorySectionProps) {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-20">
           <span className="text-gold uppercase tracking-[0.3em] text-xs font-sans font-medium block mb-2">
-            Our Journey
+            Notre Histoire
           </span>
           <h2 className="font-serif text-4xl md:text-5xl font-light tracking-wide text-charcoal">
-            The Chapters of Us
+            Les Chapitres de Notre Vie
           </h2>
           <div className="w-16 h-px bg-gold/40 mx-auto mt-4 mb-2" />
           <p className="font-serif italic text-sm text-stone-500 max-w-sm mx-auto">
-            A linear journey of coffee spills, lavender gardens, and handwritten letters that led us to this moment.
+            Un voyage parsemé de cafés partagés, de jardins de lavande et de lettres manuscrites qui nous ont menés jusqu'à ce jour.
           </p>
         </div>
 
@@ -91,7 +91,7 @@ export function StorySection({ chapters }: StorySectionProps) {
                           {chap.period.split(' - ')[0]}
                         </span>
                         <div className="text-[9px] font-sans text-stone-400 tracking-widest uppercase mt-1">
-                          THE SCENE
+                          LE CONTEXTE
                         </div>
                       </div>
                     )}
@@ -122,7 +122,7 @@ export function StorySection({ chapters }: StorySectionProps) {
                           {chap.period.split(' - ')[0]}
                         </span>
                         <div className="text-[9px] font-sans text-stone-400 tracking-widest uppercase mt-1">
-                          THE SCENE
+                          LE CONTEXTE
                         </div>
                       </div>
                     )}
@@ -142,7 +142,7 @@ export function StorySection({ chapters }: StorySectionProps) {
         <div className="flex justify-center mt-20">
           <div className="text-center">
             <RiHeartFill className="w-5 h-5 text-rose animate-pulse mx-auto" />
-            <div className="handwriting text-3xl text-gold mt-2">To many more chapters together...</div>
+            <div className="handwriting text-3xl text-gold mt-2">Pour encore bien d'autres chapitres ensemble...</div>
           </div>
         </div>
       </div>

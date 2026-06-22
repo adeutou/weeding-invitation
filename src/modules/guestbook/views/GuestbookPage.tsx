@@ -6,10 +6,10 @@ import { StampGraphic } from './StampGraphic'
 import type { TGuestbookEntry, TStampType } from '../@types'
 
 const STAMP_OPTIONS: Array<{ type: TStampType; label: string }> = [
-  { type: 'botanical', label: 'Botanical' },
-  { type: 'gold_ring', label: 'Gold Ring' },
-  { type: 'wax_seal', label: 'Wax Seal' },
-  { type: 'vintage_dove', label: 'Dove' },
+  { type: 'botanical', label: 'Botanique' },
+  { type: 'gold_ring', label: 'Alliance' },
+  { type: 'wax_seal', label: 'Sceau Cire' },
+  { type: 'vintage_dove', label: 'Colombe' },
 ]
 
 interface GuestbookPageProps {
@@ -39,15 +39,14 @@ export function GuestbookPage({ initialEntries }: GuestbookPageProps) {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-gold uppercase tracking-[0.3em] text-xs font-sans font-medium block mb-2">
-            Memory Wall
+            Mur de Souvenirs
           </span>
           <h2 className="font-serif text-4xl md:text-5xl font-light tracking-wide text-charcoal">
-            The Guestbook
+            Le Livre d'Or
           </h2>
           <div className="w-16 h-px bg-gold/40 mx-auto mt-4 mb-2" />
           <p className="font-serif italic text-sm text-stone-500 max-w-md mx-auto">
-            Leave a timeless blessing, a wish, or a treasured memory for Clara &amp; Charles to
-            keep forever.
+            Laissez un message chaleureux, un vœu de bonheur ou un souvenir précieux pour Clara &amp; Charles.
           </p>
         </div>
 
@@ -59,7 +58,7 @@ export function GuestbookPage({ initialEntries }: GuestbookPageProps) {
                 className="flex flex-col gap-4 bg-parchment p-6 md:p-8 rounded-2xl border border-taupe/40 shadow-xs"
               >
                 <h3 className="font-serif text-lg font-light text-charcoal border-b border-gold/20 pb-3">
-                  Sign the Memory Book
+                  Écrire dans le Livre d'Or
                 </h3>
 
                 {error && (
@@ -78,7 +77,7 @@ export function GuestbookPage({ initialEntries }: GuestbookPageProps) {
                     htmlFor="gb-name"
                     className="text-[9px] text-stone-400 font-sans tracking-[0.15em] uppercase font-semibold"
                   >
-                    Your Name
+                    Votre Nom
                   </label>
                   <input
                     id="gb-name"
@@ -96,13 +95,13 @@ export function GuestbookPage({ initialEntries }: GuestbookPageProps) {
                     htmlFor="gb-message"
                     className="text-[9px] text-stone-400 font-sans tracking-[0.15em] uppercase font-semibold"
                   >
-                    Your Wish / Message
+                    Votre Message / Vœu
                   </label>
                   <textarea
                     id="gb-message"
                     value={message}
                     onChange={e => setMessage(e.target.value)}
-                    placeholder="Share a blessing, a fond memory, or a heartfelt wish for the couple..."
+                    placeholder="Partagez un vœu, un souvenir marquant ou un message chaleureux pour les mariés..."
                     disabled={isPending}
                     rows={4}
                     maxLength={500}
@@ -115,7 +114,7 @@ export function GuestbookPage({ initialEntries }: GuestbookPageProps) {
 
                 <div className="flex flex-col gap-2">
                   <span className="text-[9px] text-stone-400 font-sans tracking-[0.15em] uppercase font-semibold">
-                    Choose Your Wax Stamp
+                    Choisissez votre Sceau
                   </span>
                   <div className="grid grid-cols-4 gap-2">
                     {STAMP_OPTIONS.map(({ type, label }) => (
@@ -149,10 +148,10 @@ export function GuestbookPage({ initialEntries }: GuestbookPageProps) {
                   {isPending ? (
                     <>
                       <div className="w-3.5 h-3.5 border-2 border-cream border-t-transparent rounded-full animate-spin" />
-                      <span>AFFIXING TO MEMORY WALL...</span>
+                      <span>ENREGISTREMENT SUR LE MUR...</span>
                     </>
                   ) : (
-                    'SEAL & SUBMIT WISH'
+                    'SCELLER & ENVOYER'
                   )}
                 </button>
               </form>
@@ -161,10 +160,10 @@ export function GuestbookPage({ initialEntries }: GuestbookPageProps) {
 
           <div className="lg:col-span-7 flex flex-col gap-4">
             <div className="flex items-baseline justify-between mb-2">
-              <h3 className="font-serif text-lg font-light text-charcoal">Blessings Received</h3>
+              <h3 className="font-serif text-lg font-light text-charcoal">Messages Reçus</h3>
               {entries.length > 0 && (
                 <span className="text-[10px] text-stone-400 font-sans uppercase tracking-widest">
-                  {entries.length} {entries.length === 1 ? 'entry' : 'entries'}
+                  {entries.length} {entries.length === 1 ? 'message' : 'messages'}
                 </span>
               )}
             </div>
@@ -172,7 +171,7 @@ export function GuestbookPage({ initialEntries }: GuestbookPageProps) {
             {entries.length === 0 ? (
               <div className="bg-parchment/60 rounded-2xl border border-gold/10 p-12 text-center">
                 <p className="font-serif italic text-sm text-stone-400 leading-relaxed">
-                  The memory wall awaits its first blessing. Be the one to begin this chapter.
+                  Le mur de souvenirs attend son premier message. Soyez le premier à commencer ce chapitre.
                 </p>
               </div>
             ) : (

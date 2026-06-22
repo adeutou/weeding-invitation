@@ -48,7 +48,7 @@ export function AdminGalleryTab({
 
   const handleDeletePhoto = async (id: string) => {
     if (
-      window.confirm('Are you sure you want to remove this photo from the wall?')
+      window.confirm('Êtes-vous sûr de vouloir supprimer cette photo de la galerie ?')
     ) {
       setIsLoading(true)
       const res = await deleteGalleryPhotoAction(id)
@@ -98,10 +98,10 @@ export function AdminGalleryTab({
       if (res.ok && data.url) {
         setNewPhotoUrl(data.url)
       } else {
-        setUploadError(data.error || 'Failed to upload image.')
+        setUploadError(data.error || "Échec du chargement de l'image.")
       }
     } catch {
-      setUploadError('Network error uploading file.')
+      setUploadError('Erreur réseau lors du chargement.')
     } finally {
       setUploadProgress(false)
     }
@@ -111,8 +111,7 @@ export function AdminGalleryTab({
     <div className="space-y-6 max-w-3xl">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-taupe/30 pb-4">
         <p className="text-[11px] font-sans text-stone-500">
-          Curate your beautiful memory wall. Submit high-res image links or photo
-          CDN paths with romantic footnotes:
+          Créez votre galerie de souvenirs. Téléchargez vos images et ajoutez des légendes descriptives :
         </p>
         <button
           onClick={() => {
@@ -125,7 +124,7 @@ export function AdminGalleryTab({
           className="px-3.5 py-2 bg-charcoal hover:bg-black text-[10px] tracking-wider uppercase font-bold text-white rounded-lg flex items-center gap-1.5 transition-all cursor-pointer shrink-0 disabled:opacity-50"
         >
           <FiPlus className="w-3.5 h-3.5 text-gold" />
-          <span>Add Snapshot Frame</span>
+          <span>Ajouter une Photo</span>
         </button>
       </div>
 
@@ -136,7 +135,7 @@ export function AdminGalleryTab({
         >
           <div className="flex flex-col gap-1">
             <label className="text-[10px] text-stone-500 font-sans tracking-[0.15em] uppercase font-bold mb-1">
-              Upload Snapshot
+              Télécharger une Photo
             </label>
             <div
               onDragOver={onDragOver}
@@ -160,7 +159,7 @@ export function AdminGalleryTab({
                 <div className="flex flex-col items-center gap-2">
                   <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
                   <span className="text-[10px] text-stone-400 font-sans tracking-widest uppercase">
-                    Uploading...
+                    Chargement en cours...
                   </span>
                 </div>
               ) : newPhotoUrl ? (
@@ -173,7 +172,7 @@ export function AdminGalleryTab({
                     />
                   </div>
                   <span className="text-[9px] text-emerald-600 font-sans tracking-widest uppercase font-bold">
-                    ✅ Upload Successful
+                    ✅ Chargement Réussi
                   </span>
                   <span className="text-[8px] text-stone-400 font-mono max-w-xs truncate">
                     {newPhotoUrl}
@@ -183,10 +182,10 @@ export function AdminGalleryTab({
                 <div className="flex flex-col items-center gap-2">
                   <FiPlus className="w-6 h-6 text-gold mb-1" />
                   <p className="font-serif text-xs text-charcoal">
-                    Drag &amp; Drop snapshot image file here
+                    Glissez &amp; Déposez l'image ici
                   </p>
                   <p className="text-[9px] text-stone-400 font-sans uppercase tracking-widest">
-                    Or click to browse from device (JPEG, PNG, WebP, AVIF up to 8MB)
+                    Ou cliquez pour parcourir vos fichiers (JPEG, PNG, WebP, AVIF jusqu'à 8 Mo)
                   </p>
                 </div>
               )}
@@ -200,10 +199,10 @@ export function AdminGalleryTab({
 
           <div className="flex flex-col gap-1">
             <Textarea
-              label='Story / Romantic Caption'
+              label="Légende descriptive / Souvenir"
               value={newPhotoCaption}
               onChange={e => setNewPhotoCaption(e.target.value)}
-              placeholder="A quiet moment captured in sweet light..."
+              placeholder="Un moment calme capturé sous une jolie lumière..."
               required
               rows={3}
               disabled={isLoading || uploadProgress}
@@ -216,7 +215,7 @@ export function AdminGalleryTab({
             disabled={isLoading || uploadProgress || !newPhotoUrl}
             className="self-start px-5 py-2.5 bg-charcoal hover:bg-black text-white font-sans text-xs tracking-widest font-semibold uppercase rounded-lg transition-colors cursor-pointer disabled:opacity-50"
           >
-            Save Photo
+            Enregistrer la Photo
           </button>
         </form>
       )}
@@ -229,16 +228,16 @@ export function AdminGalleryTab({
           >
             <div className="flex items-center justify-between">
               <span className="text-[9px] font-sans text-stone-400 font-bold uppercase tracking-wider">
-                Photo Frame #{index + 1}
+                Cadre Photo #{index + 1}
               </span>
               <button
                 onClick={() => handleDeletePhoto(photo.id)}
                 disabled={isLoading || uploadProgress}
-                className="p-1 px-1.5 text-stone-450 hover:text-rose hover:bg-rose/5 rounded font-sans text-[10px] flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-50"
-                title="Remove photo from collection"
+                className="p-1 px-1.5 text-stone-455 hover:text-rose hover:bg-rose/5 rounded font-sans text-[10px] flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-50"
+                title="Supprimer la photo"
               >
                 <FiTrash2 className="w-3 h-3 text-rose/85" />
-                <span>Remove</span>
+                <span>Supprimer</span>
               </button>
             </div>
             <div className="flex gap-3">
@@ -256,17 +255,15 @@ export function AdminGalleryTab({
               </div>
               <div className="flex-1">
                 <Textarea
-                  label='Story / Romantic Caption'
+                  label="Légende descriptive / Souvenir"
                   value={photo.caption}
                   onChange={e => setNewPhotoCaption(e.target.value)}
-                  placeholder="A quiet moment captured in sweet light..."
+                  placeholder="Un moment calme capturé sous une jolie lumière..."
                   required
                   rows={3}
                   disabled={isLoading || uploadProgress}
                   className="bg-cream text-charcoal text-sm border border-taupe rounded-lg px-4 py-2 placeholder:text-stone-450 focus:outline-none w-full"
                 />
-
-
               </div>
             </div>
           </div>
@@ -274,8 +271,7 @@ export function AdminGalleryTab({
 
         {photos.length === 0 && (
           <div className="col-span-1 md:col-span-2 bg-white/75 p-12 rounded-2xl border border-dashed border-taupe/80 text-center text-xs text-stone-400 font-serif">
-            No memory frames currently registered. Seed some moments using the
-            snapshot helper at the top.
+            Aucune photo enregistrée pour le moment. Ajoutez des souvenirs en utilisant le bouton ci-dessus.
           </div>
         )}
       </div>

@@ -8,36 +8,36 @@ import type { StoryChapterRecord, DressCodeSwatchRecord } from '../schema'
 const DEFAULT_CHAPTERS: StoryChapterRecord[] = [
   {
     id: 'chapter-1',
-    title: 'Chapter I: The Boulevard Encounter',
-    period: 'October - Autumn In Paris',
-    subtitle: 'A serendipitous shelter from rain',
+    title: 'Chapitre I : La Rencontre sur le Boulevard',
+    period: "Octobre - L'Automne à Paris",
+    subtitle: 'Un abri inattendu contre la pluie',
     content:
-      "It began under a forest-green canopy on Rue Saint-André des Arts. A sudden autumn downpour forced Clara to seek shelter beneath the awning of an old bookshop where Charles was examining vintage maps. A shared umbrella and three hours of conversation over spiced tea in Saint-Germain-des-Prés set the trajectory for our hearts.",
+      "Tout a commencé sous un auvent vert forêt de la rue Saint-André-des-Arts. Une averse d'automne soudaine a forcé Clara à s'abriter sous le store d'une ancienne librairie où Charles examinait des cartes anciennes. Un parapluie partagé et trois heures de conversation autour d'un thé épicé à Saint-Germain-des-Prés ont tracé le chemin de nos cœurs.",
   },
   {
     id: 'chapter-2',
-    title: 'Chapter II: The Lavender Epistles',
-    period: 'A Summer of Distance',
-    subtitle: 'Handwritten ink across oceans',
+    title: 'Chapitre II : Les Lettres de Lavande',
+    period: 'Un Été de Distance',
+    subtitle: "De l'encre manuscrite par-delà les collines",
     content:
-      'When Charles accepted a residency in Rome and Clara was documenting the botanics of southern France, letters became our lifeblood. Two hundred and fourteen hand-sealed envelopes traveled between Provence and Prague, preserving every dream, observation, and late-night reflection in dark ink on cotton paper.',
+      "Quand Charles a accepté une résidence à Rome et que Clara documentait la botanique dans le sud de la France, les lettres sont devenues notre lien vital. Deux cent quatorze enveloppes scellées à la main ont voyagé entre la Provence et Rome, préservant chaque rêve, chaque observation et chaque réflexion nocturne.",
   },
   {
     id: 'chapter-3',
-    title: 'Chapter III: The Promises in the Ruins',
-    period: 'September - Sacred Provence',
-    subtitle: 'An oath of dynamic devotion',
+    title: 'Chapitre III : Les Promesses dans les Ruines',
+    period: 'Septembre - La Provence Sacrée',
+    subtitle: 'Un serment de dévouement éternel',
     content:
-      'Amidst the silent wind and silver olive groves of the Alpilles, Charles asked Clara to build a life of shared art and timeless architecture. It was simple, quiet, and sacred. We decided to return to these hills of Provence to share our vows with the souls who hold our stories dearest.',
+      "Au milieu du vent silencieux et des oliviers argentés des Alpilles, Charles a demandé à Clara de bâtir une vie d'art partagé et d'amour intemporel. C'était simple, calme et sacré. Nous avons décidé de retourner sur ces collines de Provence pour prononcer nos vœux.",
   },
 ]
 
 const DEFAULT_SWATCHES: DressCodeSwatchRecord[] = [
-  { name: 'Olive Sauvage', colorHex: '#5E6F5C', description: 'The deep sage of old orchards. Soft, organic, and peaceful. Suited for linen blazers, pastel trousers, or light slip dresses.' },
-  { name: 'Sienne Brûlée', colorHex: '#A97669', description: 'Terracotta and wild blossoms. Inspired by pottery over stone arches. Great for warm custom loafers, pleated skirts, or pocket squares.' },
-  { name: 'Or Antique', colorHex: '#C5A059', description: 'Muted golden glints of autumn sun. Suitable for elegant jewelry, metallic thread embroidery, or warm champagne neckties.' },
-  { name: 'Crème Royale', colorHex: '#EAE6DF', description: 'Raw silk and washed stones. Light creams of vintage paper. Perfect for linen suits, light cream column gowns, or panama hats.' },
-  { name: 'Sable Fin', colorHex: '#D5CEBF', description: 'Warm sandy paths of the château. Elegant and comfortable. Beautiful for braided leather sandals, tan accessories, and soft tailoring.' },
+  { name: 'Olive Sauvage', colorHex: '#5E6F5C', description: "Le sauge profond des vieux vergers. Doux, organique et paisible. Idéal pour les vestes en lin, les pantalons pastel ou les robes légères." },
+  { name: 'Sienne Brûlée', colorHex: '#A97669', description: "Terre cuite et fleurs sauvages. Inspiré des poteries sur les arches de pierre. Idéal pour les mocassins souples, les jupes plissées ou les pochettes." },
+  { name: 'Or Antique', colorHex: '#C5A059', description: "Reflets dorés du soleil d'automne. Parfait pour les bijoux élégants, les broderies dorées ou les cravates champagne." },
+  { name: 'Crème Royale', colorHex: '#EAE6DF', description: "Soie brute et pierres lavées. Crème clair du papier vintage. Parfait pour les costumes en lin, les robes colonnes ou les chapeaux panama." },
+  { name: 'Sable Fin', colorHex: '#D5CEBF', description: "Chemins de sable du château. Élégant et confortable. Superbe pour les sandales en cuir tressé, les accessoires fauves et les coupes fluides." },
 ]
 
 export const DEFAULT_CONFIG_VALUES = {
@@ -45,22 +45,22 @@ export const DEFAULT_CONFIG_VALUES = {
   brideName: 'Madame Clara',
   groomName: 'Monsieur Charles',
   weddingDateStr: '2026-09-19T15:00:00+02:00',
-  weddingDateReadable: 'September 19th, 2026',
+  weddingDateReadable: '19 Septembre 2026',
   venueName: 'Château de la Rose',
   venueLocation: 'Provence, France',
-  welcomeInviteMessage: 'To our dear guest • You are invited',
+  welcomeInviteMessage: 'À notre cher invité • Vous êtes invité',
   editorialQuote: 'Pour toujours, et au-delà du temps',
   travelFlights:
-    'The closest international airport is Marseille Provence (MRS), located a scenic 1-hour drive through the orchards, or Nice Côte d\'Azur (NCE), situated 2.5 hours away.',
+    "L'aéroport international le plus proche est Marseille Provence (MRS), situé à 1 heure de route à travers les vergers, ou Nice Côte d'Azur (NCE), situé à 2,5 heures.",
   travelTrains:
-    'For high-speed trains, book Eurostar directly to Avignon TGV or take a regional connection to Saint-Sulpice station.',
+    "Pour les trains à grande vitesse, réservez directement votre trajet Eurostar ou TGV vers Avignon TGV ou prenez une correspondance régionale pour la gare de Saint-Sulpice.",
   travelStays:
-    "We have reserved full block-room registries under a preferential rate at Le Clos de Saint-Pierre and Grand Saint-Jean Hotel (located 10 mins from the Château ruins). Please mention Clara & Charles's Wedding when reserving.",
+    "Nous avons réservé des blocs de chambres avec un tarif préférentiel au Clos de Saint-Pierre et à l'Hôtel Grand Saint-Jean (situés à 10 minutes des ruines du Château). Veuillez mentionner 'Mariage de Clara & Charles' lors de votre réservation.",
   travelTreasures:
-    "If you arrive early, explore the stunning cliffside red-ochre town of Gordes, visit the medieval monastic lavender gardens at Sénanque Abbey, or pick fresh strawberries at L'Isle-sur-la-Sorgue market.",
-  dressCodeTitle: 'Provenance Formal with Fine Textures',
+    "Si vous arrivez tôt, explorez le magnifique village perché de Gordes, visitez les jardins de lavande de l'abbaye de Sénanque ou cueillez des fraises fraîches au marché de L'Isle-sur-la-Sorgue.",
+  dressCodeTitle: "Tenue de Cocktail Chic de Provence",
   dressCodeDescription:
-    'We invite you to join our aesthetic tapestry by choosing garments in organic earthen shades. Soft linens, draped silk, light tailoring, and flat leather footwear are encouraged for compatibility with our garden lawns.',
+    "Nous vous invitons à participer à l'harmonie visuelle en choisissant des vêtements dans des tons organiques et naturels. Le lin souple, la soie drapée, les coupes légères et les chaussures plates en cuir sont recommandés pour la pelouse du jardin.",
   storyChapters: DEFAULT_CHAPTERS,
   dressCodeSwatches: DEFAULT_SWATCHES,
 } as const

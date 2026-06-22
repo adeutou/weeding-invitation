@@ -30,7 +30,7 @@ export function AdminPlaylistTab({
     const res = await addMusicTrackAction(
       title,
       artist,
-      requestedBy.trim() || 'Atelier Admin'
+      requestedBy.trim() || "Admin de l'Atelier"
     )
     setIsLoading(false)
     if (res.success) {
@@ -44,7 +44,7 @@ export function AdminPlaylistTab({
   }
 
   const handleDelete = async (id: string) => {
-    if (window.confirm('Are you sure you want to remove this track request?')) {
+    if (window.confirm('Êtes-vous sûr de vouloir supprimer ce morceau ?')) {
       setIsLoading(true)
       const res = await deleteMusicTrackAction(id)
       setIsLoading(false)
@@ -61,7 +61,7 @@ export function AdminPlaylistTab({
         className="bg-white p-5 rounded-2xl border border-taupe flex flex-col gap-4"
       >
         <h4 className="font-serif text-sm font-semibold text-charcoal">
-          Add Dancefloor Request Track
+          Ajouter un morceau à la playlist
         </h4>
 
         {error && (
@@ -73,13 +73,13 @@ export function AdminPlaylistTab({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="flex flex-col gap-1">
             <label className="text-[10px] text-stone-500 font-sans tracking-widest uppercase font-bold">
-              Song Title
+              Titre de la chanson
             </label>
             <input
               type="text"
               value={title}
               onChange={e => setTitle(e.target.value)}
-              placeholder="e.g., September"
+              placeholder="Ex : La Vie En Rose"
               required
               disabled={isLoading}
               className="bg-cream text-charcoal text-sm border border-taupe rounded-lg px-4 py-2 placeholder:text-stone-450 focus:outline-none w-full"
@@ -87,13 +87,13 @@ export function AdminPlaylistTab({
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-[10px] text-stone-500 font-sans tracking-widest uppercase font-bold">
-              Artist Name
+              Nom de l'artiste
             </label>
             <input
               type="text"
               value={artist}
               onChange={e => setArtist(e.target.value)}
-              placeholder="e.g., Earth, Wind &amp; Fire"
+              placeholder="Ex : Édith Piaf"
               required
               disabled={isLoading}
               className="bg-cream text-charcoal text-sm border border-taupe rounded-lg px-4 py-2 placeholder:text-stone-450 focus:outline-none w-full"
@@ -103,13 +103,13 @@ export function AdminPlaylistTab({
 
         <div className="flex flex-col gap-1">
           <label className="text-[10px] text-stone-500 font-sans tracking-widest uppercase font-bold">
-            Requested By
+            Suggéré par
           </label>
           <input
             type="text"
             value={requestedBy}
             onChange={e => setRequestedBy(e.target.value)}
-            placeholder="e.g., Cousin Alexandre (or blank for Atelier Admin)"
+            placeholder="Ex : Cousin Alexandre (ou laisser vide pour Admin)"
             disabled={isLoading}
             className="bg-cream text-charcoal text-sm border border-taupe rounded-lg px-4 py-2 placeholder:text-stone-450 focus:outline-none w-full"
           />
@@ -120,17 +120,17 @@ export function AdminPlaylistTab({
           disabled={isLoading || !title.trim() || !artist.trim()}
           className="self-start px-5 py-2.5 bg-charcoal hover:bg-black text-white font-sans text-xs tracking-widest font-semibold uppercase rounded-lg transition-colors cursor-pointer disabled:opacity-50"
         >
-          Add Track
+          Ajouter le morceau
         </button>
       </form>
 
       <div className="space-y-4">
         <p className="text-[11px] font-sans text-stone-500 font-semibold tracking-wider uppercase">
-          Ballroom Dancefloor Votes ({tracks.length} track{tracks.length !== 1 ? 's' : ''})
+          Votes de la Playlist ({tracks.length} morceau{tracks.length !== 1 ? 'x' : ''})
         </p>
         {tracks.length === 0 ? (
           <div className="bg-white p-6 rounded-2xl border border-dashed border-taupe/80 text-center text-xs text-[#c8968e] font-serif">
-            No songs voted on or requested.
+            Aucune chanson votée ou proposée pour le moment.
           </div>
         ) : (
           <div className="bg-white rounded-xl border border-taupe divide-y divide-taupe/40 overflow-hidden shadow-xs">
@@ -144,18 +144,18 @@ export function AdminPlaylistTab({
                     {song.title}
                   </p>
                   <p className="font-sans text-[10px] text-stone-400 uppercase tracking-wider">
-                    {song.artist} by {song.requestedBy}
+                    {song.artist} par {song.requestedBy}
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="bg-[#fcfaf4] border border-gold/35 px-4 py-1.5 rounded-full text-xs font-serif text-gold-dark font-bold">
-                    {song.votes} love votes
+                    {song.votes} vote(s)
                   </div>
                   <button
                     onClick={() => handleDelete(song.id)}
                     disabled={isLoading}
                     className="p-1 px-2 text-stone-400 hover:text-rose hover:bg-rose/5 rounded cursor-pointer shrink-0 disabled:opacity-50"
-                    title="Remove Track"
+                    title="Supprimer le morceau"
                   >
                     <FiTrash2 className="w-3.5 h-3.5" />
                   </button>

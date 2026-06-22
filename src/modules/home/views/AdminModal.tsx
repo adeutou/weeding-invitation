@@ -69,14 +69,14 @@ type TAdminTab =
   | 'timeline'
 
 const TABS = [
-  { id: 'general', label: 'General Settings', icon: FiSettings },
-  { id: 'story', label: 'Our Story Chapters', icon: FiBookOpen },
-  { id: 'travel', label: 'Travel Logistics', icon: FiCompass },
-  { id: 'dresscode', label: 'Dress Code Palette', icon: FiScissors },
-  { id: 'rsvps_blessings', label: 'RSVPs & Guestbook', icon: FiUsers },
-  { id: 'playlist', label: 'Dance Playlist', icon: FiMusic },
-  { id: 'gallery', label: 'Gallery Collection', icon: FiCamera },
-  { id: 'timeline', label: 'Schedule Timeline', icon: FiClock },
+  { id: 'general', label: 'Paramètres Généraux', icon: FiSettings },
+  { id: 'story', label: 'Notre Histoire', icon: FiBookOpen },
+  { id: 'travel', label: 'Logistique & Voyage', icon: FiCompass },
+  { id: 'dresscode', label: 'Code Couleur', icon: FiScissors },
+  { id: 'rsvps_blessings', label: 'RSVPs & Livre d\'Or', icon: FiUsers },
+  { id: 'playlist', label: 'Playlist de Danse', icon: FiMusic },
+  { id: 'gallery', label: 'Collection Galerie', icon: FiCamera },
+  { id: 'timeline', label: 'Planning & Programme', icon: FiClock },
 ] as const
 
 export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
@@ -119,7 +119,7 @@ export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
         setEvents(dataResult.data.events)
       }
     } else {
-      setLoginError('Invalid passphrase. Please try again.')
+      setLoginError('Mot de passe invalide. Veuillez réessayer.')
     }
     setIsLoading(false)
   }
@@ -138,7 +138,7 @@ export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
   async function handleRevert() {
     if (
       window.confirm(
-        'Are you sure you want to revert all changes to database values?'
+        'Êtes-vous sûr de vouloir annuler toutes les modifications et rétablir les valeurs par défaut ?'
       )
     ) {
       setIsLoading(true)
@@ -240,7 +240,7 @@ export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
   }
 
   const handleDeleteRsvp = async (id: string) => {
-    if (window.confirm('Are you sure you want to delete this RSVP record?')) {
+    if (window.confirm('Êtes-vous sûr de vouloir supprimer ce RSVP ?')) {
       const res = await deleteRsvpAction(id)
       if (res.success) {
         setRsvps(prev => prev.filter(r => r.id !== id))
@@ -259,7 +259,7 @@ export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
 
   const handleDeleteEntry = async (id: string) => {
     if (
-      window.confirm('Are you sure you want to delete this guestbook message?')
+      window.confirm("Êtes-vous sûr de vouloir supprimer ce message du livre d'or ?")
     ) {
       const res = await deleteGuestbookEntryAdminAction(id)
       if (res.success) {
@@ -281,11 +281,11 @@ export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
             <div className="flex items-center gap-2 mb-8">
               <div className="w-2.5 h-2.5 rounded-full bg-gold" />
               <span className="font-serif text-sm tracking-[0.2em] uppercase font-bold text-white">
-                Couples Studio
+                Atelier des Mariés
               </span>
             </div>
             <p className="text-[10px] uppercase tracking-[0.2em] text-stone-400 mb-4 font-sans">
-              Management Workspace
+              Espace de Gestion
             </p>
             {isAuthenticated ? (
               <div className="space-y-1.5 font-sans text-xs">
@@ -296,11 +296,10 @@ export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`w-full text-left px-3.5 py-2.5 rounded-lg flex items-center gap-2.5 transition-all cursor-pointer ${
-                        isActive
-                          ? 'bg-white/10 text-white font-semibold'
-                          : 'text-stone-400 hover:text-white'
-                      }`}
+                      className={`w-full text-left px-3.5 py-2.5 rounded-lg flex items-center gap-2.5 transition-all cursor-pointer ${isActive
+                        ? 'bg-white/10 text-white font-semibold'
+                        : 'text-stone-400 hover:text-white'
+                        }`}
                     >
                       <Icon className="w-4 h-4 text-gold" />
                       <span>{tab.label}</span>
@@ -310,10 +309,9 @@ export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
               </div>
             ) : (
               <div className="bg-white/5 border border-white/15 p-4 rounded-xl text-[11px] text-stone-400 space-y-2 leading-relaxed font-sans">
-                <p className="font-semibold text-white">🔒 Workspace Locked</p>
+                <p className="font-semibold text-white flex items-center gap-1.5"><FiLock className="text-gold" /> Espace de Gestion Verrouillé</p>
                 <p>
-                  Please log in using the credential portal to live edit text
-                  fields, change countdown parameters, and monitor your guest lists.
+                  Veuillez vous connecter avec le mot de passe pour modifier les textes, changer la date du compte à rebours et suivre la liste des invités.
                 </p>
               </div>
             )}
@@ -325,7 +323,7 @@ export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
                 className="w-full py-2 border border-white/20 text-stone-400 hover:text-white hover:border-white/40 rounded-lg flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
               >
                 <FiLogOut className="w-3.5 h-3.5" />
-                <span>Lock Dashboard</span>
+                <span>Verrouiller l'Atelier</span>
               </button>
             )}
             <button
@@ -333,7 +331,7 @@ export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
               className="w-full py-2 bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer"
             >
               <FiEye className="w-3.5 h-3.5" />
-              <span>Back to Invitation</span>
+              <span>Retour au Site</span>
             </button>
           </div>
         </div>
@@ -345,22 +343,21 @@ export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
                 <FiLock className="w-5 h-5 animate-pulse" />
               </div>
               <h2 className="font-serif text-3xl font-light text-charcoal text-center mb-1">
-                Wedding Atelier Gate
+                Accès à l'Atelier des Mariés
               </h2>
               <p className="font-serif italic text-xs text-stone-500 text-center mb-8">
-                Authorized credentials for Madame or Monsieur to edit content in
-                real-time.
+                Entrez le mot de passe de l'Atelier pour modifier le contenu du site en temps réel.
               </p>
               <form onSubmit={handleLogin} className="w-full space-y-4">
                 <div>
                   <label className="block text-[10px] uppercase tracking-widest text-stone-500 font-sans font-bold mb-1.5">
-                    Passcode
+                    Mot de passe
                   </label>
                   <input
                     type="password"
                     value={passphrase}
                     onChange={e => setPassphrase(e.target.value)}
-                    placeholder="Enter Atelier passcode"
+                    placeholder="Entrez le mot de passe de l'Atelier"
                     className="w-full bg-white border border-taupe rounded-xl px-4 py-2.5 font-sans text-xs focus:ring-1 focus:ring-gold focus:border-gold outline-none"
                     required
                     disabled={isLoading}
@@ -377,12 +374,12 @@ export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
                   className="w-full py-3 bg-charcoal text-white hover:bg-black rounded-xl font-sans uppercase font-bold text-[10px] tracking-widest transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                 >
                   <FiKey className="w-3.5 h-3.5 text-gold" />
-                  <span>Verify Passcode &amp; Open</span>
+                  <span>Vérifier &amp; Ouvrir</span>
                 </button>
               </form>
               <div className="mt-8 bg-parchment p-4 rounded-xl border border-taupe/60 w-full text-[11px] font-sans text-stone-500">
-                <p className="font-semibold text-charcoal mb-1">Passphrase Hint:</p>
-                <p>Ask the couple for the Atelier passphrase.</p>
+                <p className="font-semibold text-charcoal mb-1">Indice :</p>
+                <p>Veuillez demander le mot de passe de l'Atelier aux mariés.</p>
               </div>
             </div>
           ) : (
@@ -390,51 +387,50 @@ export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-taupe pb-4 mb-6 gap-3">
                 <div>
                   <span className="text-[10px] tracking-[0.25em] text-gold uppercase font-bold font-sans">
-                    Active Atelier Config
+                    Configuration Active
                   </span>
                   <h3 className="font-serif text-2xl font-light text-charcoal">
-                    {activeTab === 'general' && 'General Settings'}
-                    {activeTab === 'story' && 'Our Story Chapters'}
-                    {activeTab === 'travel' && 'Travel Logistics'}
-                    {activeTab === 'dresscode' && 'Dress Code Palette'}
-                    {activeTab === 'rsvps_blessings' && 'RSVPs & Guestbook'}
-                    {activeTab === 'playlist' && 'Dance Playlist'}
-                    {activeTab === 'gallery' && 'Gallery Collection'}
-                    {activeTab === 'timeline' && 'Schedule Timeline'}
+                    {activeTab === 'general' && 'Paramètres Généraux'}
+                    {activeTab === 'story' && 'Notre Histoire'}
+                    {activeTab === 'travel' && 'Logistique & Voyage'}
+                    {activeTab === 'dresscode' && 'Code Couleur'}
+                    {activeTab === 'rsvps_blessings' && 'RSVPs & Livre d\'Or'}
+                    {activeTab === 'playlist' && 'Playlist de Danse'}
+                    {activeTab === 'gallery' && 'Collection Galerie'}
+                    {activeTab === 'timeline' && 'Planning & Programme'}
                   </h3>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
                   {['general', 'story', 'travel', 'dresscode'].includes(
                     activeTab
                   ) && (
-                    <>
-                      <button
-                        onClick={handleRevert}
-                        disabled={isLoading}
-                        className="px-3.5 py-1.5 border border-taupe text-[10px] tracking-wider uppercase font-bold text-stone-500 hover:text-charcoal rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50"
-                        title="Revert modifications to saved database records"
-                      >
-                        <FiRotateCcw className="w-3 h-3 text-gold" />
-                        <span>Revert to Defaults</span>
-                      </button>
-                      <button
-                        onClick={handleSave}
-                        disabled={isLoading}
-                        className="px-4 py-1.5 bg-charcoal text-white hover:bg-black text-[10px] tracking-wider uppercase font-bold rounded-lg flex items-center gap-1.5 transition-all shadow-xs cursor-pointer disabled:opacity-50"
-                      >
-                        <FiSave className="w-3 h-3 text-gold" />
-                        <span>Save Changes</span>
-                      </button>
-                    </>
-                  )}
+                      <>
+                        <button
+                          onClick={handleRevert}
+                          disabled={isLoading}
+                          className="px-3.5 py-1.5 border border-taupe text-[10px] tracking-wider uppercase font-bold text-stone-500 hover:text-charcoal rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50"
+                          title="Annuler les modifications et rétablir les valeurs enregistrées"
+                        >
+                          <FiRotateCcw className="w-3 h-3 text-gold" />
+                          <span>Rétablir les valeurs par défaut</span>
+                        </button>
+                        <button
+                          onClick={handleSave}
+                          disabled={isLoading}
+                          className="px-4 py-1.5 bg-charcoal text-white hover:bg-black text-[10px] tracking-wider uppercase font-bold rounded-lg flex items-center gap-1.5 transition-all shadow-xs cursor-pointer disabled:opacity-50"
+                        >
+                          <FiSave className="w-3 h-3 text-gold" />
+                          <span>Enregistrer</span>
+                        </button>
+                      </>
+                    )}
                 </div>
               </div>
 
               {saveSuccess && (
                 <div className="bg-sage/10 text-sage border border-sage/30 p-3 rounded-xl mb-6 text-xs flex items-center gap-2 font-serif italic">
                   <FiCheckCircle className="w-4 h-4 text-sage" />
-                  Atelier settings saved! Changes reflect on the invitation
-                  immediately.
+                  Atelier de l'invitation enregistré ! Les modifications sont appliquées immédiatement sur l'invitation.
                 </div>
               )}
 
