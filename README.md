@@ -7,15 +7,15 @@ Une application web moderne, élégante et interactive conçue pour célébrer e
 ## Galerie et Captures d'Écran
 
 ### L'Expérience d'Ouverture de l'Enveloppe
-![Ouverture de l'Enveloppe](/screenshots/envelope.png)
+![Ouverture de l'Enveloppe](/public/screenshots/envelope.png)
 *L'enveloppe scellée avec de la cire dorée s'ouvre avec une animation fluide pour révéler le faire-part personnalisé.*
 
 ### Le Faire-Part de Mariage (Aperçu Bureau)
-![Faire-part Provençal](/screenshots/faire-part.png)
+![Faire-part Provençal](/public/screenshots/faire-part.png)
 *Un design épuré, des polices de caractères premium, et une palette harmonieuse aux accents provençaux.*
 
 ### L'Atelier d'Administration
-![Atelier Admin](/screenshots/admin.png)
+![Atelier Admin](/public/screenshots/admin.png)
 *L'interface d'administration sécurisée permettant de gérer la playlist, de modérer le livre d'or et de suivre les RSVP.*
 
 ### Générateur de Code QR & Cartes PDF
