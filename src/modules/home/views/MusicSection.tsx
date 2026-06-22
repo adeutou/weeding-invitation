@@ -20,13 +20,16 @@ export function MusicSection({ initialTracks }: MusicSectionProps) {
   const [votedSet, setVotedSet] = useState<Set<string>>(new Set())
 
   useEffect(() => {
+    setTracks([...initialTracks].sort((a, b) => b.votes - a.votes))
+  }, [initialTracks])
+
+  useEffect(() => {
     try {
       const saved = localStorage.getItem('wedding_voted_tracks_v2')
       if (saved) {
         setVotedSet(new Set(JSON.parse(saved) as string[]))
       }
     } catch {
-      // ignore parse errors
     }
   }, [])
 

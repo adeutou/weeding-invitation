@@ -7,6 +7,8 @@ export const metadata = {
   description: 'Confirm your attendance at the wedding of Albert and Clara in Provence, France.',
 }
 
+export const dynamic = 'force-dynamic'
+
 export default function RsvpRoute() {
   return (
     <Layout>

@@ -9,6 +9,8 @@ export const metadata = {
   description: 'A cinematic gallery of photographs from the wedding of Albert and Clara.',
 }
 
+export const dynamic = 'force-dynamic'
+
 async function GalleryContent() {
   const rows = await getAllGalleryPhotos()
   const photos: TGalleryPhoto[] = rows.map(row => ({

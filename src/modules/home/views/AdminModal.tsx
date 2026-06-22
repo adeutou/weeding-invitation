@@ -17,6 +17,7 @@ import {
   FiRotateCcw,
   FiCheckCircle,
   FiClock,
+  FiShare2,
 } from 'react-icons/fi'
 import {
   loginToAtelier,
@@ -51,6 +52,7 @@ import { AdminRsvpsTab } from './tabs/AdminRsvpsTab'
 import { AdminPlaylistTab } from './tabs/AdminPlaylistTab'
 import { AdminGalleryTab } from './tabs/AdminGalleryTab'
 import { AdminTimelineTab } from './tabs/AdminTimelineTab'
+import { AdminQrCodeTab } from './tabs/AdminQrCodeTab'
 
 interface AdminModalProps {
   isOpen: boolean
@@ -67,6 +69,7 @@ type TAdminTab =
   | 'playlist'
   | 'gallery'
   | 'timeline'
+  | 'qrcode'
 
 const TABS = [
   { id: 'general', label: 'Paramètres Généraux', icon: FiSettings },
@@ -77,6 +80,7 @@ const TABS = [
   { id: 'playlist', label: 'Playlist de Danse', icon: FiMusic },
   { id: 'gallery', label: 'Collection Galerie', icon: FiCamera },
   { id: 'timeline', label: 'Planning & Programme', icon: FiClock },
+  { id: 'qrcode', label: 'Code QR Invitation', icon: FiShare2 },
 ] as const
 
 export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
@@ -398,6 +402,7 @@ export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
                     {activeTab === 'playlist' && 'Playlist de Danse'}
                     {activeTab === 'gallery' && 'Collection Galerie'}
                     {activeTab === 'timeline' && 'Planning & Programme'}
+                    {activeTab === 'qrcode' && 'Code QR Invitation'}
                   </h3>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
@@ -502,6 +507,10 @@ export function AdminModal({ isOpen, onClose, config }: AdminModalProps) {
                     }
                     onDeleteEvent={id => setEvents(prev => prev.filter(e => e.id !== id))}
                   />
+                )}
+
+                {activeTab === 'qrcode' && (
+                  <AdminQrCodeTab localConfig={localConfig} />
                 )}
               </div>
             </div>

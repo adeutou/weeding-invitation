@@ -6,6 +6,8 @@ import { getAllTimelineEvents } from '@/server/db/queries/timeline'
 import { HomePageClient } from '@/modules/home'
 import type { TWeddingConfig, TMusicTrack } from '@/modules/home'
 
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage() {
   const [weddingConfig, galleryPhotos, guestbookEntries, musicTracks, timelineEvents] = await Promise.all([
     getWeddingConfig(),

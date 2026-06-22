@@ -26,10 +26,10 @@ async function main() {
 
   await db.insert(weddingConfigTable).values({
     id: 'default',
-    brideName: 'Madame Clara',
-    groomName: 'Monsieur Charles',
-    weddingDateStr: '2026-09-19T15:00:00+02:00',
-    weddingDateReadable: '19 Septembre 2026',
+    brideName: 'Madame Deutou',
+    groomName: 'Monsieur Deutou',
+    weddingDateStr: '2026-07-16T15:00:00+02:00',
+    weddingDateReadable: '16 Juillet 2026',
     venueName: 'Château de la Rose',
     venueLocation: 'Provence, France',
     welcomeInviteMessage: 'À notre cher invité • Vous êtes invité',
@@ -96,10 +96,10 @@ async function main() {
   ])
 
   await db.insert(musicTracksTable).values([
-    { title: 'September', artist: 'Earth, Wind & Fire', votes: 18, requestedBy: 'Amélie', isCurated: true },
-    { title: 'La Vie En Rose', artist: 'Édith Piaf', votes: 14, requestedBy: 'Grand-mère Eleanor', isCurated: true },
-    { title: 'Fly Me To The Moon', artist: 'Frank Sinatra', votes: 11, requestedBy: 'Charles (Marié)', isCurated: true },
-    { title: 'L-O-V-E', artist: 'Nat King Cole', votes: 9, requestedBy: 'Clara (Mariée)', isCurated: true },
+    { title: 'September', artist: 'Earth, Wind & Fire', votes: 0, requestedBy: 'Amélie', isCurated: true },
+    { title: 'La Vie En Rose', artist: 'Édith Piaf', votes: 0, requestedBy: 'Grand-mère Eleanor', isCurated: true },
+    { title: 'Fly Me To The Moon', artist: 'Frank Sinatra', votes: 0, requestedBy: 'Charles (Marié)', isCurated: true },
+    { title: 'L-O-V-E', artist: 'Nat King Cole', votes: 0, requestedBy: 'Clara (Mariée)', isCurated: true },
   ])
 
   await db.insert(timelineEventsTable).values([

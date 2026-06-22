@@ -9,6 +9,8 @@ export const metadata = {
   description: 'Leave a message for the couple in the wedding guestbook.',
 }
 
+export const dynamic = 'force-dynamic'
+
 async function GuestbookContent() {
   const rows = await getApprovedGuestbookEntries()
   const entries: TGuestbookEntry[] = rows.map(row => ({
