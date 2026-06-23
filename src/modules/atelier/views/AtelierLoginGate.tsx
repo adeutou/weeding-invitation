@@ -41,7 +41,7 @@ export function AtelierLoginGate() {
           </p>
         </div>
 
-        <div className="bg-[#222] border border-white/5 rounded-2xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+        <div className="bg-[#0E1628] border border-blue-900/30 rounded-2xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             {error && (
               <div className="flex items-center gap-2 text-rose bg-rose/10 border border-rose/20 p-3 rounded-lg text-xs leading-relaxed font-serif">

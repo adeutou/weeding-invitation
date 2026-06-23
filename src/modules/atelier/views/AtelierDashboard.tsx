@@ -36,7 +36,7 @@ export function AtelierDashboard({ initialRsvps, initialEntries, initialPhotos }
 
   return (
     <div className="min-h-screen bg-charcoal flex">
-      <aside className="w-64 shrink-0 bg-[#111] border-r border-white/5 flex flex-col py-8 px-5">
+      <aside className="w-64 shrink-0 bg-[#060F1C] border-r border-blue-900/20 flex flex-col py-8 px-5">
         <div className="mb-8">
           <h1 className="font-serif text-lg text-cream font-light tracking-wide">Atelier</h1>
           <p className="text-[10px] text-stone-500 font-sans uppercase tracking-[0.2em] mt-0.5">

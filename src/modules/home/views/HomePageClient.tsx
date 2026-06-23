@@ -14,6 +14,7 @@ import { GallerySection } from '@/modules/gallery/views/GallerySection'
 import { RsvpPage } from '@/modules/rsvp/views/RsvpPage'
 import { GuestbookPage } from '@/modules/guestbook/views/GuestbookPage'
 import { AudioToggle } from '@/modules/audio/views/AudioToggle'
+import { FloralDivider } from '@/components/FloralDivider'
 import type { HomePageClientProps } from '../@types'
 import type { TGuestbookEntry } from '@/modules/guestbook/@types'
 
@@ -130,9 +131,13 @@ export function HomePageClient({
             onScrollToStory={() => scrollTo('our-story-section')}
           />
 
+          <FloralDivider className="bg-cream" />
+
           <StorySection chapters={config.storyChapters} />
 
           <TimelineSection events={initialTimelineEvents} />
+
+          <FloralDivider className="bg-parchment" />
 
           <SwatchBoard
             title={config.dressCodeTitle}
@@ -143,6 +148,8 @@ export function HomePageClient({
           <GallerySection photos={galleryPhotos} />
 
           <TravelSection config={config} />
+
+          <FloralDivider className="bg-cream" />
 
           <RsvpPage />
 
@@ -167,7 +174,7 @@ export function HomePageClient({
               {config.venueName}, {config.venueLocation} &bull; {config.weddingDateReadable}
             </div>
 
-            <div className="w-16 h-px bg-gold/25 mx-auto my-6" />
+            <FloralDivider className="my-2" opacity={0.6} />
 
             <p className="text-[11px] text-stone-400 font-serif italic">
               Créé avec amour pour {brideShort} &amp; {groomShort}. Tous les RSVP sont sécurisés et privés.

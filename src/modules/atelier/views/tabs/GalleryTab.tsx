@@ -46,7 +46,7 @@ export function GalleryTab({ initialPhotos }: GalleryTabProps) {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="bg-[#222] border border-white/5 rounded-xl p-5">
+      <div className="bg-[#0E1628] border border-white/5 rounded-xl p-5">
         <h3 className="text-[10px] text-stone-400 font-sans tracking-[0.2em] uppercase font-semibold mb-4">
           Add Gallery Photo
         </h3>
@@ -127,7 +127,7 @@ export function GalleryTab({ initialPhotos }: GalleryTabProps) {
           {photos.map(photo => (
             <div
               key={photo.id}
-              className="relative group aspect-video bg-[#1a1a1a] rounded-xl overflow-hidden border border-white/5"
+              className="relative group aspect-video bg-[#0A1525] rounded-xl overflow-hidden border border-white/5"
             >
               <img
                 src={photo.url}

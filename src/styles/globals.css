@@ -5,15 +5,16 @@
   --font-cursive: var(--font-alex-brush), cursive;
   --font-sans: var(--font-inter), system-ui, sans-serif;
 
-  --color-gold: #C5A059;
-  --color-gold-dark: #A48039;
-  --color-rose: #C8968E;
-  --color-sage: #81917F;
-  --color-sage-light: #EAECE2;
-  --color-cream: #F8F5F2;
-  --color-charcoal: #1A1A1A;
-  --color-taupe: #E6E2DE;
-  --color-parchment: #EFECE8;
+  /* ── Blue & Gold Wedding Palette ── */
+  --color-gold: #5577BB;          /* Cornflower / pervenche — accent principal */
+  --color-gold-dark: #2D4A8A;     /* Bleu marine profond */
+  --color-rose: #E8C547;          /* Jaune doré soleil — couleur pop */
+  --color-sage: #7B9BB5;          /* Bleu poudré / acier doux */
+  --color-sage-light: #E6EFF8;    /* Lavis bleu très clair */
+  --color-cream: #F8F7F4;         /* Ivoire chaud neutre */
+  --color-charcoal: #1C2B3E;      /* Bleu nuit quasi-noir pour le texte */
+  --color-taupe: #D8E2EE;         /* Bordure bleu-gris neutre */
+  --color-parchment: #EDF1F9;     /* Parchemin bleuté clair */
 }
 
 html {
@@ -21,22 +22,22 @@ html {
 }
 
 body {
-  background-color: #F8F5F2;
-  color: #1A1A1A;
+  background-color: #F8F7F4;
+  color: #1C2B3E;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .paper-texture {
-  background-color: #F8F5F2;
-  background-image: radial-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 0),
-                    radial-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 0);
+  background-color: #F8F7F4;
+  background-image: radial-gradient(rgba(45, 74, 138, 0.015) 1px, transparent 0),
+                    radial-gradient(rgba(45, 74, 138, 0.015) 1px, transparent 0);
   background-size: 8px 8px;
   background-position: 0 0, 4px 4px;
 }
 
 .gold-border-corner {
-  border-image: linear-gradient(to bottom right, #C5A059, #E6E2DE, #C5A059, #A48039) 1;
+  border-image: linear-gradient(to bottom right, #5577BB, #D8E2EE, #5577BB, #2D4A8A) 1;
 }
 
 .handwriting {
@@ -48,24 +49,24 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #F8F5F2;
+  background: #F8F7F4;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C8968E;
+  background: #5577BB;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #81917F;
+  background: #2D4A8A;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: #C5A059 !important;
-  box-shadow: 0 0 0 1px rgba(197, 160, 89, 0.2);
+  border-color: #5577BB !important;
+  box-shadow: 0 0 0 1px rgba(85, 119, 187, 0.2);
 }
 
 @keyframes slow-spin {

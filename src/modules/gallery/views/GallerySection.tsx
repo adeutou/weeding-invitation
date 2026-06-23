@@ -30,7 +30,7 @@ const DESKTOP_SPANS: string[] = [
 
 function EmptyGallery() {
   return (
-    <section className="relative py-24 px-6 bg-[#121110] text-stone-300 border-b border-stone-800 select-none">
+    <section className="relative py-24 px-6 bg-[#060F1C] text-stone-300 border-b border-stone-800 select-none">
       <div className="max-w-4xl mx-auto text-center">
         <FiCamera className="w-12 h-12 text-amber-600/60 mx-auto mb-4 stroke-[1.25]" />
         <h2 className="font-serif text-3xl font-light tracking-wide text-white">
@@ -56,7 +56,7 @@ export function GallerySection({ photos = [] }: TGallerySectionProps) {
   return (
     <section
       id="gallery-section"
-      className="relative py-24 px-6 md:px-12 bg-[#0E0D0C] border-b border-stone-900"
+      className="relative py-24 px-6 md:px-12 bg-[#060F1C] border-b border-stone-900"
     >
       <div className="text-center mb-12">
         <span className="text-amber-600 uppercase tracking-[0.3em] text-[10px] font-sans font-bold block mb-2">

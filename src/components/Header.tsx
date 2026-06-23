@@ -28,7 +28,7 @@ export function Header({ groomInitial = 'C', brideInitial = 'C' }: HeaderProps) 
       <div className="flex items-center gap-2.5">
         <Link
           href="/atelier"
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-[#F2ECE4] border border-taupe/60 hover:border-gold/60 text-charcoal font-medium text-xs rounded-lg transition-all"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-[#EDF1F9] border border-taupe/60 hover:border-gold/60 text-charcoal font-medium text-xs rounded-lg transition-all"
           title="Open Couples Atelier Studio Dashboard"
         >
           <FiSettings className="w-3.5 h-3.5 text-gold-dark shrink-0" />
