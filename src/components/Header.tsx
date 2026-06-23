@@ -17,7 +17,7 @@ export function Header({ groomInitial = 'C', brideInitial = 'C' }: HeaderProps) 
         aria-label="Return to top"
       >
         <span className="font-serif text-sm font-semibold tracking-widest text-charcoal group-hover:text-gold transition-colors">
-          {groomInitial} &amp; {brideInitial}
+          {brideInitial} &amp; {groomInitial}
         </span>
         <span className="w-1.5 h-1.5 rounded-full bg-gold shrink-0" />
         <span className="font-cursive text-base text-gold italic">monogram</span>

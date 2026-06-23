@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { FiCalendar, FiMapPin, FiChevronDown } from 'react-icons/fi'
 import { RiHeartFill, RiSparklingFill } from 'react-icons/ri'
 import type { TCountdown, TWeddingConfig } from '../@types'
@@ -81,17 +82,16 @@ export function HeroSection({ config, guestName, onScrollToStory }: HeroSectionP
             </p>
           </div>
 
-          <div className="space-y-2 max-w-2xl">
+          <div className="space-y-2 max-w-4xl">
             <span className="text-gold uppercase tracking-[0.45em] text-[10px] font-sans font-semibold block">
               La Sainte Union &amp; Célébration
             </span>
-            <h1 className="font-serif text-5xl sm:text-7xl md:text-[80px] font-extralight tracking-tight text-charcoal leading-[1.05]">
-              {config.groomName}
-              <span className="handwriting text-gold text-6xl sm:text-8xl md:text-[104px] inline-block mx-4 -rotate-6 translate-y-2">
+            <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[80px] font-extralight tracking-tight text-charcoal leading-[1.05] whitespace-nowrap">
+              {config.brideName}
+              <span className="handwriting text-gold text-5xl sm:text-7xl md:text-8xl lg:text-[104px] inline-block mx-3 -rotate-6 translate-y-2">
                 &amp;
               </span>
-              <br />
-              <span className="font-normal italic tracking-wide text-stone-800">{config.brideName}</span>
+              <span className="font-normal italic tracking-wide text-stone-800">{config.groomName}</span>
             </h1>
           </div>
 
@@ -162,47 +162,22 @@ export function HeroSection({ config, guestName, onScrollToStory }: HeroSectionP
               <div className="flex items-center justify-between border-b border-taupe/50 pb-4 mb-5">
                 <div className="flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-                  <span className="font-sans uppercase text-[10px] tracking-[0.25em] text-stone-500 font-bold">Provence Voyage</span>
+                  <span className="font-sans uppercase text-[10px] tracking-[0.25em] text-stone-500 font-bold">Mairie Rueil-Malmaison</span>
                 </div>
-                <span className="handwriting text-gold text-lg">Autumn 2026</span>
+                <span className="handwriting text-gold text-lg">Été 2026</span>
               </div>
 
               <div className="relative w-full overflow-hidden rounded-xl border border-taupe/40 bg-parchment p-1.5 shadow-sm">
-                <svg viewBox="0 0 400 240" className="w-full h-auto rounded-lg" fill="none">
-                  <defs>
-                    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#EFECE8" />
-                      <stop offset="50%" stopColor="#EAE6E2" />
-                      <stop offset="100%" stopColor="#F8F5F2" />
-                    </linearGradient>
-                  </defs>
-                  <rect width="400" height="240" fill="url(#skyGrad)" />
-                  <path d="M-50,200 C100,160 200,210 400,170 L400,240 L-50,240 Z" fill="#EAECE2" opacity="0.6" />
-                  <path d="M0,220 C150,190 280,230 450,190 L450,240 L0,240 Z" fill="#81917F" opacity="0.15" />
-                  <circle cx="280" cy="110" r="32" fill="#C5A059" opacity="0.25" />
-                  <circle cx="280" cy="110" r="16" fill="#C5A059" opacity="0.15" />
-                  <path d="M80,180 L88,110 L96,180 Z" fill="#81917F" opacity="0.7" />
-                  <path d="M72,190 L78,130 L84,190 Z" fill="#81917F" opacity="0.5" />
-                  <path d="M310,170 L316,110 L322,170 Z" fill="#81917F" opacity="0.6" />
-                  <path d="M320,180 L325,120 L330,180 Z" fill="#81917F" opacity="0.4" />
-                  <g transform="translate(140, 100)" stroke="#C5A059" strokeWidth="1" opacity="0.8">
-                    <rect x="0" y="30" width="16" height="50" fill="#F8F5F2" />
-                    <polygon points="0,30 8,10 16,30" fill="#EFECE8" />
-                    <rect x="64" y="30" width="16" height="50" fill="#F8F5F2" />
-                    <polygon points="64,30 72,10 80,30" fill="#EFECE8" />
-                    <rect x="12" y="40" width="56" height="40" fill="#F8F5F2" />
-                    <path d="M32,80 A8,8 0 0 1 48,80 Z" fill="#EFECE8" />
-                    <rect x="22" y="48" width="6" height="10" rx="1" fill="#EFECE8" />
-                    <rect x="52" y="48" width="6" height="10" rx="1" fill="#EFECE8" />
-                  </g>
-                  <g stroke="#C8968E" strokeWidth="1.5" opacity="0.5">
-                    <line x1="30" y1="240" x2="100" y2="185" />
-                    <line x1="110" y1="240" x2="140" y2="185" />
-                    <line x1="200" y1="240" x2="200" y2="185" />
-                    <line x1="290" y1="240" x2="260" y2="185" />
-                    <line x1="370" y1="240" x2="300" y2="185" />
-                  </g>
-                </svg>
+                <div className="relative w-full rounded-lg overflow-hidden" style={{ aspectRatio: '400/240' }}>
+                  <Image
+                    src="https://justinehphotography.com/wp-content/uploads/2023/02/mariage-Morrigane-Titouan-1-1-scaled.jpg"
+                    alt="Mariage en Provence"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 400px"
+                    priority
+                  />
+                </div>
               </div>
 
               <div className="mt-6 border-t border-taupe/50 pt-5 text-center">
