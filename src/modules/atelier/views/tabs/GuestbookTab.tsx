@@ -71,7 +71,7 @@ export function GuestbookTab({ initialEntries }: GuestbookTabProps) {
           {entries.map(entry => (
             <div
               key={entry.id}
-              className={`bg-[#222] border rounded-xl p-4 flex items-start justify-between gap-4 ${entry.isApproved ? 'border-white/5' : 'border-gold/20'}`}
+              className={`bg-[#0E1628] border rounded-xl p-4 flex items-start justify-between gap-4 ${entry.isApproved ? 'border-white/5' : 'border-gold/20'}`}
             >
               <div className="flex flex-col gap-2 min-w-0 flex-1">
                 <div className="flex items-center gap-3 flex-wrap">

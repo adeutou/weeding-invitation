@@ -129,7 +129,7 @@ export function AdminPlaylistTab({
           Votes de la Playlist ({tracks.length} morceau{tracks.length !== 1 ? 'x' : ''})
         </p>
         {tracks.length === 0 ? (
-          <div className="bg-white p-6 rounded-2xl border border-dashed border-taupe/80 text-center text-xs text-[#c8968e] font-serif">
+          <div className="bg-white p-6 rounded-2xl border border-dashed border-taupe/80 text-center text-xs text-[#E8C547] font-serif">
             Aucune chanson votée ou proposée pour le moment.
           </div>
         ) : (
@@ -148,7 +148,7 @@ export function AdminPlaylistTab({
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="bg-[#fcfaf4] border border-gold/35 px-4 py-1.5 rounded-full text-xs font-serif text-gold-dark font-bold">
+                  <div className="bg-[#EDF1F9] border border-gold/35 px-4 py-1.5 rounded-full text-xs font-serif text-gold-dark font-bold">
                     {song.votes} vote(s)
                   </div>
                   <button

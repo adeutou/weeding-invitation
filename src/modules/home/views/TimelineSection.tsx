@@ -93,7 +93,7 @@ export function TimelineSection({ events }: TimelineSectionProps) {
             {currentEvents.map(event => (
               <div
                 key={event.id}
-                className="group relative bg-[#fdfbf8]/80 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-taupe/30 hover:border-gold/30 hover:bg-[#fdfbf6] shadow-sm hover:shadow-md transition-all duration-500 flex flex-col md:flex-row md:items-start gap-6 select-none"
+                className="group relative bg-[#F6F8FC]/80 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-taupe/30 hover:border-gold/30 hover:bg-[#F6F8FC] shadow-sm hover:shadow-md transition-all duration-500 flex flex-col md:flex-row md:items-start gap-6 select-none"
               >
                 <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-1/3 bg-transparent rounded-r group-hover:bg-gold transition-all duration-500" />
 
@@ -127,7 +127,7 @@ export function TimelineSection({ events }: TimelineSectionProps) {
             ))}
 
             {currentEvents.length === 0 && (
-              <div className="bg-[#fdfbf8]/85 p-12 rounded-xl border border-dashed border-taupe/80 text-center text-xs text-stone-400 font-serif">
+              <div className="bg-[#F6F8FC]/85 p-12 rounded-xl border border-dashed border-taupe/80 text-center text-xs text-stone-400 font-serif">
                 Aucun événement prévu pour cette étape.
               </div>
             )}

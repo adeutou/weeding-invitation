@@ -49,9 +49,9 @@ export function EnvelopeOpener({
   }
 
   return (
-    <div id="envelope-screen" className="fixed inset-0 z-50 flex flex-col items-center justify-center px-4 overflow-hidden" style={{ background: 'radial-gradient(ellipse at center, #2a2c2a 0%, #121312 100%)' }}>
+    <div id="envelope-screen" className="fixed inset-0 z-50 flex flex-col items-center justify-center px-4 overflow-hidden" style={{ background: 'radial-gradient(ellipse at center, #0A1830 0%, #060F1C 100%)' }}>
       
-      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, rgba(207,168,86,0.05) 0%, transparent 70%)' }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, rgba(85,119,187,0.08) 0%, transparent 70%)' }} />
 
       <div className="relative w-full max-w-lg flex flex-col items-center">
         <div className="absolute -top-32 -left-20 w-48 h-48 opacity-10 pointer-events-none animate-sway text-cream">
@@ -82,10 +82,10 @@ export function EnvelopeOpener({
         <div className="relative w-full h-[320px] md:h-[360px] bg-transparent flex items-center justify-center">
           
           {/* Main Envelope Body */}
-          <div className="relative w-full h-full max-w-[460px] bg-[#222422] rounded-xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] border border-neutral-800/60 overflow-hidden flex flex-col justify-end">
-            
+          <div className="relative w-full h-full max-w-[460px] bg-[#0E1628] rounded-xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] border border-blue-900/40 overflow-hidden flex flex-col justify-end">
+
             {/* Envelope Interior Lined Pattern (Revealed when open) */}
-            <div className="absolute inset-0 bg-[#161816] flex flex-col items-center justify-start p-6 overflow-hidden">
+            <div className="absolute inset-0 bg-[#0A1020] flex flex-col items-center justify-start p-6 overflow-hidden">
               <div className="w-full h-40 opacity-15 text-gold flex items-center justify-center pt-8">
                 <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="1" className="w-full max-w-[280px]">
                   <path d="M100,20 C80,50 30,80 30,120 C30,160 60,180 100,180 C140,180 170,160 170,120 C170,80 120,50 100,20 Z" />
@@ -130,10 +130,10 @@ export function EnvelopeOpener({
               </div>
             </motion.div>
 
-            <div className="absolute bottom-0 left-0 w-1/2 h-[60%] bg-[#282a28] shadow-[4px_-4px_10px_rgba(0,0,0,0.15)] rounded-bl-xl origin-bottom-left border-t border-r border-[#303330] z-20" style={{ transform: 'skewY(24deg)' }} />
-            <div className="absolute bottom-0 right-0 w-1/2 h-[60%] bg-[#282a28] shadow-[-4px_-4px_10px_rgba(0,0,0,0.15)] rounded-br-xl origin-bottom-right border-t border-l border-[#303330] z-20" style={{ transform: 'skewY(-24deg)' }} />
+            <div className="absolute bottom-0 left-0 w-1/2 h-[60%] bg-[#111E35] shadow-[4px_-4px_10px_rgba(0,0,0,0.15)] rounded-bl-xl origin-bottom-left border-t border-r border-[#1A2E4A] z-20" style={{ transform: 'skewY(24deg)' }} />
+            <div className="absolute bottom-0 right-0 w-1/2 h-[60%] bg-[#111E35] shadow-[-4px_-4px_10px_rgba(0,0,0,0.15)] rounded-br-xl origin-bottom-right border-t border-l border-[#1A2E4A] z-20" style={{ transform: 'skewY(-24deg)' }} />
 
-            <div className="absolute bottom-0 inset-x-0 h-[40%] bg-[#1f211f] border-t border-[#2d2f2d] shadow-[-5px_-5px_15px_rgba(0,0,0,0.2)] z-20 flex items-center justify-center">
+            <div className="absolute bottom-0 inset-x-0 h-[40%] bg-[#0A1525] border-t border-[#111E35] shadow-[-5px_-5px_15px_rgba(0,0,0,0.2)] z-20 flex items-center justify-center">
               <div className="text-neutral-500 font-serif text-[10px] tracking-[0.3em] uppercase pt-4">RSVP INCLUS</div>
             </div>
 
@@ -142,7 +142,7 @@ export function EnvelopeOpener({
               initial={{ rotateX: 0 }}
               animate={isOpening ? { rotateX: 180, zIndex: 0, opacity: 0.1 } : { rotateX: 0, zIndex: 30 }}
               transition={{ duration: 1.0, ease: "easeInOut", delay: 0.4 }}
-              className="absolute top-0 inset-x-0 h-[50%] bg-[#2d2f2d] border-b border-neutral-700 rounded-t-xl origin-top shadow-[0_4px_12px_rgba(0,0,0,0.4)] flex flex-col items-center pt-8 pointer-events-none"
+              className="absolute top-0 inset-x-0 h-[50%] bg-[#111E35] border-b border-blue-900/50 rounded-t-xl origin-top shadow-[0_4px_12px_rgba(0,0,0,0.4)] flex flex-col items-center pt-8 pointer-events-none"
             >
               <div className="text-gold/40 w-8 h-8">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
@@ -163,8 +163,8 @@ export function EnvelopeOpener({
                   <div className="relative w-20 h-20 rounded-full flex items-center justify-center shadow-[0_8px_20px_rgba(0,0,0,0.5),inset_0_4px_6px_rgba(255,255,255,0.2),inset_0_-4px_6px_rgba(0,0,0,0.4)] border-2 border-[#f3d47d]/30 transform rotate-12 cursor-pointer p-1" style={{ background: 'linear-gradient(135deg, #d4af37, #b88e3a, #805e13)' }}>
                     <div className="absolute inset-px rounded-full border border-[#805e13]/20" />
                     <div className="w-16 h-16 rounded-full border border-dashed border-[#ffeecc]/40 flex flex-col items-center justify-center text-center">
-                      <span className="text-[#fdfbf7] font-serif text-lg font-bold tracking-tighter drop-shadow-md">{groomInitial} &amp; {brideInitial}</span>
-                      <span className="text-[#ffeecc]/80 text-[7px] font-sans tracking-widest uppercase mt-0.5">SCELLÉ</span>
+                      <span className="text-white font-serif text-lg font-bold tracking-tighter drop-shadow-md">{groomInitial} &amp; {brideInitial}</span>
+                      <span className="text-[#E6EFF8]/80 text-[7px] font-sans tracking-widest uppercase mt-0.5">SCELLÉ</span>
                     </div>
                     <div className="absolute -top-1 left-4 w-4 h-8 bg-white/10 rounded-full blur-sm transform -rotate-45" />
                   </div>
@@ -189,7 +189,7 @@ export function EnvelopeOpener({
                 value={guestName}
                 onChange={(e) => setGuestName(e.target.value)}
                 placeholder="Ex. Emma & Michel..."
-                className="w-full bg-[#181918] text-cream border border-neutral-800 rounded-lg px-4 py-3 text-center tracking-wide capitalize text-sm focus:border-gold/50 transition-colors"
+                className="w-full bg-[#08111D] text-cream border border-blue-900/60 rounded-lg px-4 py-3 text-center tracking-wide capitalize text-sm focus:border-gold/50 transition-colors"
                 disabled={isOpening}
                 maxLength={40}
               />
@@ -205,7 +205,7 @@ export function EnvelopeOpener({
                   ? "bg-neutral-800 text-neutral-500 cursor-not-allowed"
                   : "text-neutral-900 font-semibold cursor-pointer active:scale-[0.98] hover:shadow-lg hover:shadow-gold/10"
               }`}
-              style={!isOpening ? { background: 'linear-gradient(to right, #C5A059, #A48039)' } : {}}
+              style={!isOpening ? { background: 'linear-gradient(to right, #5577BB, #2D4A8A)' } : {}}
             >
               {isOpening ? "SCEAU EN COURS..." : "BRISER LE SCEAU DE CIRE & CHRONIQUE"}
             </button>

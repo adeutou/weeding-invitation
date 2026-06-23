@@ -236,7 +236,7 @@ export function MusicSection({ initialTracks }: MusicSectionProps) {
                         className={`w-9 h-9 rounded-full flex items-center justify-center cursor-pointer transition-all ${
                           hasVoted
                             ? 'bg-rose/10 border border-rose/30 text-rose scale-105'
-                            : 'bg-[#f5eedf]/40 border border-taupe/40 text-gold hover:bg-[#f5eedf]/80'
+                            : 'bg-[#EDF1F9]/40 border border-taupe/40 text-gold hover:bg-[#EDF1F9]/80'
                         }`}
                         title={hasVoted ? 'Retirer le vote' : 'Voter pour ce morceau'}
                       >

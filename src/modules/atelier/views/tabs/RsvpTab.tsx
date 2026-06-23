@@ -88,7 +88,7 @@ export function RsvpTab({ initialRsvps }: RsvpTabProps) {
           {rsvps.map(rsvp => (
             <div
               key={rsvp.id}
-              className="bg-[#222] border border-white/5 rounded-xl p-4 flex items-start justify-between gap-4 group"
+              className="bg-[#0E1628] border border-white/5 rounded-xl p-4 flex items-start justify-between gap-4 group"
             >
               <div className="flex flex-col gap-2 min-w-0 flex-1">
                 <div className="flex items-center gap-3 flex-wrap">

@@ -197,7 +197,7 @@ export function HeroSection({ config, guestName, onScrollToStory }: HeroSectionP
                       return (
                         <span key={day} className="relative flex items-center justify-center font-bold text-gold-dark z-10 w-6 h-6 mx-auto">
                           {day}
-                          <svg viewBox="0 0 24 24" fill="none" stroke="#C5A059" strokeWidth="1.75" className="absolute w-8 h-8 pointer-events-none scale-125 animate-pulse">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="#5577BB" strokeWidth="1.75" className="absolute w-8 h-8 pointer-events-none scale-125 animate-pulse">
                             <path d="M12,21.35 L10.55,20.03 C5.4,15.36 2,12.28 2,8.5 C2,5.42 4.42,3 7.5,3 C9.24,3 10.91,3.81 12,5.09 C13.09,3.81 14.76,3 16.5,3 C19.58,3 22,5.42 22,8.5 C22,12.28 18.6,15.36 13.45,20.04 L12,21.35 Z" />
                           </svg>
                         </span>
