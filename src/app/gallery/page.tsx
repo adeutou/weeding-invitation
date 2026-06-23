@@ -5,7 +5,7 @@ import { getAllGalleryPhotos } from '@/server/db/queries/gallery'
 import type { TGalleryPhoto } from '@/modules/gallery'
 
 export const metadata = {
-  title: 'Gallery — Albert & Madame Wedding',
+  title: 'Gallery — Lola & Albert Wedding',
   description: 'A cinematic gallery of photographs from the wedding of Albert and Clara.',
 }
 
