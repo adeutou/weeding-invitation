@@ -159,9 +159,9 @@ export function HomePageClient({
             </div>
 
             <h3 className="font-serif text-xl font-light text-charcoal tracking-wider">
-              {groomShort}{' '}
+              {brideShort }{' '}
               <span className="handwriting text-gold text-2xl lowercase">&amp;</span>{' '}
-              {brideShort}
+              {groomShort}
             </h3>
             <div className="text-[10px] text-stone-400 font-sans tracking-[0.2em] uppercase mt-2">
               {config.venueName}, {config.venueLocation} &bull; {config.weddingDateReadable}
@@ -170,10 +170,10 @@ export function HomePageClient({
             <div className="w-16 h-px bg-gold/25 mx-auto my-6" />
 
             <p className="text-[11px] text-stone-400 font-serif italic">
-              Créé avec amour pour {groomShort} &amp; {brideShort}. Tous les RSVP sont sécurisés et privés.
+              Créé avec amour pour {brideShort} &amp; {groomShort}. Tous les RSVP sont sécurisés et privés.
             </p>
             <p className="text-[10px] text-stone-400/60 font-sans tracking-wide mt-2">
-              &copy; {new Date().getFullYear()} {groomShort} &amp; {brideShort}. Tous droits réservés.
+              &copy; {new Date().getFullYear()} {brideShort} &amp; {groomShort}. Tous droits réservés.
             </p>
           </footer>
           <AdminModal
