@@ -74,9 +74,9 @@ export function EnvelopeOpener({
           transition={{ duration: 0.8 }}
           className="text-center mb-8"
         >
-          <div className="text-gold text-xs tracking-[0.4em] uppercase font-sans font-medium mb-2">The Wedding Celebration of</div>
+          <div className="text-gold text-xs tracking-[0.4em] uppercase font-sans font-medium mb-2">La cérémonie de mariage de</div>
           <h1 className="text-cream font-serif text-3xl md:text-4xl tracking-wide font-light">
-            {groomShort} <span className="handwriting text-gold text-4xl italic lowercase">&amp;</span> {brideShort}
+            {brideShort} <span className="handwriting text-gold text-4xl italic lowercase">&amp;</span> {groomShort}
           </h1>
           <div className="text-gray-400 font-serif text-sm italic mt-2">{weddingDateReadable} • {venueName}, {venueLocation}</div>
         </motion.div>
@@ -203,7 +203,7 @@ export function EnvelopeOpener({
               id="unseal-invitation-btn"
               type="submit"
               disabled={isOpening}
-              className={`relative overflow-hidden w-full py-3 px-6 rounded-lg text-xs tracking-[0.25em] font-medium uppercase shadow-md transition-all duration-300 ${
+              className={`relative overflow-hidden w-full py-3 px-6 rounded-lg text-white/70 text-xs tracking-[0.25em] font-medium uppercase shadow-md transition-all duration-300 ${
                 isOpening
                   ? "bg-neutral-800 text-neutral-500 cursor-not-allowed"
                   : "text-neutral-900 font-semibold cursor-pointer active:scale-[0.98] hover:shadow-lg hover:shadow-gold/10"

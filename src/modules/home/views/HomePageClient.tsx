@@ -107,7 +107,7 @@ export function HomePageClient({
             <nav className="hidden lg:flex items-center gap-8 text-[11px] font-sans tracking-[0.2em] uppercase font-medium">
               <button onClick={() => scrollTo('our-story-section')} className="hover:text-gold cursor-pointer transition-colors">Notre Histoire</button>
               <button onClick={() => scrollTo('schedule-timeline-section')} className="hover:text-gold cursor-pointer transition-colors">Le Programme</button>
-              <button onClick={() => scrollTo('dresscode-section')} className="hover:text-gold cursor-pointer transition-colors">Code Couleur</button>
+              {/* <button onClick={() => scrollTo('dresscode-section')} className="hover:text-gold cursor-pointer transition-colors">Code Couleur</button> */}
               <button onClick={() => scrollTo('travel-guide-section')} className="hover:text-gold cursor-pointer transition-colors">Guide Provence</button>
               <button onClick={() => scrollTo('rsvp-section')} className="hover:text-gold cursor-pointer transition-colors font-semibold text-rose">Répondre (RSVP)</button>
               <button onClick={() => scrollTo('guestbook-section')} className="hover:text-gold cursor-pointer transition-colors">Livre d'Or</button>

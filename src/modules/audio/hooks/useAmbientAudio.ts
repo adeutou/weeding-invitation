@@ -7,6 +7,7 @@ const MUSIC_URL =
   'https://res.cloudinary.com/dklupmul7/video/upload/v1782258498/Nostalgie_d_amour_hqnwc9.mp3'
 
 let singleton: HTMLAudioElement | null = null
+let wasPlayingBeforeVideo = false
 
 function getAudio(): HTMLAudioElement | null {
   if (typeof window === 'undefined') return null
@@ -17,6 +18,20 @@ function getAudio(): HTMLAudioElement | null {
     singleton.preload = 'auto'
   }
   return singleton
+}
+
+export function pauseAmbientForVideo(): void {
+  const audio = getAudio()
+  if (!audio || audio.paused || audio.muted) return
+  wasPlayingBeforeVideo = true
+  audio.muted = true
+}
+
+export function resumeAmbientAfterVideo(): void {
+  const audio = getAudio()
+  if (!audio || !wasPlayingBeforeVideo) return
+  audio.muted = false
+  wasPlayingBeforeVideo = false
 }
 
 export function triggerAutoStart(): void {

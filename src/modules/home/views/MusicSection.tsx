@@ -9,9 +9,13 @@ import {
   FiSkipForward,
   FiShuffle,
   FiRepeat,
+  FiVolume,
+  FiVolume1,
   FiVolume2,
+  FiVolumeX,
 } from 'react-icons/fi'
 import { RiDiscLine } from 'react-icons/ri'
+import { pauseAmbientForVideo, resumeAmbientAfterVideo } from '@/modules/audio/hooks/useAmbientAudio'
 
 const MUSIC_BG =
   'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
@@ -62,6 +66,8 @@ export function MusicSection() {
   const [duration, setDuration] = useState(0)
   const [isShuffle, setIsShuffle] = useState(false)
   const [repeatMode, setRepeatMode] = useState<RepeatMode>('off')
+  const [volume, setVolume] = useState(1)
+  const [isMuted, setIsMuted] = useState(false)
 
   const videoRef = useRef<HTMLVideoElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
@@ -90,6 +96,7 @@ export function MusicSection() {
     setIsPlaying(true)
     setCurrentTime(0)
     setDuration(0)
+    pauseAmbientForVideo()
   }
 
   function togglePlay() {
@@ -97,8 +104,10 @@ export function MusicSection() {
     if (!video) return
     if (isPlaying) {
       video.pause()
+      resumeAmbientAfterVideo()
     } else {
       video.play().catch(() => {})
+      pauseAmbientForVideo()
     }
   }
 
@@ -124,6 +133,28 @@ export function MusicSection() {
       if (prev === 'all') return 'one'
       return 'off'
     })
+  }
+
+  function handleVolumeChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const val = parseInt(e.target.value, 10) / 100
+    setVolume(val)
+    setIsMuted(val === 0)
+    if (videoRef.current) {
+      videoRef.current.volume = val
+      videoRef.current.muted = val === 0
+    }
+  }
+
+  function toggleMute() {
+    const newMuted = !isMuted
+    setIsMuted(newMuted)
+    if (videoRef.current) {
+      videoRef.current.muted = newMuted
+      if (!newMuted && volume === 0) {
+        setVolume(0.5)
+        videoRef.current.volume = 0.5
+      }
+    }
   }
 
   function handleSeek(e: React.MouseEvent<HTMLDivElement>) {
@@ -159,6 +190,7 @@ export function MusicSection() {
       )
     } else {
       setIsPlaying(false)
+      resumeAmbientAfterVideo()
     }
   }
 
@@ -213,8 +245,12 @@ export function MusicSection() {
                 ref={videoRef}
                 className="w-full h-full object-contain"
                 onCanPlay={() => {
+                  const video = videoRef.current
+                  if (!video) return
+                  video.volume = volume
+                  video.muted = isMuted
                   if (isPlayingRef.current) {
-                    videoRef.current?.play().catch(() => {})
+                    video.play().catch(() => {})
                   }
                 }}
                 onTimeUpdate={() => {
@@ -350,6 +386,37 @@ export function MusicSection() {
                     </span>
                   )}
                 </button>
+              </div>
+
+              {/* Volume control */}
+              <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/8">
+                <button
+                  onClick={toggleMute}
+                  title={isMuted || volume === 0 ? 'Activer le son' : 'Couper le son'}
+                  className="text-white/40 hover:text-cream transition-colors cursor-pointer shrink-0"
+                >
+                  {isMuted || volume === 0 ? (
+                    <FiVolumeX className="w-4 h-4" />
+                  ) : volume <= 0.4 ? (
+                    <FiVolume className="w-4 h-4" />
+                  ) : volume <= 0.7 ? (
+                    <FiVolume1 className="w-4 h-4" />
+                  ) : (
+                    <FiVolume2 className="w-4 h-4" />
+                  )}
+                </button>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={Math.round(isMuted ? 0 : volume * 100)}
+                  onChange={handleVolumeChange}
+                  className="flex-1 h-1 cursor-pointer rounded-full appearance-none bg-white/10"
+                  style={{ accentColor: '#C5A059' }}
+                />
+                <span className="text-[10px] font-mono text-white/30 w-8 text-right shrink-0">
+                  {isMuted ? '0%' : `${Math.round(volume * 100)}%`}
+                </span>
               </div>
             </div>
           </div>

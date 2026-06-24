@@ -13,7 +13,7 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { label: 'Our Story', href: '/#our-story-section' },
   { label: 'The Schedule', href: '/#schedule-timeline-section' },
-  { label: 'Attire Theme', href: '/#dresscode-section' },
+  /*{ label: 'Attire Theme', href: '/#dresscode-section' },*/
   { label: 'Provence Guide', href: '/#travel-guide-section' },
   { label: 'RSVP', href: '/rsvp', highlight: true },
   { label: 'Blessings', href: '/guestbook' },
