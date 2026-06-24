@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'motion/react'
 import { FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { getDisplayImageUrl } from '@/lib/image'
 import type { TGalleryPhoto } from '../@types'
 
 interface GalleryLightboxProps {
@@ -35,9 +36,10 @@ export function GalleryLightbox({ photo, photos, onClose, onNavigate }: GalleryL
         transition={{ type: 'spring', stiffness: 300, damping: 35 }}
       >
         <Image
-          src={photo.url}
+          src={getDisplayImageUrl(photo.url)}
           alt={photo.caption}
           fill
+          unoptimized
           className="object-contain"
           sizes="(max-width: 768px) 100vw, 80vw"
           priority
