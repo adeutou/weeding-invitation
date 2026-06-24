@@ -23,7 +23,6 @@ export function HomePageClient({
   config,
   galleryPhotos,
   initialGuestbookEntries,
-  initialMusicTracks,
   initialTimelineEvents,
 }: HomePageClientProps) {
   const [isOpened, setIsOpened] = useState(false)
@@ -157,7 +156,7 @@ export function HomePageClient({
 
           <GuestbookPage initialEntries={mappedGuestbookEntries} />
 
-          <MusicSection initialTracks={initialMusicTracks} />
+          <MusicSection />
 
           <footer className="bg-cream pt-16 pb-12 px-6 border-t border-taupe/40 text-center text-charcoal select-none">
             <div className="text-gold/40 w-12 h-12 mx-auto mb-4">

@@ -1,259 +1,418 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { FiPlusCircle, FiVolume2 } from 'react-icons/fi'
-import { RiPlayCircleLine, RiHeartFill, RiHeartLine, RiDiscLine } from 'react-icons/ri'
-import { addMusicTrackAction, voteTrackAction } from '@/server/actions/music'
-import type { TMusicTrack } from '../@types'
+import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
+import {
+  FiPlay,
+  FiPause,
+  FiSkipBack,
+  FiSkipForward,
+  FiShuffle,
+  FiRepeat,
+  FiVolume2,
+} from 'react-icons/fi'
+import { RiDiscLine } from 'react-icons/ri'
 
-interface MusicSectionProps {
-  initialTracks: TMusicTrack[]
+const MUSIC_BG =
+  'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+
+type RepeatMode = 'off' | 'all' | 'one'
+
+interface AlbumTrack {
+  number: number
+  title: string
+  src: string
 }
 
-export function MusicSection({ initialTracks }: MusicSectionProps) {
-  const [tracks, setTracks] = useState<TMusicTrack[]>([...initialTracks].sort((a, b) => b.votes - a.votes))
-  const [title, setTitle] = useState('')
-  const [artist, setArtist] = useState('')
-  const [voterName, setVoterName] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [feedback, setFeedback] = useState('')
-  const [votedSet, setVotedSet] = useState<Set<string>>(new Set())
+const TRACK_FALLBACK: AlbumTrack = { number: 0, title: '', src: '' }
+
+const ALBUM: readonly AlbumTrack[] = [
+  { number: 1, title: 'Cent Battements — Intro', src: 'https://res.cloudinary.com/dklupmul7/video/upload/v1782315156/01_-_Cent_Battements_-_Intro_rmlte7.mp4' },
+  { number: 2, title: 'My Queen Bana', src: 'https://res.cloudinary.com/dklupmul7/video/upload/v1782315163/02_-_My_Queen_Bana_fucile.mp4' },
+  { number: 3, title: 'Angel of Mine', src: 'https://res.cloudinary.com/dklupmul7/video/upload/v1782315163/03_-_Angel_of_Mine_nrbnh4.mp4' },
+  { number: 4, title: 'Ma Muse', src: 'https://res.cloudinary.com/dklupmul7/video/upload/v1782315166/04_-_Ma_Muse_w4nm3b.mp4' },
+  { number: 5, title: "Nostalgie d'amour", src: 'https://res.cloudinary.com/dklupmul7/video/upload/v1782315147/05_-_Nostalgie_d_amour_ngwn1r.mp4' },
+  { number: 6, title: 'Goslar', src: 'https://res.cloudinary.com/dklupmul7/video/upload/v1782322513/goslar_tpk15v.mp4' },
+  { number: 7, title: 'Renaître', src: 'https://res.cloudinary.com/dklupmul7/video/upload/v1782315151/07_-_Rena%C3%AEtre_exj9wj.mp4' },
+  { number: 8, title: "S'éloigner pour mieux se retrouver", src: 'https://res.cloudinary.com/dklupmul7/video/upload/v1782315149/08_-_S_%C3%A9loigner_pour_mieux_se_retrouver_uljh98.mp4' },
+  { number: 9, title: 'Une rose pour toi', src: 'https://res.cloudinary.com/dklupmul7/video/upload/v1782315142/09_-_Une_rose_pour_toi_nctwa0.mp4' },
+  { number: 10, title: "On ne s'écoute pas", src: 'https://res.cloudinary.com/dklupmul7/video/upload/v1782315149/10_-_On_ne_s_%C3%A9coute_pas_kvh1ag.mp4' },
+  { number: 11, title: "Symphonie d'un cœur fidèle", src: 'https://res.cloudinary.com/dklupmul7/video/upload/v1782315159/11_-_Symphonie_d_un_c%C5%93ur_fid%C3%A8le_zicdna.mp4' },
+  { number: 12, title: "Avant l'Union — Outro", src: 'https://res.cloudinary.com/dklupmul7/video/upload/v1782315155/12_-_Avant_l_Union_-_Outro_ep2vk7.mp4' },
+  { number: 13, title: 'Ma Reine Bana (Edit · Bonus Track)', src: 'https://res.cloudinary.com/dklupmul7/video/upload/v1782315165/13_-_Ma_Reine_Bana_Edit_Bonus_Track_vfwrnr.mp4' },
+]
+
+function formatTime(secs: number): string {
+  if (!Number.isFinite(secs) || secs < 0) return '0:00'
+  const m = Math.floor(secs / 60)
+  const s = Math.floor(secs % 60)
+  return `${m}:${s.toString().padStart(2, '0')}`
+}
+
+function randomOtherIndex(current: number, total: number): number {
+  if (total <= 1) return 0
+  const pool = Array.from({ length: total }, (_, i) => i).filter(i => i !== current)
+  return pool[Math.floor(Math.random() * pool.length)] ?? 0
+}
+
+export function MusicSection() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [duration, setDuration] = useState(0)
+  const [isShuffle, setIsShuffle] = useState(false)
+  const [repeatMode, setRepeatMode] = useState<RepeatMode>('off')
+
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const bgRef = useRef<HTMLDivElement>(null)
+  const isPlayingRef = useRef(false)
 
   useEffect(() => {
-    setTracks([...initialTracks].sort((a, b) => b.votes - a.votes))
-  }, [initialTracks])
+    isPlayingRef.current = isPlaying
+  }, [isPlaying])
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem('wedding_voted_tracks_v2')
-      if (saved) {
-        setVotedSet(new Set(JSON.parse(saved) as string[]))
-      }
-    } catch {
+    function onScroll() {
+      if (!sectionRef.current || !bgRef.current) return
+      const top = sectionRef.current.getBoundingClientRect().top
+      bgRef.current.style.transform = `translateY(${-top * 0.38}px)`
     }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  function persistVoted(newSet: Set<string>) {
-    setVotedSet(newSet)
-    try {
-      localStorage.setItem('wedding_voted_tracks_v2', JSON.stringify(Array.from(newSet)))
-    } catch {
-      // ignore storage errors
+  const currentTrack: AlbumTrack = ALBUM[currentIndex] ?? TRACK_FALLBACK
+  const progress = duration > 0 ? (currentTime / duration) * 100 : 0
+
+  function playAtIndex(index: number) {
+    setCurrentIndex(index)
+    setIsPlaying(true)
+    setCurrentTime(0)
+    setDuration(0)
+  }
+
+  function togglePlay() {
+    const video = videoRef.current
+    if (!video) return
+    if (isPlaying) {
+      video.pause()
+    } else {
+      video.play().catch(() => {})
     }
   }
 
-  async function handleAddTrack(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setFeedback('')
-    if (!title.trim() || !artist.trim()) {
-      setFeedback("Veuillez renseigner le titre de la chanson et l'artiste.")
+  function playPrev() {
+    playAtIndex(
+      isShuffle
+        ? randomOtherIndex(currentIndex, ALBUM.length)
+        : (currentIndex - 1 + ALBUM.length) % ALBUM.length,
+    )
+  }
+
+  function playNext() {
+    playAtIndex(
+      isShuffle
+        ? randomOtherIndex(currentIndex, ALBUM.length)
+        : (currentIndex + 1) % ALBUM.length,
+    )
+  }
+
+  function cycleRepeat() {
+    setRepeatMode(prev => {
+      if (prev === 'off') return 'all'
+      if (prev === 'all') return 'one'
+      return 'off'
+    })
+  }
+
+  function handleSeek(e: React.MouseEvent<HTMLDivElement>) {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))
+    const video = videoRef.current
+    if (video && Number.isFinite(duration) && duration > 0) {
+      video.currentTime = ratio * duration
+      setCurrentTime(ratio * duration)
+    }
+  }
+
+  function handleEnded() {
+    if (repeatMode === 'one') {
+      const video = videoRef.current
+      if (video) {
+        video.currentTime = 0
+        video.play().catch(() => {})
+      }
       return
     }
-    setIsSubmitting(true)
-    const result = await addMusicTrackAction(title, artist, voterName)
-    if (result.success) {
-      const newTrack: TMusicTrack = {
-        id: result.data.id,
-        title: result.data.title,
-        artist: result.data.artist,
-        votes: result.data.votes,
-        requestedBy: result.data.requestedBy,
-        isCurated: result.data.isCurated,
-      }
-      setTracks(prev => [...prev, newTrack].sort((a, b) => b.votes - a.votes))
-      setTitle('')
-      setArtist('')
-      setVoterName('')
-      setFeedback('Chanson ajoutée avec succès à la liste de danse !')
-    } else {
-      setFeedback(result.error)
+    if (repeatMode === 'all') {
+      playAtIndex(
+        isShuffle
+          ? randomOtherIndex(currentIndex, ALBUM.length)
+          : (currentIndex + 1) % ALBUM.length,
+      )
+      return
     }
-    setIsSubmitting(false)
-  }
-
-  async function handleVote(trackId: string) {
-    const hasVoted = votedSet.has(trackId)
-    const direction = hasVoted ? 'down' : 'up'
-
-    const newSet = new Set(votedSet)
-    if (hasVoted) {
-      newSet.delete(trackId)
+    if (currentIndex < ALBUM.length - 1) {
+      playAtIndex(
+        isShuffle ? randomOtherIndex(currentIndex, ALBUM.length) : currentIndex + 1,
+      )
     } else {
-      newSet.add(trackId)
+      setIsPlaying(false)
     }
-    persistVoted(newSet)
-
-    setTracks(prev =>
-      prev
-        .map(t =>
-          t.id === trackId
-            ? { ...t, votes: hasVoted ? Math.max(0, t.votes - 1) : t.votes + 1 }
-            : t,
-        )
-        .sort((a, b) => b.votes - a.votes),
-    )
-
-    await voteTrackAction(trackId, direction)
   }
 
   return (
     <section
       id="ballplay-section"
-      className="relative py-24 px-6 md:px-12 bg-parchment text-charcoal border-t border-taupe/45 overflow-hidden"
+      ref={sectionRef}
+      className="relative py-24 px-6 md:px-12 border-t border-white/10 overflow-hidden"
     >
-      <div className="absolute -bottom-20 -left-20 w-80 h-80 opacity-5 pointer-events-none text-charcoal">
-        <RiDiscLine className="w-full h-full animate-slow-spin" />
+      <div
+        ref={bgRef}
+        className="absolute will-change-transform pointer-events-none"
+        style={{ top: '-18%', left: 0, right: 0, height: '136%' }}
+      >
+        <Image
+          src={MUSIC_BG}
+          alt="Fond musical"
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+        />
       </div>
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="absolute inset-0 bg-[#060F1C]/78 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-b from-[#060F1C]/60 via-transparent to-[#060F1C]/60 pointer-events-none" />
+
+      <div className="absolute -bottom-20 -left-20 w-80 h-80 opacity-[0.04] pointer-events-none">
+        <RiDiscLine className="w-full h-full text-white animate-slow-spin" />
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <span className="text-gold uppercase tracking-[0.3em] text-xs font-sans font-medium block mb-2">
-            Tiré du reccueil de poèmes 
+            Tiré du reccueil de poèmes
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl font-light tracking-wide text-charcoal">
+          <h2 className="font-serif text-4xl md:text-5xl font-light tracking-wide text-cream">
             Cent Battements pour Lola
           </h2>
           <div className="w-16 h-px bg-gold/40 mx-auto mt-4 mb-2" />
-          <p className="font-serif italic text-sm text-stone-500 max-w-md mx-auto">
+          <p className="font-serif italic text-sm text-white/55 max-w-md mx-auto">
             Vivez en chanson une expérience inédite, où chaque note murmure les étapes de notre histoire, délicatement tissée dans des poèmes écrits pour Lola.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
-          <div className="md:col-span-5 bg-cream p-6 rounded-xl border border-gold/15 shadow-sm flex flex-col gap-4">
-            <div className="flex items-center gap-2 text-gold font-serif">
-              <RiPlayCircleLine className="w-5 h-5 text-gold-dark" />
-              <h3 className="font-serif text-lg font-light tracking-wide text-charcoal">Suggérer une Mélodie</h3>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+          <div className="lg:col-span-8 bg-white/8 backdrop-blur-xl rounded-2xl border border-white/15 overflow-hidden shadow-[0_25px_60px_rgba(6,15,28,0.55),inset_0_1px_0_rgba(255,255,255,0.1)] flex flex-col relative">
+            <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-white/20 to-transparent" />
+
+            <div className="relative w-full bg-[#02060E]" style={{ aspectRatio: '16/9' }}>
+              <video
+                key={currentIndex}
+                ref={videoRef}
+                className="w-full h-full object-contain"
+                onCanPlay={() => {
+                  if (isPlayingRef.current) {
+                    videoRef.current?.play().catch(() => {})
+                  }
+                }}
+                onTimeUpdate={() => {
+                  if (videoRef.current) setCurrentTime(videoRef.current.currentTime)
+                }}
+                onLoadedMetadata={() => {
+                  if (videoRef.current) setDuration(videoRef.current.duration)
+                }}
+                onEnded={handleEnded}
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                playsInline
+              >
+                <source src={currentTrack.src} type="video/mp4" />
+              </video>
+
+              {!isPlaying && (
+                <button
+                  onClick={togglePlay}
+                  className="absolute inset-0 flex items-center justify-center bg-[#060F1C]/35 group cursor-pointer"
+                >
+                  <div className="w-16 h-16 rounded-full bg-white/15 backdrop-blur-sm border border-white/25 flex items-center justify-center group-hover:bg-white/25 transition-all duration-300">
+                    <FiPlay className="w-6 h-6 text-cream ml-1" />
+                  </div>
+                </button>
+              )}
             </div>
 
-            <form onSubmit={handleAddTrack} className="flex flex-col gap-3">
-              <div className="flex flex-col gap-1">
-                <label htmlFor="music-title" className="text-[9px] text-stone-400 font-sans uppercase tracking-widest font-semibold">
-                  Titre de la Chanson
-                </label>
-                <input
-                  id="music-title"
-                  type="text"
-                  value={title}
-                  onChange={e => setTitle(e.target.value)}
-                  placeholder="Ex : La Vie En Rose"
-                  className="bg-parchment text-charcoal text-xs border border-taupe rounded-lg px-3 py-2.5 focus:outline-none focus:border-gold"
-                  maxLength={50}
-                  required
-                  disabled={isSubmitting}
-                />
+            <div className="p-5 md:p-6 flex-1 flex flex-col justify-between">
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex-1 min-w-0">
+                  <p className="text-white/30 text-[10px] font-sans uppercase tracking-[0.22em] mb-1">
+                    {String(currentTrack.number).padStart(2, '0')} / {String(ALBUM.length).padStart(2, '0')} · Album
+                  </p>
+                  <h3 className="font-serif text-lg md:text-xl text-cream font-light leading-tight truncate">
+                    {currentTrack.title}
+                  </h3>
+                </div>
+                {isPlaying && (
+                  <div className="flex items-end gap-0.5 h-5 shrink-0 ml-3 mt-2">
+                    {[0, 1, 2].map(i => (
+                      <div
+                        key={i}
+                        className="w-0.5 bg-gold rounded-full animate-pulse"
+                        style={{ height: `${55 + i * 22}%`, animationDelay: `${i * 0.18}s` }}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
 
-              <div className="flex flex-col gap-1">
-                <label htmlFor="music-artist" className="text-[9px] text-stone-400 font-sans uppercase tracking-widest font-semibold">
-                  Groupe / Artiste
-                </label>
-                <input
-                  id="music-artist"
-                  type="text"
-                  value={artist}
-                  onChange={e => setArtist(e.target.value)}
-                  placeholder="Ex : Édith Piaf"
-                  className="bg-parchment text-charcoal text-xs border border-taupe rounded-lg px-3 py-2.5 focus:outline-none focus:border-gold"
-                  maxLength={50}
-                  required
-                  disabled={isSubmitting}
-                />
+              <div className="mb-5">
+                <div
+                  className="relative h-1.5 bg-white/10 rounded-full cursor-pointer group mb-1.5"
+                  onClick={handleSeek}
+                >
+                  <div
+                    className="h-full rounded-full relative"
+                    style={{
+                      width: `${progress}%`,
+                      background: 'linear-gradient(to right, #C5A059, #A87D35)',
+                    }}
+                  >
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-cream rounded-full opacity-0 group-hover:opacity-100 shadow-md transition-opacity pointer-events-none" />
+                  </div>
+                </div>
+                <div className="flex justify-between text-[10px] font-mono text-white/30">
+                  <span>{formatTime(currentTime)}</span>
+                  <span>{formatTime(duration)}</span>
+                </div>
               </div>
 
-              <div className="flex flex-col gap-1">
-                <label htmlFor="music-voter" className="text-[9px] text-stone-400 font-sans uppercase tracking-widest font-semibold">
-                  Votre Prénom / Nom
-                </label>
-                <input
-                  id="music-voter"
-                  type="text"
-                  value={voterName}
-                  onChange={e => setVoterName(e.target.value)}
-                  placeholder="Ex : Emma (Demoiselle d'honneur)"
-                  className="bg-parchment text-charcoal text-xs border border-taupe rounded-lg px-3 py-2.5 focus:outline-none focus:border-gold"
-                  maxLength={30}
-                  disabled={isSubmitting}
-                />
+              <div className="flex items-center justify-between">
+                <button
+                  onClick={() => setIsShuffle(p => !p)}
+                  title={isShuffle ? 'Lecture aléatoire activée' : 'Lecture aléatoire'}
+                  className={`p-2 rounded-lg transition-all cursor-pointer ${
+                    isShuffle
+                      ? 'text-gold bg-gold/10 border border-gold/25'
+                      : 'text-white/30 hover:text-cream'
+                  }`}
+                >
+                  <FiShuffle className="w-4 h-4" />
+                </button>
+
+                <div className="flex items-center gap-3 md:gap-4">
+                  <button
+                    onClick={playPrev}
+                    className="p-2 text-white/50 hover:text-cream transition-colors cursor-pointer"
+                  >
+                    <FiSkipBack className="w-5 h-5" />
+                  </button>
+
+                  <button
+                    onClick={togglePlay}
+                    className="w-12 h-12 rounded-full flex items-center justify-center shadow-[0_4px_16px_rgba(197,160,89,0.4)] hover:shadow-[0_6px_20px_rgba(197,160,89,0.5)] transition-all cursor-pointer active:scale-95"
+                    style={{ background: 'linear-gradient(135deg, #C5A059, #A87D35)' }}
+                  >
+                    {isPlaying ? (
+                      <FiPause className="w-5 h-5 text-neutral-900" />
+                    ) : (
+                      <FiPlay className="w-5 h-5 text-neutral-900 ml-0.5" />
+                    )}
+                  </button>
+
+                  <button
+                    onClick={playNext}
+                    className="p-2 text-white/50 hover:text-cream transition-colors cursor-pointer"
+                  >
+                    <FiSkipForward className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <button
+                  onClick={cycleRepeat}
+                  title={
+                    repeatMode === 'off'
+                      ? 'Répéter'
+                      : repeatMode === 'all'
+                        ? 'Répéter tout'
+                        : 'Répéter ce titre'
+                  }
+                  className={`relative p-2 rounded-lg transition-all cursor-pointer ${
+                    repeatMode !== 'off'
+                      ? 'text-gold bg-gold/10 border border-gold/25'
+                      : 'text-white/30 hover:text-cream'
+                  }`}
+                >
+                  <FiRepeat className="w-4 h-4" />
+                  {repeatMode === 'one' && (
+                    <span className="absolute -top-1 -right-1 text-[7px] font-bold bg-gold text-neutral-900 rounded-full w-3.5 h-3.5 flex items-center justify-center leading-none">
+                      1
+                    </span>
+                  )}
+                </button>
               </div>
-
-              {feedback && (
-                <p className="text-[10px] text-teal-800 bg-teal-50 border border-teal-100 p-2.5 rounded-lg text-center font-serif leading-relaxed italic">
-                  {feedback}
-                </p>
-              )}
-
-              <button
-                id="submit-music"
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-3 mt-2 bg-neutral-900 border border-neutral-800 text-cream text-[10px] tracking-widest font-sans font-semibold uppercase rounded-lg shadow hover:bg-stone-800 transition-colors cursor-pointer flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <FiPlusCircle className="w-3.5 h-3.5 text-gold-dark" />
-                <span>{isSubmitting ? 'TRANSMISSION...' : 'PROPOSER CE MORCEAU'}</span>
-              </button>
-            </form>
+            </div>
           </div>
 
-          <div className="md:col-span-12 lg:col-span-7 flex flex-col gap-4">
-            <div className="flex items-center justify-between border-b border-gold/15 pb-2">
-              <h3 className="font-serif text-lg font-light text-stone-800 tracking-wide flex items-center gap-2">
-                <FiVolume2 className="w-4 h-4 text-rose animate-pulse" />
-                <span>Liste des Demandes et Votes</span>
-              </h3>
-              <span className="text-[10px] font-mono text-stone-400 uppercase tracking-widest">
-                EN DIRECT
+          <div className="lg:col-span-4 bg-white/8 backdrop-blur-xl rounded-2xl border border-white/15 overflow-hidden shadow-[0_25px_60px_rgba(6,15,28,0.55),inset_0_1px_0_rgba(255,255,255,0.1)] flex flex-col relative">
+            <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-white/20 to-transparent" />
+
+            <div className="px-5 py-4 border-b border-white/8 flex items-center justify-between shrink-0">
+              <h4 className="font-serif text-sm font-light text-cream tracking-wide">
+                Cent Battements pour Lola
+              </h4>
+              <span className="text-[10px] text-white/30 font-mono tracking-widest">
+                {ALBUM.length} titres
               </span>
             </div>
 
-            <div className="flex flex-col gap-3 max-h-[420px] overflow-y-auto pr-1">
-              {tracks.map(track => {
-                const hasVoted = votedSet.has(track.id)
+            <div className="flex-1 overflow-y-auto" style={{ maxHeight: '460px' }}>
+              {ALBUM.map((track, idx) => {
+                const isActive = idx === currentIndex
                 return (
-                  <div
-                    key={track.id}
-                    className="bg-cream/60 p-4 rounded-xl border border-taupe/50 flex justify-between items-center gap-4 hover:bg-cream hover:border-gold/20 shadow-sm transition-colors select-none"
+                  <button
+                    key={track.number}
+                    onClick={() => playAtIndex(idx)}
+                    className={`w-full flex items-center gap-3 px-5 py-3.5 text-left transition-all cursor-pointer border-b border-white/5 last:border-b-0 group ${
+                      isActive ? 'bg-white/15' : 'hover:bg-white/8'
+                    }`}
                   >
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <h4 className="font-serif text-[15px] font-semibold text-charcoal truncate">{track.title}</h4>
-                        {!track.isCurated && (
-                          <span className="text-[8px] bg-gold/15 text-gold border border-gold/20 px-1.5 py-0.5 rounded font-sans tracking-widest uppercase shrink-0">
-                            INVITÉ
-                          </span>
-                        )}
-                      </div>
-                      <p className="font-serif text-[12px] text-stone-500 truncate mt-0.5">par {track.artist}</p>
-                      <p className="font-serif text-[10px] italic text-stone-400 truncate mt-1">
-                        Suggéré par {track.requestedBy}
-                      </p>
-                    </div>
+                    <span className="shrink-0 w-6 flex items-center justify-center">
+                      {isActive && isPlaying ? (
+                        <FiVolume2 className="w-3.5 h-3.5 text-gold animate-pulse" />
+                      ) : (
+                        <span
+                          className={`text-[10px] font-mono ${
+                            isActive ? 'text-gold' : 'text-white/25 group-hover:text-white/50'
+                          }`}
+                        >
+                          {String(track.number).padStart(2, '0')}
+                        </span>
+                      )}
+                    </span>
 
-                    <div className="flex items-center gap-2 shrink-0">
-                      <span className="font-serif text-xs font-semibold text-stone-600">{track.votes} votes</span>
-                      <button
-                        onClick={() => void handleVote(track.id)}
-                        className={`w-9 h-9 rounded-full flex items-center justify-center cursor-pointer transition-all ${
-                          hasVoted
-                            ? 'bg-rose/10 border border-rose/30 text-rose scale-105'
-                            : 'bg-[#EDF1F9]/40 border border-taupe/40 text-gold hover:bg-[#EDF1F9]/80'
-                        }`}
-                        title={hasVoted ? 'Retirer le vote' : 'Voter pour ce morceau'}
-                      >
-                        {hasVoted ? (
-                          <RiHeartFill className="w-4 h-4 text-rose" />
-                        ) : (
-                          <RiHeartLine className="w-4 h-4" />
-                        )}
-                      </button>
-                    </div>
-                  </div>
+                    <span
+                      className={`font-serif text-xs leading-snug flex-1 min-w-0 truncate ${
+                        isActive ? 'text-cream' : 'text-white/50 group-hover:text-cream'
+                      }`}
+                    >
+                      {track.title}
+                    </span>
+
+                    {isActive && (
+                      <div className="flex items-end gap-px h-3.5 shrink-0">
+                        {[0, 1, 2].map(i => (
+                          <div
+                            key={i}
+                            className={`w-0.5 bg-gold rounded-full ${isPlaying ? 'animate-pulse' : 'opacity-35'}`}
+                            style={{ height: `${45 + i * 27}%`, animationDelay: `${i * 0.14}s` }}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </button>
                 )
               })}
-            </div>
-
-            <div className="text-[10px] text-stone-400 font-serif italic text-center mt-3">
-              * La liste des morceaux acceptés est réservée aux classiques et variétés. Le hard rock et le heavy metal seront redirigés vers la session tardive dans la cave !
             </div>
           </div>
         </div>
