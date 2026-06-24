@@ -98,14 +98,14 @@ export function AdminQrCodeTab({ localConfig }: AdminQrCodeTabProps) {
           <div className="bg-[#EDF1F9] border-2 border-gold/30 p-6 rounded-2xl w-full flex flex-col items-center">
             <div className="w-12 h-12 rounded-full border border-gold/25 flex items-center justify-center mb-4 bg-white/70">
               <span className="font-serif text-sm tracking-widest text-gold-dark font-semibold">
-                {groomInitial}&amp;{brideInitial}
+                {brideInitial}&amp;{groomInitial}
               </span>
             </div>
             <h5 className="text-[8px] tracking-[0.2em] text-gold uppercase font-bold font-sans mb-0.5">
               {customTitle}
             </h5>
             <h3 className="text-lg font-light text-charcoal tracking-wide mb-2">
-              {groomShort} &amp; {brideShort}
+              {brideShort} &amp; {groomShort}
             </h3>
             <div className="w-10 h-px bg-gold/20 mb-4" />
 
@@ -146,14 +146,14 @@ export function AdminQrCodeTab({ localConfig }: AdminQrCodeTabProps) {
           <div className="bg-[#EDF1F9] border-[3px] border-double border-gold/50 p-12 rounded-3xl max-w-sm text-center shadow-none flex flex-col items-center justify-center font-serif text-charcoal" style={{ width: '400px', minHeight: '520px' }}>
             <div className="w-16 h-16 rounded-full border border-gold/30 flex items-center justify-center mb-6 bg-white">
               <span className="font-serif text-xl tracking-widest text-gold-dark font-semibold">
-                {groomInitial}&amp;{brideInitial}
+                {brideInitial}&amp;{groomInitial}
               </span>
             </div>
             <h2 className="text-[10px] tracking-[0.25em] text-gold uppercase font-bold font-sans mb-1">
               {customTitle}
             </h2>
             <h1 className="text-2xl font-light text-charcoal tracking-wide mb-3">
-              {groomShort} &amp; {brideShort}
+              {brideShort} &amp; {groomShort}
             </h1>
             <div className="w-16 h-px bg-gold/30 mb-6" />
 

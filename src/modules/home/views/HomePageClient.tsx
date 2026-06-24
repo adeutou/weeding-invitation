@@ -14,6 +14,7 @@ import { GallerySection } from '@/modules/gallery/views/GallerySection'
 import { RsvpPage } from '@/modules/rsvp/views/RsvpPage'
 import { GuestbookPage } from '@/modules/guestbook/views/GuestbookPage'
 import { AudioToggle } from '@/modules/audio/views/AudioToggle'
+import { triggerAutoStart } from '@/modules/audio/hooks/useAmbientAudio'
 import { FloralDivider } from '@/components/FloralDivider'
 import type { HomePageClientProps } from '../@types'
 import type { TGuestbookEntry } from '@/modules/guestbook/@types'
@@ -85,6 +86,7 @@ export function HomePageClient({
             venueName={config.venueName}
             venueLocation={config.venueLocation}
             onOpen={handleOpen}
+            onSealBreak={triggerAutoStart}
           />
         </div>
       )}
@@ -97,7 +99,7 @@ export function HomePageClient({
               className="flex items-center gap-1.5 cursor-pointer"
             >
               <span className="font-serif text-sm font-semibold tracking-widest text-charcoal">
-                {groomInitial} &amp; {brideInitial}
+                {brideInitial} &amp; {groomInitial}
               </span>
               <span className="w-1.5 h-1.5 rounded-full bg-gold" />
               <span className="handwriting text-base text-gold italic">monogram</span>

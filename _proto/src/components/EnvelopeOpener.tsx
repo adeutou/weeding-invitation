@@ -65,9 +65,9 @@ export default function EnvelopeOpener({ onOpen }: EnvelopeOpenerProps) {
         >
           <div className="text-gold text-xs tracking-[0.4em] uppercase font-sans font-medium mb-2">The Wedding Celebration of</div>
           <h1 className="text-cream font-serif text-3xl md:text-4xl tracking-wide font-light">
-            Arthur <span className="handwriting text-gold text-4xl italic lowercase">&amp;</span> Beatrice
+            Lola <span className="handwriting text-gold text-4xl italic lowercase">&amp;</span> Albert
           </h1>
-          <div className="text-gray-400 font-serif text-sm italic mt-2">September 19th, 2026 • Château de la Rose, France</div>
+          <div className="text-gray-400 font-serif text-sm italic mt-2">16 Juillet 2026 • 92500 Rueil-Malmaison, France</div>
         </motion.div>
 
         {/* Custom Interactive Envelope Frame */}
@@ -109,16 +109,16 @@ export default function EnvelopeOpener({ onOpen }: EnvelopeOpenerProps) {
               <div className="w-12 h-12 rounded-full border border-gold/40 flex items-center justify-center mb-3">
                 <span className="text-gold font-serif text-sm tracking-wide font-semibold">A &amp; B</span>
               </div>
-              <p className="text-gold text-xs tracking-[0.25em] uppercase font-sans mb-2">Personal Invitation</p>
-              <p className="font-serif text-xs italic text-sage mb-2">Prepared with endless love for</p>
+              <p className="text-gold text-xs tracking-[0.25em] uppercase font-sans mb-2">Invitation Personnelle</p>
+              <p className="font-serif text-xs italic text-sage mb-2">Préparée avec un amour infini pour</p>
               <h3 className="font-serif text-xl font-medium tracking-wide text-charcoal max-w-[280px] truncate border-b border-gold/20 pb-2 mb-2">
                 {guestName.trim() || "Our Honored Guest"}
               </h3>
               <p className="font-serif text-xs text-stone-500 leading-relaxed max-w-[240px]">
-                We request the honor of your presence as we pledge our lives together under the skies of Provence.
+                Nous aurions l'honneur de vous compter parmi nous alors que nous nous engagerons pour la vie sous le ciel de Rueil-Malmaison.
               </p>
               <div className="mt-4 flex items-center gap-1.5 text-xs text-gold font-medium uppercase tracking-widest animate-pulse">
-                <span>Entering Celebration</span>
+                <span>Entrée dans la célébration</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-gold"></span>
               </div>
             </motion.div>
@@ -169,8 +169,8 @@ export default function EnvelopeOpener({ onOpen }: EnvelopeOpenerProps) {
                     
                     {/* Inner engraved circle */}
                     <div className="w-16 h-16 rounded-full border border-dashed border-[#ffeecc]/40 flex flex-col items-center justify-center text-center">
-                      <span className="text-[#fdfbf7] font-serif text-lg font-bold tracking-tighter drop-shadow-md">A &amp; B</span>
-                      <span className="text-[#ffeecc]/80 text-[7px] font-sans tracking-widest uppercase mt-0.5">SEALED</span>
+                      <span className="text-[#fdfbf7] font-serif text-lg font-bold tracking-tighter drop-shadow-md">L &amp; A</span>
+                      <span className="text-[#ffeecc]/80 text-[7px] font-sans tracking-widest uppercase mt-0.5">SCELLÉ</span>
                     </div>
 
                     {/* Wax luster glint effect */}
@@ -221,7 +221,7 @@ export default function EnvelopeOpener({ onOpen }: EnvelopeOpenerProps) {
           </form>
 
           <p className="text-[11px] text-gray-500 font-serif italic mt-3">
-            Enter your name to open your digital bespoke invitation &amp; schedule details.
+            Saisissez votre nom pour ouvrir votre invitation numérique personnalisée &amp; consulter les détails de l'événement.
           </p>
         </motion.div>
       </div>
