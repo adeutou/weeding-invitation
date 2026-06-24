@@ -260,7 +260,7 @@ export function RsvpPage() {
               <button
                 type="submit"
                 disabled={isPending}
-                className="w-full py-4 mt-4 bg-linear-to-r from-gold to-gold-dark text-neutral-900 font-sans text-xs tracking-[0.25em] font-semibold uppercase rounded-xl shadow-[0_8px_24px_rgba(197,160,89,0.35)] hover:shadow-[0_12px_32px_rgba(197,160,89,0.45)] transition-all duration-300 active:scale-[0.99] cursor-pointer flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full py-4 mt-4 bg-linear-to-r from-gold to-gold-dark text-white/85 text-neutral-900 font-sans text-xs tracking-[0.25em] font-semibold uppercase rounded-xl shadow-[0_8px_24px_rgba(197,160,89,0.35)] hover:shadow-[0_12px_32px_rgba(197,160,89,0.45)] transition-all duration-300 active:scale-[0.99] cursor-pointer flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {isPending ? (
                   <>

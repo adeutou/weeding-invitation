@@ -108,14 +108,14 @@ export function MusicSection({ initialTracks }: MusicSectionProps) {
       <div className="max-w-4xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <span className="text-gold uppercase tracking-[0.3em] text-xs font-sans font-medium block mb-2">
-            Harmonie de la Piste de Danse
+            Tiré du reccueil de poèmes 
           </span>
           <h2 className="font-serif text-4xl md:text-5xl font-light tracking-wide text-charcoal">
-            La Playlist de la Soirée
+            Cent Battements pour Lola
           </h2>
           <div className="w-16 h-px bg-gold/40 mx-auto mt-4 mb-2" />
           <p className="font-serif italic text-sm text-stone-500 max-w-md mx-auto">
-            Proposez vos morceaux préférés ou votez pour les classiques afin que notre orchestre de jazz et notre DJ puissent rythmer la soirée.
+            Vivez en chanson une expérience inédite, où chaque note murmure les étapes de notre histoire, délicatement tissée dans des poèmes écrits pour Lola.
           </p>
         </div>
 

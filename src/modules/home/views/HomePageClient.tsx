@@ -141,11 +141,11 @@ export function HomePageClient({
 
           <FloralDivider className="bg-parchment" />
 
-          <SwatchBoard
+          {/* <SwatchBoard
             title={config.dressCodeTitle}
             description={config.dressCodeDescription}
             swatches={config.dressCodeSwatches}
-          />
+          /> */}
 
           <GallerySection photos={galleryPhotos} />
 
