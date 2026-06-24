@@ -46,6 +46,50 @@ function EmptyGallery() {
   )
 }
 
+interface GalleryItemProps {
+  photo: TGalleryPhoto
+  desktopSpan: string
+  onClick: () => void
+}
+
+function GalleryItem({ photo, desktopSpan, onClick }: GalleryItemProps) {
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  return (
+    <motion.div
+      layoutId={`gallery-photo-${photo.id}`}
+      className={`col-span-1 row-span-1 ${desktopSpan} relative overflow-hidden cursor-pointer group bg-[#09111E]`}
+      onClick={onClick}
+      whileHover={{ scale: 1.015 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+    >
+
+      {!isLoaded && (
+        <div className="absolute inset-0 z-10 animate-shimmer" />
+      )}
+
+      <Image
+        src={getDisplayImageUrl(photo.url)}
+        alt={photo.caption}
+        fill
+        unoptimized
+        onLoad={() => setIsLoaded(true)}
+        className={`object-cover transition-all duration-700 ease-out group-hover:scale-110 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+          }`}
+        sizes="(max-width: 1024px) 50vw, 20vw"
+      />
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 z-10" />
+      {photo.caption && (
+        <div className="absolute inset-x-0 bottom-0 z-20 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-linear-to-t from-black/80 via-black/40 to-transparent">
+          <p className="font-serif text-white text-xs italic leading-tight line-clamp-2">
+            {photo.caption}
+          </p>
+        </div>
+      )}
+    </motion.div>
+  )
+}
+
 export function GallerySection({ photos = [] }: TGallerySectionProps) {
   const [selected, setSelected] = useState<TGalleryPhoto | null>(null)
 
@@ -80,31 +124,12 @@ export function GallerySection({ photos = [] }: TGallerySectionProps) {
           const desktopSpan = DESKTOP_SPANS[index % DESKTOP_SPANS.length] ?? 'lg:col-span-1 lg:row-span-1'
 
           return (
-            <motion.div
+            <GalleryItem
               key={photo.id}
-              layoutId={`gallery-photo-${photo.id}`}
-              className={`col-span-1 row-span-1 ${desktopSpan} relative overflow-hidden cursor-pointer group`}
+              photo={photo}
+              desktopSpan={desktopSpan}
               onClick={() => handleOpen(photo)}
-              whileHover={{ scale: 1.015 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-            >
-              <Image
-                src={getDisplayImageUrl(photo.url)}
-                alt={photo.caption}
-                fill
-                unoptimized
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                sizes="(max-width: 1024px) 50vw, 20vw"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 z-10" />
-              {photo.caption && (
-                <div className="absolute inset-x-0 bottom-0 z-20 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-linear-to-t from-black/80 via-black/40 to-transparent">
-                  <p className="font-serif text-white text-xs italic leading-tight line-clamp-2">
-                    {photo.caption}
-                  </p>
-                </div>
-              )}
-            </motion.div>
+            />
           )
         })}
       </div>
