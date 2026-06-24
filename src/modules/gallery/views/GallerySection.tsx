@@ -60,14 +60,14 @@ export function GallerySection({ photos = [] }: TGallerySectionProps) {
     >
       <div className="text-center mb-12">
         <span className="text-amber-600 uppercase tracking-[0.3em] text-[10px] font-sans font-bold block mb-2">
-          Moments en Provence
+          Moments Partagés
         </span>
         <h2 className="font-serif text-4xl md:text-5xl font-light tracking-wide text-white">
           Galerie de la Rose
         </h2>
         <div className="w-16 h-px bg-amber-600/30 mx-auto mt-4 mb-3" />
         <p className="font-serif italic text-xs sm:text-sm text-stone-400 max-w-md mx-auto leading-relaxed">
-          Un panorama de nos souvenirs, capturant la douceur de nos instants partagés sous la lumière provençale.
+          Un panorama de nos souvenirs, capturant la douceur de nos instants partagés ensemble.
         </p>
       </div>
 

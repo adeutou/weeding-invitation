@@ -10,6 +10,7 @@ interface EnvelopeOpenerProps {
   venueName: string
   venueLocation: string
   onOpen: (guestName: string) => void
+  onSealBreak?: () => void
 }
 
 export function EnvelopeOpener({
@@ -19,6 +20,7 @@ export function EnvelopeOpener({
   venueName,
   venueLocation,
   onOpen,
+  onSealBreak,
 }: EnvelopeOpenerProps) {
   const [guestName, setGuestName] = useState('')
   const [isOpening, setIsOpening] = useState(false)
@@ -38,6 +40,7 @@ export function EnvelopeOpener({
   }
 
   const triggerEnvelopeSequence = (finalName: string) => {
+    onSealBreak?.()
     setIsOpening(true)
     setTimeout(() => {
       setIsSealed(false)
@@ -114,7 +117,7 @@ export function EnvelopeOpener({
               className="absolute left-4 right-4 top-4 bottom-4 bg-[#fdfbf7] p-8 rounded shadow-inner border border-taupe/40 flex flex-col items-center justify-center text-center text-charcoal paper-texture z-10"
             >
               <div className="w-12 h-12 rounded-full border border-gold/40 flex items-center justify-center mb-3">
-                <span className="text-gold font-serif text-sm tracking-wide font-semibold">{groomInitial} &amp; {brideInitial}</span>
+                <span className="text-gold font-serif text-sm tracking-wide font-semibold">{brideInitial} &amp; {groomInitial}</span>
               </div>
               <p className="text-gold text-xs tracking-[0.25em] uppercase font-sans mb-2">Invitation Personnelle</p>
               <p className="font-serif text-xs italic text-sage mb-2">Préparé avec tout notre amour pour</p>
@@ -122,7 +125,7 @@ export function EnvelopeOpener({
                 {guestName || "Notre Cher(e) Invité(e)"}
               </h3>
               <p className="font-serif text-xs text-stone-500 leading-relaxed max-w-[240px]">
-                Nous sollicitons l'honneur de votre présence alors que nous unissons nos vies sous le ciel de la Provence.
+                Nous sollicitons l'honneur de votre présence alors que nous unissons nos vies sous le ciel de Rueil-Malmaison.
               </p>
               <div className="mt-4 flex items-center gap-1.5 text-xs text-gold font-medium uppercase tracking-widest animate-pulse">
                 <span>Entrée dans la Célébration</span>
@@ -163,7 +166,7 @@ export function EnvelopeOpener({
                   <div className="relative w-20 h-20 rounded-full flex items-center justify-center shadow-[0_8px_20px_rgba(0,0,0,0.5),inset_0_4px_6px_rgba(255,255,255,0.2),inset_0_-4px_6px_rgba(0,0,0,0.4)] border-2 border-[#f3d47d]/30 transform rotate-12 cursor-pointer p-1" style={{ background: 'linear-gradient(135deg, #d4af37, #b88e3a, #805e13)' }}>
                     <div className="absolute inset-px rounded-full border border-[#805e13]/20" />
                     <div className="w-16 h-16 rounded-full border border-dashed border-[#ffeecc]/40 flex flex-col items-center justify-center text-center">
-                      <span className="text-white font-serif text-lg font-bold tracking-tighter drop-shadow-md">{groomInitial} &amp; {brideInitial}</span>
+                      <span className="text-white font-serif text-lg font-bold tracking-tighter drop-shadow-md">{brideInitial} &amp; {groomInitial}</span>
                       <span className="text-[#E6EFF8]/80 text-[7px] font-sans tracking-widest uppercase mt-0.5">SCELLÉ</span>
                     </div>
                     <div className="absolute -top-1 left-4 w-4 h-8 bg-white/10 rounded-full blur-sm transform -rotate-45" />
