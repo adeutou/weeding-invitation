@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'motion/react'
 import { FiCamera } from 'react-icons/fi'
 import { GalleryLightbox } from './GalleryLightbox'
+import { getDisplayImageUrl } from '@/lib/image'
 import type { TGallerySectionProps, TGalleryPhoto } from '../@types'
 
 const DESKTOP_SPANS: string[] = [
@@ -88,9 +89,10 @@ export function GallerySection({ photos = [] }: TGallerySectionProps) {
               transition={{ type: 'spring', stiffness: 400, damping: 30 }}
             >
               <Image
-                src={photo.url}
+                src={getDisplayImageUrl(photo.url)}
                 alt={photo.caption}
                 fill
+                unoptimized
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 sizes="(max-width: 1024px) 50vw, 20vw"
               />

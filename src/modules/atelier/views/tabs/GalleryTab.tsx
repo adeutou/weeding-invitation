@@ -3,6 +3,7 @@
 import { useState, useTransition } from 'react'
 import { FiTrash2, FiPlus, FiAlertTriangle } from 'react-icons/fi'
 import { addGalleryPhotoAction, deleteGalleryPhotoAction } from '@/server/actions/atelier'
+import { getDisplayImageUrl } from '@/lib/image'
 import type { TAtelierGalleryPhoto } from '@/modules/atelier/@types'
 
 interface GalleryTabProps {
@@ -130,7 +131,7 @@ export function GalleryTab({ initialPhotos }: GalleryTabProps) {
               className="relative group aspect-video bg-[#0A1525] rounded-xl overflow-hidden border border-white/5"
             >
               <img
-                src={photo.url}
+                src={getDisplayImageUrl(photo.url)}
                 alt={photo.caption}
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
               />

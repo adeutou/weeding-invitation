@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import { addGalleryPhotoAction, deleteGalleryPhotoAction } from '@/server/actions/atelier'
 import type { GalleryPhotoSelect } from '@/server/db/schema'
+import { getDisplayImageUrl } from '@/lib/image'
 import { Textarea } from '@/modules/ui'
 
 interface AdminGalleryTabProps {
@@ -166,7 +167,7 @@ export function AdminGalleryTab({
                 <div className="flex flex-col items-center gap-2">
                   <div className="w-16 h-16 rounded-lg overflow-hidden border border-taupe bg-stone-100 relative group">
                     <img
-                      src={newPhotoUrl}
+                      src={getDisplayImageUrl(newPhotoUrl)}
                       alt="Uploaded preview"
                       className="w-full h-full object-cover"
                     />
@@ -243,7 +244,7 @@ export function AdminGalleryTab({
             <div className="flex gap-3">
               <div className="w-20 h-20 rounded-lg border border-taupe bg-stone-100 overflow-hidden shrink-0 shadow-inner relative group">
                 <img
-                  src={photo.url}
+                  src={getDisplayImageUrl(photo.url)}
                   alt=""
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover transition-transform group-hover:scale-105"
@@ -257,12 +258,12 @@ export function AdminGalleryTab({
                 <Textarea
                   label="Légende descriptive / Souvenir"
                   value={photo.caption}
-                  onChange={e => setNewPhotoCaption(e.target.value)}
+                  readOnly
+                  disabled
                   placeholder="Un moment calme capturé sous une jolie lumière..."
                   required
                   rows={3}
-                  disabled={isLoading || uploadProgress}
-                  className="bg-cream text-charcoal text-sm border border-taupe rounded-lg px-4 py-2 placeholder:text-stone-450 focus:outline-none w-full"
+                  className="bg-cream text-charcoal text-sm border border-taupe rounded-lg px-4 py-2 placeholder:text-stone-450 focus:outline-none w-full opacity-70"
                 />
               </div>
             </div>

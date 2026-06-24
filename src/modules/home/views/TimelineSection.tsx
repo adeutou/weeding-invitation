@@ -86,7 +86,7 @@ export function TimelineSection({ events }: TimelineSectionProps) {
 
       {/* Cinematic overlays */}
       <div className="absolute inset-0 bg-[#060F1C]/75 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#060F1C]/60 via-transparent to-[#060F1C]/60 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-b from-[#060F1C]/60 via-transparent to-[#060F1C]/60 pointer-events-none" />
 
       {/* Decorative orbit rings */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] border border-white/5 rounded-full pointer-events-none animate-slow-spin flex items-center justify-center">
@@ -114,11 +114,10 @@ export function TimelineSection({ events }: TimelineSectionProps) {
               <button
                 key={phase}
                 onClick={() => setActivePhase(phase)}
-                className={`px-5 py-3 rounded-lg text-xs tracking-widest uppercase font-medium transition-all duration-300 cursor-pointer ${
-                  activePhase === phase
+                className={`px-5 py-3 rounded-lg text-xs tracking-widest uppercase font-medium transition-all duration-300 cursor-pointer ${activePhase === phase
                     ? 'bg-white/15 text-gold font-semibold shadow-inner border border-gold/30 backdrop-blur-sm'
                     : 'text-white/50 hover:text-cream'
-                }`}
+                  }`}
               >
                 {label}
               </button>
@@ -154,7 +153,7 @@ export function TimelineSection({ events }: TimelineSectionProps) {
                   <h3 className="font-serif text-xl md:text-2xl font-light text-cream tracking-wide group-hover:text-gold transition-colors duration-300 mb-2">
                     {event.title}
                   </h3>
-                  <div className="hidden md:flex items-center gap-1.5 text-white/40 text-xs font-sans uppercase tracking-[0.1em] font-medium mb-3">
+                  <div className="hidden md:flex items-center gap-1.5 text-white/40 text-xs font-sans uppercase tracking-widest font-medium mb-3">
                     <FiMapPin className="w-3.5 h-3.5 text-gold/60" />
                     <span>{event.location}</span>
                   </div>
@@ -175,7 +174,7 @@ export function TimelineSection({ events }: TimelineSectionProps) {
 
         {/* Shuttle service info */}
         <div className="mt-16 bg-white/10 backdrop-blur-md border border-white/15 p-6 rounded-xl text-center shadow-inner relative overflow-hidden flex flex-col items-center">
-          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+          <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-gold/50 to-transparent" />
           <FiMap className="w-6 h-6 text-gold/80 mb-3" />
           <h4 className="font-serif text-lg font-light text-cream tracking-wide mb-1">
             Service de Navette pour les Invités
